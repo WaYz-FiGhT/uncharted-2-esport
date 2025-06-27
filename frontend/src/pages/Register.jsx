@@ -6,19 +6,29 @@ import '../App.css';
 function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [psn, setPsn] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setMessage('Les mots de passe ne correspondent pas.');
+      return;
+    }
+
     try {
-      await axios.post('http://localhost:3000/auth/register', {
+      const res = await axios.post('http://localhost:3000/auth/register', {
         username,
         password,
-        email
+        confirmPassword,
+        email,
+        psn
       });
-      navigate('/login');
+      setMessage(res.data.message);
     } catch (err) {
       setMessage(err?.response?.data?.error || "Erreur lors de l'inscription.");
     }
@@ -36,6 +46,12 @@ function Register() {
 
         <label>Mot de passe :</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+
+        <label>Confirmer le mot de passe :</label>
+        <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+
+        <label>PSN :</label>
+        <input value={psn} onChange={(e) => setPsn(e.target.value)} required />
 
         <button type="submit">Créer mon compte</button>
       </form>

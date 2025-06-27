@@ -25,7 +25,7 @@ function Login({ setUser }) {
       navigate('/dashboard');
     } catch (err) {
       console.error('Erreur login', err);
-      setError('Identifiants incorrects.');
+      setError(err?.response?.data?.error || 'Identifiants incorrects.');
     }
   };
 

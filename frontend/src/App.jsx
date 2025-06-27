@@ -16,6 +16,7 @@ import MatchDetails from './pages/MatchDetails';
 import ReportMatch from './pages/ReportMatch';
 import DisputeTickets from './pages/DisputeTickets';
 import TicketDetails from './pages/TicketDetails';
+import VerifyEmail from './pages/VerifyEmail';
 
 import axios from 'axios';
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register setUser={setUser} />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-team" element={<CreateTeam />} />
         <Route path="/mes-equipes" element={<MyTeams />} />

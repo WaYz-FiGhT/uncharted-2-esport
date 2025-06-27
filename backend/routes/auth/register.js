@@ -1,14 +1,21 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 const db = require('../../db');
 
 router.post('/', async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, confirmPassword, psn } = req.body;
+    
 
   // 🔸 Vérification des champs
-  if (!username || !email || !password) {
+  if (!username || !email || !password || !confirmPassword || !psn) {
     return res.status(400).json({ error: 'Champs manquants' });
+  }
+
+  if (password !== confirmPassword) {
+    return res.status(400).json({ error: 'Les mots de passe ne correspondent pas.' });
   }
 
   try {
@@ -24,16 +31,40 @@ router.post('/', async (req, res) => {
     // 🔸 Hash du mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 🔸 Insertion en BDD
+    const token = crypto.randomBytes(32).toString('hex');
+
+    // 🔸 Insertion en BDD avec PSN et token de vérification
     const [result] = await db.execute(
-      'INSERT INTO players (username, email, password, created_at) VALUES (?, ?, ?, NOW())',
-      [username, email, hashedPassword]
+      'INSERT INTO players (username, email, password, psn, verification_token, email_verified, created_at) VALUES (?, ?, ?, ?, ?, 0, NOW())',
+      [username, email, hashedPassword, psn, token]
     );
 
-    res.status(201).json({ id: result.insertId, username, email });
+       // 🔸 Envoi de l'email de vérification
+    const transporter = nodemailer.createTransport({
+      host: 'sandbox.smtp.mailtrap.io',
+      port: 587,
+      secure: false,
+      auth: {
+        user: 'd6a28cc1be54ae',
+        pass: '9235fe8b6ded92'
+      }
+    });
+
+    const verifyLink = `http://localhost:5173/verify-email?token=${token}`;
+    await transporter.sendMail({
+      from: 'noreply@unchartedesport.com',
+      to: email,
+      subject: 'Confirmez votre inscription',
+      text: `Cliquez sur ce lien pour activer votre compte : ${verifyLink}`
+    });
+    console.log('✅ Email envoyé à', email);
+
+    res.status(201).json({ message: 'Utilisateur créé. Vérifiez votre email.' });
   } catch (err) {
     console.error('Erreur lors de la création du joueur :', err);
     res.status(500).json({ error: 'Erreur serveur.' });
+    console.error('❌ Erreur complète :', err);
+
   }
 });
 

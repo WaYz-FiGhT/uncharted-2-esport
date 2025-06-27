@@ -23,6 +23,10 @@ router.post('/', async (req, res) => {
     if (!match)
       return res.status(401).json({ error: 'Mot de passe incorrect' });
 
+    if (!user.email_verified) {
+      return res.status(401).json({ error: 'Email non vérifié' });
+    }
+
     // ⬇️ On stocke aussi le team_id (s'il est présent)
     const isAdmin = Boolean(user.is_admin);
     req.session.user = { id: user.id, username: user.username, team_id: user.team_id, is_admin: isAdmin };
