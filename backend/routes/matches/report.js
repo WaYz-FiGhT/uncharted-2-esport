@@ -15,6 +15,22 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'Champs invalides' });
   }
 
+      // ⛔ Vérifie que le match existe et est bien accepté
+    const [matchRows] = await db.execute(
+      `SELECT status FROM matches WHERE id = ?`,
+      [match_id]
+    );
+
+    if (matchRows.length === 0) {
+      return res.status(404).json({ error: 'Match introuvable' });
+    }
+
+    if (matchRows[0].status !== 'accepted') {
+      return res
+        .status(400)
+        .json({ error: "Ce match n'est pas encore accepté." });
+    }
+
   try {
     // 🔒 Vérifie si ce match a déjà été reporté par cette équipe
     const [existing] = await db.execute(

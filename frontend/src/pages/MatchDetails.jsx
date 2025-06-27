@@ -110,7 +110,7 @@ function MatchDetails() {
     ))}
 
     {/* Bouton pour reporter */}
-    {isTeamInMatch && !hasAlreadyReported && (
+    {isTeamInMatch && match.status === 'accepted' && !hasAlreadyReported && (
       <div style={{ marginTop: '20px' }}>
         <h4>ID de ton équipe : {userTeamId}</h4>
         <Link to={`/report/${match.id}/${userTeamId}`}>
