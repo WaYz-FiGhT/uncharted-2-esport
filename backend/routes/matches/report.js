@@ -67,6 +67,37 @@ router.post('/', async (req, res) => {
          WHERE id = ?`,
         [finalResult, newStatus, match_id]
       );
+
+      // ⭐ Mise à jour de l'XP des équipes lorsque le match est complété
+      if (newStatus === 'completed') {
+        const [teamRows] = await db.execute(
+          `SELECT id, xp FROM teams WHERE id IN (?, ?)`,
+          [team1.team_id, team2.team_id]
+        );
+
+        const team1XP = teamRows.find(t => t.id === team1.team_id)?.xp || 0;
+        const team2XP = teamRows.find(t => t.id === team2.team_id)?.xp || 0;
+
+        const eloChange = (ratingA, ratingB, winA) => {
+          const K = 32;
+          const expectedA = 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
+          const scoreA = winA ? 1 : 0;
+          const changeA = Math.round(K * (scoreA - expectedA));
+          return changeA;
+        };
+
+        if (finalResult === 'win_team_1') {
+          const change1 = eloChange(team1XP, team2XP, true);
+          const change2 = -eloChange(team2XP, team1XP, true);
+          await db.execute(`UPDATE teams SET xp = xp + ? WHERE id = ?`, [change1, team1.team_id]);
+          await db.execute(`UPDATE teams SET xp = GREATEST(0, xp + ?) WHERE id = ?`, [change2, team2.team_id]);
+        } else if (finalResult === 'win_team_2') {
+          const change2 = eloChange(team2XP, team1XP, true);
+          const change1 = -eloChange(team1XP, team2XP, true);
+          await db.execute(`UPDATE teams SET xp = GREATEST(0, xp + ?) WHERE id = ?`, [change1, team1.team_id]);
+          await db.execute(`UPDATE teams SET xp = xp + ? WHERE id = ?`, [change2, team2.team_id]);
+        }
+      }
     }
 
     res.json({ success: true, message: 'Résultat reporté avec succès.' });

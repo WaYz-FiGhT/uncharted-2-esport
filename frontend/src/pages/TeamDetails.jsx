@@ -143,6 +143,11 @@ function TeamDetails() {
       <button onClick={() => navigate(`/team/${team_id}/accept-match`)}>
         Accepter un match
       </button>
+
+      <button onClick={() => navigate(`/ladder/${ladderId}/ranking`)}>
+        Voir le classement
+      </button>
+      
     </div>
   );
 }

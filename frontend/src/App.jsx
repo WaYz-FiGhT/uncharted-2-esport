@@ -14,6 +14,7 @@ import PostMatch from './pages/PostMatch';
 import AcceptMatch from './pages/AcceptMatch';
 import MatchDetails from './pages/MatchDetails';
 import ReportMatch from './pages/ReportMatch';
+import Ranking from './pages/Ranking';
 import DisputeTickets from './pages/DisputeTickets';
 import TicketDetails from './pages/TicketDetails';
 import VerifyEmail from './pages/VerifyEmail';
@@ -46,6 +47,7 @@ function App() {
         <Route path="/team/:team_id/accept-match" element={<AcceptMatch />} />
         <Route path="/match/:match_id" element={<MatchDetails />} />
         <Route path="/report/:match_id/:team_id" element={<ReportMatch />} />
+        <Route path="/ladder/:ladder_id/ranking" element={<Ranking />} />
 
         {/* 🔒 Routes admin-only */}
         <Route

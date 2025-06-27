@@ -61,6 +61,7 @@ app.use('/teams/by-captain', require('./routes/teams/byCaptain'));
 app.use('/teams/by-member', require('./routes/teams/byMember'));
 app.use('/teams/details', require('./routes/teams/get_teamselected'));
 app.use('/teams/get_playerid', require('./routes/teams/get_playerid'));
+app.use('/teams/ranking', require('./routes/teams/get_ranking'));
 
 // tickets
 app.use('/tickets/create', require('./routes/tickets/create'));
