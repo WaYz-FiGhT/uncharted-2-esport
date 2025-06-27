@@ -1,0 +1,186 @@
+/* Global layout */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Gunplay', sans-serif;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed; /* permet un effet de parallaxe */
+  color: #F5F5F5;
+}
+
+h1, h2, h3 {
+  text-align: center;
+  color: #c2dfe3; /* ✅ Couleur du brand navbar */
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Container */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Forms */
+form {
+  background-color: #572e1e; /* ✅ Couleur principale navbar */
+  padding: 25px;
+  border-radius: 8px;
+  border: 2px solid #a75d47; /* ✅ Bordure navbar */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-bottom: 30px;
+}
+
+form label {
+  font-weight: bold;
+  margin-top: 15px;
+  display: block;
+  color: #e0fbfc; /* ✅ Couleur des liens navbar */
+  font-family: 'Gunplay', sans-serif;
+}
+
+form input,
+form select,
+form button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+form input,
+form select {
+  background-color: #3d1f13; /* ✅ Version plus foncée de la couleur navbar */
+  color: #e0fbfc;
+  border: 1px solid #a75d47;
+  font-family: 'Gunplay', sans-serif;
+}
+
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: #C1440E;
+  box-shadow: 0 0 5px rgba(193, 68, 14, 0.3);
+}
+
+form button {
+  background-color: #a75d47; /* ✅ Couleur de bordure navbar */
+  color: #e0fbfc;
+  font-weight: bold;
+  font-family: 'Gunplay', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+form button:hover {
+  background-color: #C1440E; /* ✅ Couleur hover navbar */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons global */
+button {
+  background-color: #a75d47; /* ✅ Couleur de bordure navbar */
+  color: #e0fbfc;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  margin: 10px 5px;
+  font-weight: bold;
+  font-family: 'Gunplay', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+  background-color: #C1440E; /* ✅ Couleur hover navbar */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Listes */
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  background-color: #572e1e; /* ✅ Couleur principale navbar */
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #a75d47; /* ✅ Bordure navbar */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #e0fbfc;
+}
+
+ul li:hover {
+  background-color: #6b3621; /* ✅ Version légèrement plus claire pour le hover */
+  border-color: #C1440E;
+}
+
+/* Messages */
+p {
+  text-align: center;
+  font-weight: bold;
+  color: #e0fbfc;
+}
+
+.error {
+  color: #ff6b6b; /* Rouge plus doux pour s'harmoniser avec la palette */
+  background-color: rgba(255, 107, 107, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ff6b6b;
+}
+
+.success {
+  color: #51cf66; /* Vert plus doux pour s'harmoniser avec la palette */
+  background-color: rgba(81, 207, 102, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #51cf66;
+}
+
+/* ✅ Pour centrer toutes les pages */
+.page-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  background-color: #572e1e; /* ✅ Couleur principale navbar */
+  border-radius: 10px;
+  border: 2px solid #a75d47; /* ✅ Bordure navbar */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.page-content {
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  background-color: #572e1e; /* ✅ Couleur principale navbar */
+  border-radius: 10px;
+  border: 2px solid #a75d47; /* ✅ Bordure navbar */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}

@@ -1,0 +1,75 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import '../App.css';
+
+function MyTeams() {
+  const [teams, setTeams] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  // Récupère l'utilisateur connecté
+  useEffect(() => {
+    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+      .then(res => setUserId(res.data.id))
+      .catch(() => setMessage('Vous devez être connecté.'));
+  }, []);
+
+  // Récupère ses équipes (capitaine et membre)
+  useEffect(() => {
+    if (!userId) return;
+
+    const fetchTeams = async () => {
+      try {
+        const [capRes, memRes] = await Promise.all([
+          axios.get(`http://localhost:3000/teams/by-captain?captain_id=${userId}`, { withCredentials: true }),
+          axios.get(`http://localhost:3000/teams/by-member?player_id=${userId}`, { withCredentials: true }),
+        ]);
+
+        const combined = [...capRes.data, ...memRes.data];
+        const uniqueTeams = combined.filter(
+          (team, index, self) =>
+            index === self.findIndex(t => t.id === team.id)
+        );
+
+        if (uniqueTeams.length === 0) {
+          setMessage('Aucune équipe trouvée.');
+        } else {
+          setTeams(uniqueTeams);
+        }
+      } catch {
+        setMessage('Erreur lors du chargement des équipes.');
+      }
+    };
+
+    fetchTeams();
+  }, [userId]);
+
+  const handleChange = (e) => {
+    const teamId = e.target.value;
+    if (teamId) {
+      navigate(`/team/${teamId}`);
+    }
+  };
+
+  return (
+    <div className="page-center">
+      <h1>Mes équipes</h1>
+
+      <label htmlFor="teamSelect">Mes équipes :</label>
+      <select id="teamSelect" onChange={handleChange}>
+        <option value="">-- Sélectionne une équipe --</option>
+        {teams.map(team => (
+          <option key={team.id} value={team.id}>
+            {team.name || 'Nom indisponible'}
+          </option>
+        ))}
+      </select>
+
+      {message && <p>{message}</p>}
+    </div>
+  );
+}
+
+export default MyTeams;
