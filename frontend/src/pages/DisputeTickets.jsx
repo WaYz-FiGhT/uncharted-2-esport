@@ -53,8 +53,6 @@ function DisputeTickets() {
                 <li key={ticket.ticket_id} style={{ marginBottom: '15px' }}>
                   <strong>Équipe :</strong> {ticket.ticket_team_name}<br />
                   <strong>Date du ticket :</strong> {new Date(ticket.created_at).toLocaleString()}<br />
-                  <strong>Message :</strong>
-                  <pre style={{ whiteSpace: 'pre-wrap' }}>{ticket.message}</pre>
                   <Link to={`/ticket/${ticket.ticket_id}`}>
                     <button style={{ marginTop: '5px' }}>Voir le ticket</button>
                   </Link>

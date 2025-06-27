@@ -63,8 +63,7 @@ function CreateTeam() {
           <option value="">-- Choisissez un ladder --</option>
           <option value="1">Uncharted 2 - 2vs2</option>
           <option value="2">Uncharted 2 - 3vs3, 4vs4, 5vs5</option>
-          <option value="3">Uncharted 3 - 2vs2</option>
-          <option value="4">Uncharted 3 - 3vs3, 4vs4, 5vs5</option>
+          <option value="9">Uncharted 2 - 1vs1</option>
         </select>
 
         <button type="submit">Créer</button>

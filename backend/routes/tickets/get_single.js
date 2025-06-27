@@ -49,9 +49,9 @@ router.post('/:ticket_id/set-result', async (req, res) => {
   }
 
   try {
-    // 1. Récupérer match_id + statut du match
+    // 1. Récupérer match_id, statut et équipes du match
     const [[ticket]] = await db.execute(`
-      SELECT dt.match_id, m.status
+      SELECT dt.match_id, m.status, m.team_1_id, m.team_2_id
       FROM dispute_tickets dt
       JOIN matches m ON dt.match_id = m.id
       WHERE dt.id = ?
@@ -68,9 +68,39 @@ router.post('/:ticket_id/set-result', async (req, res) => {
     const result = winner === 'team_1' ? 'win_team_1' : 'win_team_2';
 
     // 2. Mise à jour du match
-    await db.execute(`
-      UPDATE matches SET official_result = ?, status = 'completed' WHERE id = ?
-    `, [result, ticket.match_id]);
+    await db.execute(
+      `UPDATE matches SET official_result = ?, status = 'completed' WHERE id = ?`,
+      [result, ticket.match_id]
+    );
+
+    // 3. Mise à jour de l'XP des équipes
+    const [teamRows] = await db.execute(
+      `SELECT id, xp FROM teams WHERE id IN (?, ?)`,
+      [ticket.team_1_id, ticket.team_2_id]
+    );
+
+    const team1XP = teamRows.find(t => t.id === ticket.team_1_id)?.xp || 0;
+    const team2XP = teamRows.find(t => t.id === ticket.team_2_id)?.xp || 0;
+
+    const eloChange = (ratingA, ratingB, winA) => {
+      const K = 32;
+      const expectedA = 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
+      const scoreA = winA ? 1 : 0;
+      const changeA = Math.round(K * (scoreA - expectedA));
+      return changeA;
+    };
+
+    if (result === 'win_team_1') {
+      const change1 = eloChange(team1XP, team2XP, true);
+      const change2 = -eloChange(team2XP, team1XP, true);
+      await db.execute(`UPDATE teams SET xp = xp + ? WHERE id = ?`, [change1, ticket.team_1_id]);
+      await db.execute(`UPDATE teams SET xp = GREATEST(0, xp + ?) WHERE id = ?`, [change2, ticket.team_2_id]);
+    } else if (result === 'win_team_2') {
+      const change2 = eloChange(team2XP, team1XP, true);
+      const change1 = -eloChange(team1XP, team2XP, true);
+      await db.execute(`UPDATE teams SET xp = GREATEST(0, xp + ?) WHERE id = ?`, [change1, ticket.team_1_id]);
+      await db.execute(`UPDATE teams SET xp = xp + ? WHERE id = ?`, [change2, ticket.team_2_id]);
+    }
 
     res.json({ success: true });
   } catch (err) {

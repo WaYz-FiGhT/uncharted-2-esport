@@ -39,7 +39,11 @@ router.post('/', async (req, res) => {
     let selectedModes = [];
     let selectedMaps = [];
 
-    if (match_game_mode === 'TDM Only') {
+    if (ladder_id === '9') {
+      const mapCount = match_format === 'bo1' ? 1 : (match_format === 'bo3' ? 3 : 5);
+      selectedModes = Array(mapCount).fill('TDM');
+      selectedMaps = Array(mapCount).fill('Village');
+    } else if (match_game_mode === 'TDM Only') {
       const mapCount = match_format === 'bo3' ? 3 : 5;
       selectedModes = Array(mapCount).fill('TDM');
       selectedMaps = getRandomElements(MAPS.TDM, mapCount);
