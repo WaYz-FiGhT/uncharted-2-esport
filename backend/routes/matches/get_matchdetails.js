@@ -24,6 +24,11 @@ router.get('/:id', async (req, res) => {
 
     const match = matchRows[0];
 
+    // Block details if the match is still pending
+    // if (match.status === 'pending') {
+     //  return res.status(403).json({ error: 'Match en attente, détails indisponibles' });
+   //  }
+
     const [mapRows] = await db.execute(`
       SELECT JSON_UNQUOTE(JSON_EXTRACT(mode_list, CONCAT('$[', idx, ']'))) AS game_mode,
              JSON_UNQUOTE(JSON_EXTRACT(map_list, CONCAT('$[', idx, ']'))) AS map_name
