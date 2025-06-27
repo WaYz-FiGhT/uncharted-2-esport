@@ -3,16 +3,17 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Gunplay', sans-serif;
+   background-image: url('/images/u2site.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed; /* permet un effet de parallaxe */
+  background-attachment: fixed;
   color: #F5F5F5;
 }
 
 h1, h2, h3 {
   text-align: center;
-  color: #c2dfe3; /* ✅ Couleur du brand navbar */
+  color: #c2dfe3;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -22,41 +23,49 @@ h1, h2, h3 {
   max-width: 800px;
   margin: auto;
   padding: 20px;
+  text-align: center;
 }
 
 /* Forms */
 form {
-  background-color: #572e1e; /* ✅ Couleur principale navbar */
-  padding: 25px;
-  border-radius: 8px;
-  border: 2px solid #a75d47; /* ✅ Bordure navbar */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  margin-bottom: 30px;
+  background-color: #572e1e;
+  padding: 120px 50px;
+  border-radius: 15px;
+  border: 3px solid #a75d47;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  margin-bottom: 40px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  background: linear-gradient(135deg, #572e1e 0%, #4a2518 100%);
 }
 
 form label {
   font-weight: bold;
   margin-top: 15px;
   display: block;
-  color: #e0fbfc; /* ✅ Couleur des liens navbar */
+  color: #e0fbfc;
   font-family: 'Gunplay', sans-serif;
+  text-align: center;
 }
 
 form input,
 form select,
 form button {
-  width: 100%;
+  width: 90%;
   margin-top: 8px;
   padding: 10px;
   border-radius: 5px;
   border: none;
   font-size: 1rem;
   margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 form input,
 form select {
-  background-color: #3d1f13; /* ✅ Version plus foncée de la couleur navbar */
+  background-color: #3d1f13;
   color: #e0fbfc;
   border: 1px solid #a75d47;
   font-family: 'Gunplay', sans-serif;
@@ -70,7 +79,7 @@ form select:focus {
 }
 
 form button {
-  background-color: #a75d47; /* ✅ Couleur de bordure navbar */
+  background-color: #a75d47;
   color: #e0fbfc;
   font-weight: bold;
   font-family: 'Gunplay', sans-serif;
@@ -82,14 +91,14 @@ form button {
 }
 
 form button:hover {
-  background-color: #C1440E; /* ✅ Couleur hover navbar */
+  background-color: #C1440E;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Buttons global */
 button {
-  background-color: #a75d47; /* ✅ Couleur de bordure navbar */
+  background-color: #a75d47;
   color: #e0fbfc;
   border: none;
   padding: 10px 16px;
@@ -104,7 +113,7 @@ button {
 }
 
 button:hover {
-  background-color: #C1440E; /* ✅ Couleur hover navbar */
+  background-color: #C1440E;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -117,24 +126,20 @@ button:active {
 ul {
   padding: 0;
   list-style: none;
+  text-align: center;
 }
 
 ul li {
-  background-color: #572e1e; /* ✅ Couleur principale navbar */
+  background-color: #572e1e;
   margin-bottom: 10px;
   padding: 15px;
   border-radius: 6px;
-  border: 1px solid #a75d47; /* ✅ Bordure navbar */
+  border: 1px solid #a75d47;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: #e0fbfc;
-}
-
-ul li:hover {
-  background-color: #6b3621; /* ✅ Version légèrement plus claire pour le hover */
-  border-color: #C1440E;
 }
 
 /* Messages */
@@ -145,7 +150,7 @@ p {
 }
 
 .error {
-  color: #ff6b6b; /* Rouge plus doux pour s'harmoniser avec la palette */
+  color: #ff6b6b;
   background-color: rgba(255, 107, 107, 0.1);
   padding: 10px;
   border-radius: 5px;
@@ -153,34 +158,36 @@ p {
 }
 
 .success {
-  color: #51cf66; /* Vert plus doux pour s'harmoniser avec la palette */
+  color: #51cf66;
   background-color: rgba(81, 207, 102, 0.1);
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #51cf66;
 }
 
-/* ✅ Pour centrer toutes les pages */
+/* ✅ Centrage + largeur élargie */
 .page-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 500px;
-  padding: 30px;
-  background-color: #572e1e; /* ✅ Couleur principale navbar */
+  max-width: 700px;
+  padding: 40px;
+  background-color: #572e1e;
   border-radius: 10px;
-  border: 2px solid #a75d47; /* ✅ Bordure navbar */
+  border: 2px solid #a75d47;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
 
 .page-content {
   width: 100%;
-  max-width: 500px;
-  padding: 30px;
-  background-color: #572e1e; /* ✅ Couleur principale navbar */
+  max-width: 700px;
+  padding: 40px;
+  background-color: #572e1e;
   border-radius: 10px;
-  border: 2px solid #a75d47; /* ✅ Bordure navbar */
+  border: 2px solid #a75d47;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
