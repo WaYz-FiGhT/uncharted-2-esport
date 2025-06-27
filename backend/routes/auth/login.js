@@ -24,8 +24,9 @@ router.post('/', async (req, res) => {
       return res.status(401).json({ error: 'Mot de passe incorrect' });
 
     // ⬇️ On stocke aussi le team_id (s'il est présent)
-    req.session.user = { id: user.id, username: user.username, team_id: user.team_id,  is_admin: user.is_admin};
-    res.json({ username: user.username, team_id: user.team_id, is_admin: user.is_admin });
+    const isAdmin = Boolean(user.is_admin);
+    req.session.user = { id: user.id, username: user.username, team_id: user.team_id, is_admin: isAdmin };
+    res.json({ username: user.username, team_id: user.team_id, is_admin: isAdmin });
 
   } catch (err) {
     console.error('Erreur de connexion :', err);

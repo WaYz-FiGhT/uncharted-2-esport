@@ -41,8 +41,8 @@ app.use('/auth/register', require('./routes/auth/register'));
 // Session info
 app.get('/session-info', (req, res) => {
   if (req.session.user) {
-    const { id, username, team_id } = req.session.user;
-    return res.json({ id, username, team_id }); // ← 🔥 ici !
+    const { id, username, team_id, is_admin } = req.session.user;
+    return res.json({ id, username, team_id, is_admin }); // ← 🔥 ici !
   } else {
     return res.status(401).json({ error: 'Non connecté' });
   }
