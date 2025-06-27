@@ -39,28 +39,21 @@ router.post('/', async (req, res) => {
     let selectedModes = [];
     let selectedMaps = [];
 
-    const ladderIdNum = Number(ladder_id);
-    if (ladderIdNum === 9) {
-      const mapCount = match_format === 'bo1' ? 1 : (match_format === 'bo3' ? 3 : 5);
-      selectedModes = Array(mapCount).fill('TDM');
-      selectedMaps = Array(mapCount).fill('Village');
-    } else if (match_game_mode === 'TDM Only') {
-      const mapCount = match_format === 'bo1' ? 1 : (match_format === 'bo3' ? 3 : 5);
+      if (match_game_mode === 'TDM Only') {
+      const mapCount = match_format === 'bo3' ? 3 : 5
       selectedModes = Array(mapCount).fill('TDM');
       selectedMaps = getRandomElements(MAPS.TDM, mapCount);
     } else if (match_game_mode === 'Mixte mode') {
-      selectedModes = match_format === 'bo1'
-        ? ['TDM']
-        : (match_format === 'bo3'
-            ? ['TDM', 'Plunder', 'TurfWar']
-            : ['TDM', 'Plunder', 'TurfWar', 'TDM', 'Plunder']);
+      selectedModes = match_format === 'bo3'
+        ? ['TDM', 'Plunder', 'TurfWar']
+        : ['TDM', 'Plunder', 'TurfWar', 'TDM', 'Plunder'];
 
       selectedMaps = selectedModes.map(mode => {
         const modeKey = mode === 'TurfWar' ? 'TurfWar' : mode;
         return getRandomElements(MAPS[modeKey], 1)[0];
       });
     } else if (match_game_mode === 'Plunder Only') {
-      const mapCount = match_format === 'bo1' ? 1 : (match_format === 'bo3' ? 3 : 5);
+      const mapCount = match_format === 'bo3' ? 3 : 5;
       selectedModes = Array(mapCount).fill('Plunder');
       selectedMaps = getRandomElements(MAPS.Plunder, mapCount);
     } else {

@@ -5,8 +5,7 @@ import '../App.css';
 
 function PostMatch() {
   const { team_id, ladder_id } = useParams();
-  const isLadder1v1 = ladder_id === "9";
-  const [match_game_mode, setGameMode] = useState(isLadder1v1 ? 'TDM Only' : '');
+  const [match_game_mode, setGameMode] = useState('');
   const [boFormat, setBoFormat] = useState('bo3');
   const [members, setMembers] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
@@ -56,11 +55,6 @@ function PostMatch() {
       return;
     }
 
-    if (ladder_id === "9" && selectedPlayers.length !== 1) {
-      setMessage("Un match 1v1 nécessite exactement 1 joueur.");
-      return;
-    }
-
     try {
       const res = await axios.post('http://localhost:3000/matches/create', {
         team_1_id: team_id,
@@ -74,7 +68,7 @@ function PostMatch() {
       if (res.status === 201) {
         setMessage("Match posté avec succès !");
         setSelectedPlayers([]);
-        setGameMode(isLadder1v1 ? 'TDM Only' : '');
+        setGameMode('');
         setBoFormat('bo3');
       } else {
         setMessage(res.data.error || "Erreur inconnue.");
@@ -89,22 +83,14 @@ function PostMatch() {
       <h1>Poster un match</h1>
       <form onSubmit={handleSubmit}>
         <label>Mode de jeu :</label>
-        {isLadder1v1 ? (
-          <select value="TDM Only" disabled>
-            <option value="TDM Only">TDM Only</option>
-          </select>
-        ) : (
-          <select value={match_game_mode} onChange={(e) => setGameMode(e.target.value)} required>
-            <option value="">-- Choisissez un mode --</option>
-            <option value="TDM Only">TDM Only</option>
-            <option value="Mixte mode">Mixte mode</option>
-            <option value="Plunder Only">Plunder Only</option>
-          </select>
-        )}
-
+        <select value={match_game_mode} onChange={(e) => setGameMode(e.target.value)} required>
+          <option value="">-- Choisissez un mode --</option>
+          <option value="TDM Only">TDM Only</option>
+          <option value="Mixte mode">Mixte mode</option>
+          <option value="Plunder Only">Plunder Only</option>
+        </select>
         <label>Format du match :</label>
         <select value={boFormat} onChange={(e) => setBoFormat(e.target.value)} required>
-          <option value="bo1">Bo1</option>
           <option value="bo3">Bo3</option>
           <option value="bo5">Bo5</option>
         </select>
