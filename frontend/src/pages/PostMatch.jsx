@@ -89,6 +89,7 @@ function PostMatch() {
           <option value="Mixte mode">Mixte mode</option>
           <option value="Plunder Only">Plunder Only</option>
         </select>
+
         <label>Format du match :</label>
         <select value={boFormat} onChange={(e) => setBoFormat(e.target.value)} required>
           <option value="bo3">Bo3</option>

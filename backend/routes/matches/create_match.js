@@ -39,8 +39,8 @@ router.post('/', async (req, res) => {
     let selectedModes = [];
     let selectedMaps = [];
 
-      if (match_game_mode === 'TDM Only') {
-      const mapCount = match_format === 'bo3' ? 3 : 5
+    if (match_game_mode === 'TDM Only') {
+      const mapCount = match_format === 'bo3' ? 3 : 5;
       selectedModes = Array(mapCount).fill('TDM');
       selectedMaps = getRandomElements(MAPS.TDM, mapCount);
     } else if (match_game_mode === 'Mixte mode') {
