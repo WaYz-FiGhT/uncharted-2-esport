@@ -41,8 +41,15 @@ function TicketDetails() {
       {!resultUpdated && (
         <div style={{ marginTop: '30px' }}>
           <h4>Donner la victoire à :</h4>
-          <button onClick={() => handleSetResult('team_1')} style={{ marginRight: '10px' }}>Équipe 1</button>
-          <button onClick={() => handleSetResult('team_2')}>Équipe 2</button>
+          <button
+            onClick={() => handleSetResult('team_1')}
+            style={{ marginRight: '10px' }}
+          >
+            {ticket.team_1_name}
+          </button>
+          <button onClick={() => handleSetResult('team_2')}>
+            {ticket.team_2_name}
+          </button>
         </div>
       )}
     </div>

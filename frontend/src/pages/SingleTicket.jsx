@@ -37,7 +37,7 @@ function SingleTicket() {
       <pre style={{ whiteSpace: 'pre-wrap' }}>{ticket.message}</pre>
 
       <div style={{ marginTop: '20px' }}>
-        <h3>Donner la victoire</h3>
+        <h3>Donner la victoire à :</h3>
         <button onClick={() => handleSetResult('team_1')} style={{ marginRight: '10px' }}>
           {ticket.team_1_name}
         </button>

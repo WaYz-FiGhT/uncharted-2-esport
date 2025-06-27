@@ -58,6 +58,7 @@ router.get('/', async (req, res) => {
       JOIN teams t ON dt.team_id = t.id
       LEFT JOIN teams team1 ON m.team_1_id = team1.id
       LEFT JOIN teams team2 ON m.team_2_id = team2.id
+      WHERE m.status = 'disputed'
       ORDER BY m.scheduled_time DESC, dt.created_at DESC;
 
     `);

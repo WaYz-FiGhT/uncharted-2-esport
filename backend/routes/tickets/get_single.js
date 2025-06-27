@@ -11,10 +11,20 @@ router.get('/:ticket_id', async (req, res) => {
 
   try {
     const [rows] = await db.execute(`
-      SELECT dt.id, dt.match_id, m.scheduled_time, t.name AS team_name, dt.message, dt.created_at
+      SELECT
+        dt.id,
+        dt.match_id,
+        m.scheduled_time,
+        team1.name AS team_1_name,
+        team2.name AS team_2_name,
+        t.name AS team_name,
+        dt.message,
+        dt.created_at
       FROM dispute_tickets dt
       JOIN teams t ON dt.team_id = t.id
       JOIN matches m ON dt.match_id = m.id
+      LEFT JOIN teams team1 ON m.team_1_id = team1.id
+      LEFT JOIN teams team2 ON m.team_2_id = team2.id
       WHERE dt.id = ?
     `, [ticket_id]);
 
