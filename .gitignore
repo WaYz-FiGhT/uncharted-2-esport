@@ -1,24 +1,44 @@
+# -----------------------
 # Node.js backend
-/backend/node_modules/
+# -----------------------
+backend/node_modules/
 backend/.env
+backend/npm-debug.log
+backend/yarn.lock
+backend/.DS_Store
 
-# React frontend (Vite)
+# -----------------------
+# React frontend (si tu as un dossier client/ ou frontend/)
+# -----------------------
 frontend/node_modules/
-frontend/dist/
 frontend/.env
+frontend/build/
+frontend/dist/
+frontend/yarn.lock
+frontend/npm-debug.log
+frontend/.DS_Store
 
-# Logs
-logs/
+# -----------------------
+# Global logs, environnement & IDE
+# -----------------------
 *.log
+.env
+*.env.*
+!.env.example
 
-# Systèmes d'exploitation
+# IDEs & OS
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
 
-# Éditeurs
-.vscode/
-.idea/
+# npm
+package-lock.json
 
-# Autres
-.env.local
-.env.*
+# coverage & tests
+coverage/
+*.lcov
+
+# Optional: lock file ignore if you use npm or yarn exclusively
+# yarn.lock
+# package-lock.json
