@@ -11,7 +11,9 @@ router.post('/', async (req, res) => {
 
   try {
     const [rows] = await db.execute(
-      'SELECT * FROM players WHERE username = ?',
+      `SELECT id, username, password, is_admin, email_verified,
+              team_id_ladder1, team_id_ladder2
+       FROM players WHERE username = ?`,
       [username]
     );
 
@@ -29,8 +31,19 @@ router.post('/', async (req, res) => {
 
     // ⬇️ On stocke aussi le team_id (s'il est présent)
     const isAdmin = Boolean(user.is_admin);
-    req.session.user = { id: user.id, username: user.username, team_id: user.team_id, is_admin: isAdmin };
-    res.json({ username: user.username, team_id: user.team_id, is_admin: isAdmin });
+    req.session.user = {
+      id: user.id,
+      username: user.username,
+      team_id_ladder1: user.team_id_ladder1,
+      team_id_ladder2: user.team_id_ladder2,
+      is_admin: isAdmin
+    };
+    res.json({
+      username: user.username,
+      team_id_ladder1: user.team_id_ladder1,
+      team_id_ladder2: user.team_id_ladder2,
+      is_admin: isAdmin
+    });
 
   } catch (err) {
     console.error('Erreur de connexion :', err);

@@ -42,8 +42,8 @@ app.use('/auth/verify-email', require('./routes/auth/verify_email'));
 // Session info
 app.get('/session-info', (req, res) => {
   if (req.session.user) {
-    const { id, username, team_id, is_admin } = req.session.user;
-    return res.json({ id, username, team_id, is_admin }); // ← 🔥 ici !
+    const { id, username, team_id_ladder1, team_id_ladder2, is_admin } = req.session.user;
+    return res.json({ id, username, team_id_ladder1, team_id_ladder2, is_admin });
   } else {
     return res.status(401).json({ error: 'Non connecté' });
   }

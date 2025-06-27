@@ -57,6 +57,7 @@ router.get('/:id', async (req, res) => {
 
     res.json({
       id: match.id,
+      ladder_id: match.ladder_id,
       team_1_id: match.team_1_id,
       team_2_id: match.team_2_id,
       team_1_name: match.team_1_name,

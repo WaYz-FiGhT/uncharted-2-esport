@@ -6,6 +6,8 @@ import '../App.css';
 function MatchDetails() {
   const { match_id } = useParams();
   const [match, setMatch] = useState(null);
+  const [teamId1, setTeamId1] = useState(null);
+  const [teamId2, setTeamId2] = useState(null);
   const [userTeamId, setUserTeamId] = useState(null);
   const [hasAlreadyReported, setHasAlreadyReported] = useState(false);
   const [hasAlreadySentTicket, setHasAlreadySentTicket] = useState(false);
@@ -17,7 +19,10 @@ function MatchDetails() {
 
   useEffect(() => {
     axios.get('http://localhost:3000/session-info', { withCredentials: true })
-      .then(res => setUserTeamId(res.data.team_id))
+      .then(res => {
+        setTeamId1(res.data.team_id_ladder1);
+        setTeamId2(res.data.team_id_ladder2);
+      })
       .catch(() => navigate('/login'));
   }, [navigate]);
 
@@ -26,6 +31,19 @@ function MatchDetails() {
       .then(res => setMatch(res.data))
       .catch(() => setError("Erreur lors de la récupération du match."));
   }, [match_id]);
+
+    // Détermine l'id de l'équipe de l'utilisateur pour le ladder du match
+  useEffect(() => {
+    if (!match) return;
+    if (match.ladder_id === 1) {
+      setUserTeamId(teamId1);
+    } else if (match.ladder_id === 2) {
+      setUserTeamId(teamId2);
+    } else {
+      setUserTeamId(null);
+    }
+  }, [match, teamId1, teamId2]);
+
 
   useEffect(() => {
     if (!userTeamId) return;

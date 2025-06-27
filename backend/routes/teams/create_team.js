@@ -53,9 +53,10 @@ router.post('/', async (req, res) => {
       [teamId, user_id, "captain"]
     );
 
-    // 🔥 Met à jour le joueur avec le team_id
+    // Met à jour la colonne team_id correspondant au ladder
+    const column = ladder_id === 1 ? 'team_id_ladder1' : 'team_id_ladder2';
     await db.execute(
-      `UPDATE players SET team_id = ? WHERE id = ?`,
+      `UPDATE players SET ${column} = ? WHERE id = ?`,
       [teamId, user_id]
     );
 
