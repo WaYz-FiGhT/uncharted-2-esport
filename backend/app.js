@@ -81,6 +81,7 @@ app.use('/matches/pending', require('./routes/matches/get_matchpending'));
 app.use('/matches/team', require('./routes/matches/get_matchteam'));
 app.use('/matches/details', require('./routes/matches/get_matchdetails'));
 app.use('/matches/report', require('./routes/matches/report'));
+app.use('/matches/delete-pending', require('./routes/matches/delete_pending'));
 
 // Ladders
 app.use('/ladders/name', require('./routes/ladders/get_laddername'));

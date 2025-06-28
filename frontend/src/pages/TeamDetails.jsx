@@ -83,7 +83,7 @@ function TeamDetails() {
     }
   };
 
-    const handleKick = async (playerId) => {
+  const handleKick = async (playerId) => {
     try {
       const res = await axios.post('http://localhost:3000/teams/kick-member', {
         team_id,
@@ -100,6 +100,19 @@ function TeamDetails() {
       setMessage('Erreur lors de la requête.');
     }
   };
+
+  const handleDeleteMatch = async (matchId) => {
+    try {
+      await axios.delete('http://localhost:3000/matches/delete-pending', {
+        data: { match_id: matchId },
+        withCredentials: true
+      });
+      setMatchs(matchs.filter(m => m.id !== matchId));
+    } catch (err) {
+      setMessage("Erreur lors de la suppression du match.");
+    }
+  };
+
 
   const getResultTag = (match) => {
     const teamIdInt = parseInt(team_id);
@@ -192,7 +205,17 @@ function TeamDetails() {
                     '???'
                   )}{' '}
                   {match.status === 'pending' ? (
-                    <span style={{ color: 'gray' }}>pending</span>
+                    <>
+                      <span style={{ color: 'gray' }}>pending</span>
+                      {isCaptain && match.team_1_id === Number(team_id) && (
+                        <button
+                          style={{ marginLeft: '10px' }}
+                          onClick={() => handleDeleteMatch(match.id)}
+                        >
+                          Supprimer
+                        </button>
+                      )}
+                    </>
                   ) : (
                     getResultTag(match)
                   )}

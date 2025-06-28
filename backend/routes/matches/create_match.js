@@ -24,16 +24,23 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    // Vérifier qu'aucun match en attente/existant
+    // Vérifier qu'aucun match en attente ou accepté non reporté par cette équipe
     const [rows] = await db.execute(
-      `SELECT id FROM matches
-       WHERE (team_1_id = ? OR team_2_id = ?)
-       AND (status = 'pending' OR status = 'accepted')`,
-      [team_1_id, team_1_id]
+      `SELECT m.id
+       FROM matches m
+       LEFT JOIN match_reports mr ON m.id = mr.match_id AND mr.team_id = ?
+       WHERE (m.team_1_id = ? OR m.team_2_id = ?)
+         AND (
+           m.status = 'pending'
+           OR (m.status = 'accepted' AND mr.id IS NULL)
+         )`,
+      [team_1_id, team_1_id, team_1_id]
     );
 
     if (rows.length > 0) {
-      return res.status(400).json({ error: "Cette équipe a déjà un match en attente ou accepté." });
+      return res
+        .status(400)
+        .json({ error: "Cette équipe a déjà un match en attente ou un match accepté non reporté." });
     }
 
     let selectedModes = [];
