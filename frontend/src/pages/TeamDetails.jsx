@@ -149,24 +149,25 @@ function TeamDetails() {
             <span>Username</span>
             <span>PSN</span>
             <span>Rôle</span>
+            <span style={{ visibility: isCaptain ? 'visible' : 'hidden' }}>Action</span>
           </div>
-                  {members.map((membre, index) => (
+          {members.map((membre, index) => (
             <div key={index} className="member-row">
               <span>{membre.username}</span>
               <span>{membre.psn || '-'}</span>
               <span>{membre.role}</span>
-                      {isCaptain && parseInt(membre.id) !== parseInt(captainId) && (
-                        <td>
-                          <button
-                            onClick={() => handleKick(membre.id)}
-                            disabled={hasOngoingMatch}
-                          >
-                            Expulser
-                          </button>
-                        </td>
-                      )}
+                {isCaptain && parseInt(membre.id) !== parseInt(captainId) ? (
+                <button
+                  onClick={() => handleKick(membre.id)}
+                  disabled={hasOngoingMatch}
+                >
+                  Expulser
+                </button>
+              ) : (
+                <span />
+              )}
             </div>
-                  ))}
+            ))}
         </div>
       ) : (
         <p>{message || 'Aucun membre trouvé.'}</p>
