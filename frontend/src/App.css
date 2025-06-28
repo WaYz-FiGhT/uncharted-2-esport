@@ -1,7 +1,7 @@
 /* Global layout */
 body {
   margin: 0;
-  padding: 0;
+  padding: 120px 0 0 0;
   font-family: 'Gunplay', sans-serif;
   background-image: url('/images/u2site.jpg');
   background-size: cover;
@@ -169,7 +169,7 @@ p {
 .page-center {
   width: 90%;
   max-width: 1200px;
-  margin: 80px auto;
+  margin: 60px auto;
   padding: 40px;
   background-color: #572e1e;
   border-radius: 10px;
@@ -230,7 +230,7 @@ p {
   display: flex;
   gap: 40px;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 60px;
 }
 
 .members-section,
