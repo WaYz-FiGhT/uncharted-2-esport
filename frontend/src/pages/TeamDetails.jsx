@@ -13,6 +13,7 @@ function TeamDetails() {
   const [members, setMembers] = useState([]);
   const [matchs, setMatchs] = useState([]);
   const [message, setMessage] = useState('');
+  const [showLeaveConfirm, setShowLeaveConfirm] = useState(false);
   const [userId, setUserId] = useState(null);
   const [captainId, setCaptainId] = useState(null);
   const [ladderId, setLadderId] = useState(null);
@@ -67,6 +68,7 @@ function TeamDetails() {
         player_id: userId
       }, { withCredentials: true });
       if (res.status === 200) {
+        setShowLeaveConfirm(false);
         navigate('/mes-equipes');
       } else {
         setMessage(res.data.error || 'Erreur.');
@@ -168,9 +170,17 @@ function TeamDetails() {
       </button>
       
       {!isCaptain && (
-        <button onClick={handleLeave} disabled={hasOngoingMatch}>
+        <button onClick={() => setShowLeaveConfirm(true)} disabled={hasOngoingMatch}>
           Quitter l'équipe
         </button>
+      )}
+
+            {showLeaveConfirm && (
+        <div className="confirm-box">
+          <p>Êtes-vous sûr de vouloir quitter l'équipe&nbsp;?</p>
+          <button onClick={handleLeave}>Oui</button>
+          <button onClick={() => setShowLeaveConfirm(false)}>Non</button>
+        </div>
       )}
 
       {hasOngoingMatch && (

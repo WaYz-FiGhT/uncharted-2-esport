@@ -191,3 +191,12 @@ p {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   text-align: center;
 }
+
+.confirm-box {
+  background-color: #572e1e;
+  border: 2px solid #a75d47;
+  padding: 20px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 10px;
+}
