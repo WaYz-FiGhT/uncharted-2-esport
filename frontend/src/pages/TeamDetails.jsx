@@ -136,12 +136,15 @@ function TeamDetails() {
 
   return (
     <div className="page-center">
-      <h1>Détails de l’équipe</h1>
-      <h2>{teamName || 'Nom non disponible'}</h2>
-      <h3>{gameName && ladderName ? `${gameName} - ${ladderName}` : 'Nom non disponible'}</h3>
+      <h1>{teamName || 'Nom non disponible'}</h1>
+      <h2>{gameName && ladderName ? `${gameName} - ${ladderName}` : 'Nom non disponible'}</h2>
 
       <div className="team-stats">
-        <p><strong>Victoires :</strong> {winCount} | <strong>Défaites :</strong> {loseCount}</p>
+        <p>
+          {winCount} <span style={{ color: 'green' }}>W</span> |
+          {' '}
+          {loseCount} <span style={{ color: 'red' }}>L</span>
+        </p>
       </div>
 
       <div className="team-sections">
