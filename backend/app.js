@@ -57,6 +57,7 @@ app.use('/teams/get_myteamsasmember', require('./routes/teams/get_myteamsasmembe
 app.use('/teams/members', require('./routes/teams/get_membersteam'));
 app.use('/teams/get_teamselected', require('./routes/teams/get_teamselected'));
 app.use('/teams/add-member', require('./routes/teams/add_memteam'));
+app.use('/teams/leave', require('./routes/teams/leave_team'));
 app.use('/teams/by-captain', require('./routes/teams/byCaptain'));
 app.use('/teams/by-member', require('./routes/teams/byMember'));
 app.use('/teams/details', require('./routes/teams/get_teamselected'));

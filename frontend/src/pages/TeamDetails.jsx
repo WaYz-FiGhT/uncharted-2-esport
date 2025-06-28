@@ -56,6 +56,25 @@ function TeamDetails() {
   }, [ladderId, team_id]);
 
   const isCaptain = parseInt(userId) === parseInt(captainId);
+  const hasOngoingMatch = matchs.some(m =>
+    ['pending', 'accepted', 'disputed'].includes(m.status)
+  );
+
+  const handleLeave = async () => {
+    try {
+      const res = await axios.post('http://localhost:3000/teams/leave', {
+        team_id,
+        player_id: userId
+      }, { withCredentials: true });
+      if (res.status === 200) {
+        navigate('/mes-equipes');
+      } else {
+        setMessage(res.data.error || 'Erreur.');
+      }
+    } catch (err) {
+      setMessage("Erreur lors de la requête.");
+    }
+  };
 
   const getResultTag = (match) => {
     const teamIdInt = parseInt(team_id);
@@ -148,6 +167,18 @@ function TeamDetails() {
         Voir le classement
       </button>
       
+      {!isCaptain && (
+        <button onClick={handleLeave} disabled={hasOngoingMatch}>
+          Quitter l'équipe
+        </button>
+      )}
+
+      {hasOngoingMatch && (
+        <p style={{ color: 'red' }}>
+          Impossible de quitter l'équipe : un match est en attente, accepté ou disputé.
+        </p>
+      )}
+
     </div>
   );
 }
