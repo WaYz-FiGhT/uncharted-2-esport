@@ -171,8 +171,8 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 700px;
+  width: 75%;
+  max-width: 1200px;
   padding: 40px;
   background-color: #572e1e;
   border-radius: 10px;
@@ -224,4 +224,21 @@ p {
   background-color: #572e1e;
   border: 1px solid #a75d47;
   border-radius: 6px;
+}
+
+/* Layout for team details */
+.team-sections {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.members-section,
+.matches-section {
+  flex: 1;
+}
+
+.team-stats {
+  margin: 20px 0;
 }
