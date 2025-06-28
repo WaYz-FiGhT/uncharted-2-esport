@@ -164,7 +164,9 @@ function TeamDetails() {
                   Expulser
                 </button>
               ) : (
-                <span />
+                <button style={{ visibility: 'hidden' }} disabled>
+                  Expulser
+                </button>
               )}
             </div>
             ))}
