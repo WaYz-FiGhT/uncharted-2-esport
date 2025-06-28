@@ -1,0 +1,73 @@
+const express = require('express');
+const router = express.Router();
+const db = require('../../db');
+
+// Accepter ou refuser une invitation
+router.post('/', async (req, res) => {
+  const { invitation_id, accept } = req.body;
+
+  if (!invitation_id || typeof accept === 'undefined') {
+    return res.status(400).json({ error: 'Champs manquants' });
+  }
+
+  try {
+    const [invRows] = await db.execute(
+      `SELECT ti.team_id, ti.player_id, ti.status, t.ladder_id
+       FROM team_invitations ti
+       JOIN teams t ON ti.team_id = t.id
+       WHERE ti.id = ?`,
+      [invitation_id]
+    );
+
+    if (invRows.length === 0) {
+      return res.status(404).json({ error: 'Invitation non trouvée' });
+    }
+
+    const { team_id, player_id, status, ladder_id } = invRows[0];
+
+    if (status !== 'pending') {
+      return res.status(400).json({ error: 'Invitation déjà traitée' });
+    }
+
+    if (accept) {
+      // Vérifie si le joueur est déjà dans une équipe du même ladder
+      const [conflict] = await db.execute(
+        `SELECT t.id
+         FROM teams t
+         LEFT JOIN team_members tm ON t.id = tm.team_id
+         WHERE t.ladder_id = ?
+           AND (t.captain_id = ? OR tm.player_id = ?)`,
+        [ladder_id, player_id, player_id]
+      );
+
+      if (conflict.length > 0) {
+        await db.execute(`UPDATE team_invitations SET status = 'declined' WHERE id = ?`, [invitation_id]);
+        return res.status(400).json({ error: "Le joueur fait déjà partie d'une équipe dans ce ladder." });
+      }
+
+      await db.execute(
+        `INSERT INTO team_members (team_id, player_id, role, created_at)
+         VALUES (?, ?, 'member', NOW())`,
+        [team_id, player_id]
+      );
+
+      const column = Number(ladder_id) === 1 ? 'team_id_ladder1' : 'team_id_ladder2';
+      await db.execute(
+        `UPDATE players SET ${column} = ? WHERE id = ?`,
+        [team_id, player_id]
+      );
+
+      await db.execute(`UPDATE team_invitations SET status = 'accepted' WHERE id = ?`, [invitation_id]);
+
+      res.json({ message: 'Invitation acceptée' });
+    } else {
+      await db.execute(`UPDATE team_invitations SET status = 'declined' WHERE id = ?`, [invitation_id]);
+      res.json({ message: 'Invitation refusée' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Erreur lors du traitement de l'invitation" });
+  }
+});
+
+module.exports = router;

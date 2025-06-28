@@ -22,14 +22,14 @@ function AddMember() {
         return;
       }
 
-      const res = await axios.post('http://localhost:3000/teams/add-member', {
+      const res = await axios.post('http://localhost:3000/teams/invite', {
         team_id,
         player_id: player.id,
         ladder_id
       }, { withCredentials: true });
 
       if (res.status === 201) {
-        setMessage("Membre ajouté !");
+        setMessage('Invitation envoyée !');
         setUsername('');
       } else {
         setMessage(res.data.error || "Erreur.");

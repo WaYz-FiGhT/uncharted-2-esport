@@ -18,6 +18,7 @@ import Ranking from './pages/Ranking';
 import DisputeTickets from './pages/DisputeTickets';
 import TicketDetails from './pages/TicketDetails';
 import VerifyEmail from './pages/VerifyEmail';
+import Invitations from './pages/Invitations';
 
 import axios from 'axios';
 
@@ -48,6 +49,7 @@ function App() {
         <Route path="/match/:match_id" element={<MatchDetails />} />
         <Route path="/report/:match_id/:team_id" element={<ReportMatch />} />
         <Route path="/ladder/:ladder_id/ranking" element={<Ranking />} />
+        <Route path="/invitations" element={<Invitations />} />
 
         {/* 🔒 Routes admin-only */}
         <Route

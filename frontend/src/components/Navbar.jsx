@@ -31,6 +31,7 @@ function Navbar({ user, setUser }) {
             <li><Link to="/dashboard">Dashboard</Link></li>
             <li><Link to="/mes-equipes">Mes équipes</Link></li>
             <li><Link to="/create-team">Créer une team</Link></li>
+            <li><Link to="/invitations">Invitations</Link></li>
             {user.is_admin === true && <li><Link to="/tickets">Tickets</Link></li>}
             <li className="navbar-welcome">{user.username}</li>
             <li>

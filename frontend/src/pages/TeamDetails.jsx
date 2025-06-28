@@ -13,6 +13,7 @@ function TeamDetails() {
   const [members, setMembers] = useState([]);
   const [matchs, setMatchs] = useState([]);
   const [message, setMessage] = useState('');
+  const [leaveMessage, setLeaveMessage] = useState('');
   const [showLeaveConfirm, setShowLeaveConfirm] = useState(false);
   const [userId, setUserId] = useState(null);
   const [captainId, setCaptainId] = useState(null);
@@ -50,8 +51,11 @@ function TeamDetails() {
       withCredentials: true
     })
       .then(res => {
-        setMatchs(res.data);
-        calculateStats(res.data);
+        const sorted = res.data.sort((a, b) =>
+          new Date(b.created_at) - new Date(a.created_at)
+        );
+        setMatchs(sorted);
+        calculateStats(sorted);
       })
       .catch(() => setMessage("Erreur lors de la récupération des matchs."));
   }, [ladderId, team_id]);
@@ -71,10 +75,28 @@ function TeamDetails() {
         setShowLeaveConfirm(false);
         navigate('/mes-equipes');
       } else {
+        setLeaveMessage(res.data.error || 'Erreur.');
+      }
+    } catch (err) {
+      setLeaveMessage("Erreur lors de la requête.");
+    }
+  };
+
+    const handleKick = async (playerId) => {
+    try {
+      const res = await axios.post('http://localhost:3000/teams/kick-member', {
+        team_id,
+        captain_id: userId,
+        player_id: playerId
+      }, { withCredentials: true });
+
+      if (res.status === 200) {
+        setMembers(members.filter(m => m.id !== playerId));
+      } else {
         setMessage(res.data.error || 'Erreur.');
       }
     } catch (err) {
-      setMessage("Erreur lors de la requête.");
+      setMessage('Erreur lors de la requête.');
     }
   };
 
@@ -125,6 +147,15 @@ function TeamDetails() {
           {members.map((membre, index) => (
             <li key={index}>
               {membre.username} — {membre.role}
+              {isCaptain && parseInt(membre.id) !== parseInt(captainId) && (
+                <button
+                  style={{ marginLeft: '10px' }}
+                  onClick={() => handleKick(membre.id)}
+                  disabled={hasOngoingMatch}
+                >
+                  Expulser
+                </button>
+              )}
             </li>
           ))}
         </ul>
@@ -134,7 +165,7 @@ function TeamDetails() {
 
       <h3>Matchs dans ce ladder</h3>
       {matchs.length > 0 ? (
-        <ul>
+        <ul className="match-list">
           {matchs.map((match, index) => (
             <li key={index}>
               {match.team_1_name} vs {match.team_2_name} {' '}
@@ -143,7 +174,14 @@ function TeamDetails() {
               ) : (
                 getResultTag(match)
               )}
-              <button style={{ marginLeft: '10px' }} onClick={() => navigate(`/match/${match.id}`)}>Détails</button>
+              {match.status !== 'pending' && (
+                <button
+                  style={{ marginLeft: '10px' }}
+                  onClick={() => navigate(`/match/${match.id}`)}
+                >
+                  Détails
+                </button>
+              )}
             </li>
           ))}
         </ul>
@@ -179,14 +217,12 @@ function TeamDetails() {
         <div className="confirm-box">
           <p>Êtes-vous sûr de vouloir quitter l'équipe&nbsp;?</p>
           <button onClick={handleLeave}>Oui</button>
-          <button onClick={() => setShowLeaveConfirm(false)}>Non</button>
+          <button onClick={() => { setShowLeaveConfirm(false); setLeaveMessage(''); }}>Non</button>
         </div>
       )}
 
-      {hasOngoingMatch && (
-        <p style={{ color: 'red' }}>
-          Impossible de quitter l'équipe : un match est en attente, accepté ou disputé.
-        </p>
+      {leaveMessage && (
+        <p style={{ color: 'red' }}>{leaveMessage}</p>
       )}
 
     </div>

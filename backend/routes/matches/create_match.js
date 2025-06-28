@@ -5,9 +5,9 @@ const db = require('../../db');
 
 // Listes de maps par mode
 const MAPS = {
-  TDM: ['Map1_TDM', 'Map2_TDM', 'Map3_TDM', 'Map4_TDM', 'Map5_TDM', 'Map6_TDM'],
-  Plunder: ['Map1_Plunder', 'Map2_Plunder', 'Map3_Plunder'],
-  TurfWar: ['Map1_Turf', 'Map2_Turf', 'Map3_Turf']
+  TDM: ['Temple', 'Village', 'Train wreck', 'Plaza', 'The fort', 'Facility - Or none DLC map'],
+  Plunder: ['The fort', 'Plaza', 'Sanctuary', 'Village', 'Temple'],
+  TurfWar: ['Ice cave', 'Train wreck', 'Sanctuary', 'Village', 'Lost city']
 };
 
 // Helper pour tirage aléatoire
