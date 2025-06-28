@@ -143,15 +143,9 @@ function TeamDetails() {
       <p><strong>Victoires :</strong> {winCount} | <strong>Défaites :</strong> {loseCount}</p>
 
       <h3>Membres de l’équipe</h3>
-      {members.length > 0 ? (
-        <div className="members-container">
-          <div className="member-header">
-            <span>Username</span>
-            <span>PSN</span>
-            <span>Rôle</span>
-            <span style={{ visibility: isCaptain ? 'visible' : 'hidden' }}>Action</span>
-          </div>
-          {members.map((membre, index) => (
+        {members.length > 0 ? (
+          <div className="members-container">
+            {members.map((membre, index) => (
             <div key={index} className="member-row">
               <span>{membre.username}</span>
               <span>{membre.psn || '-'}</span>

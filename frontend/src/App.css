@@ -213,7 +213,6 @@ p {
   gap: 10px;
 }
 
-.member-header,
 .member-row {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr auto;
@@ -221,12 +220,6 @@ p {
   padding: 10px;
   color: #e0fbfc;
 }
-
-.member-header {
-  font-weight: bold;
-  border-bottom: 2px solid #a75d47;
-}
-
 .member-row {
   background-color: #572e1e;
   border: 1px solid #a75d47;
