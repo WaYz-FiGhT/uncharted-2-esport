@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
 function MatchDetails() {
   const { match_id } = useParams();
+  const location = useLocation();
   const [match, setMatch] = useState(null);
+  const fromTeamId = location.state?.fromTeamId;
   const [teamId1, setTeamId1] = useState(null);
   const [teamId2, setTeamId2] = useState(null);
   const [userTeamId, setUserTeamId] = useState(null);
@@ -63,6 +65,8 @@ function MatchDetails() {
 
   const isTeamInMatch =
     Number(userTeamId) === match?.team_1_id || Number(userTeamId) === match?.team_2_id;
+  const canReport =
+    isTeamInMatch && fromTeamId && Number(fromTeamId) === Number(userTeamId);
 
   const renderOfficialResult = () => {
     switch (match.result) {
@@ -144,7 +148,7 @@ function MatchDetails() {
     ))}
 
     {/* Bouton pour reporter */}
-    {isTeamInMatch && !hasAlreadyReported && (
+    {canReport && hasAlreadyReported && (
       <div style={{ marginTop: '20px' }}>
         <h4>ID de ton équipe : {userTeamId}</h4>
         <Link to={`/report/${match.id}/${userTeamId}`}>
@@ -153,14 +157,14 @@ function MatchDetails() {
       </div>
     )}
 
-    {isTeamInMatch && hasAlreadyReported && (
+    {canReport && hasAlreadyReported && (
       <p style={{ marginTop: '20px', fontStyle: 'italic', color: 'gray' }}>
         Vous avez déjà reporté ce match.
       </p>
     )}
 
     {/* Ticket de preuve */}
-    {match.result === 'disputed' && isTeamInMatch && !ticketSent && !hasAlreadySentTicket && (
+    {match.result === 'disputed' && canReport && !ticketSent && !hasAlreadySentTicket && (
       <div style={{ marginTop: '30px' }}>
         {!showTicketForm ? (
           <button onClick={() => setShowTicketForm(true)}>

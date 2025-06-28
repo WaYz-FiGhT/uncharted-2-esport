@@ -184,7 +184,9 @@ function TeamDetails() {
               {match.status !== 'pending' && (
                 <button
                   style={{ marginLeft: '10px' }}
-                  onClick={() => navigate(`/match/${match.id}`)}
+                  onClick={() =>
+                    navigate(`/match/${match.id}`, { state: { fromTeamId: team_id } })
+                  }
                 >
                   Détails
                 </button>
