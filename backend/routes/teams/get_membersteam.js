@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
   
     try {
       const [rows] = await db.execute(`
-        SELECT p.id, p.username, tm.role
+        SELECT p.id, p.username, p.psn, tm.role
         FROM team_members tm
         JOIN players p ON tm.player_id = p.id
         WHERE tm.team_id = ?

@@ -144,22 +144,30 @@ function TeamDetails() {
 
       <h3>Membres de l’équipe</h3>
       {members.length > 0 ? (
-        <ul>
-          {members.map((membre, index) => (
-            <li key={index}>
-              {membre.username} — {membre.role}
-              {isCaptain && parseInt(membre.id) !== parseInt(captainId) && (
-                <button
-                  style={{ marginLeft: '10px' }}
-                  onClick={() => handleKick(membre.id)}
-                  disabled={hasOngoingMatch}
-                >
-                  Expulser
-                </button>
-              )}
-            </li>
-          ))}
-        </ul>
+        <div className="members-container">
+          <div className="member-header">
+            <span>Username</span>
+            <span>PSN</span>
+            <span>Rôle</span>
+          </div>
+                  {members.map((membre, index) => (
+            <div key={index} className="member-row">
+              <span>{membre.username}</span>
+              <span>{membre.psn || '-'}</span>
+              <span>{membre.role}</span>
+                      {isCaptain && parseInt(membre.id) !== parseInt(captainId) && (
+                        <td>
+                          <button
+                            onClick={() => handleKick(membre.id)}
+                            disabled={hasOngoingMatch}
+                          >
+                            Expulser
+                          </button>
+                        </td>
+                      )}
+            </div>
+                  ))}
+        </div>
       ) : (
         <p>{message || 'Aucun membre trouvé.'}</p>
       )}

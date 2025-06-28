@@ -205,3 +205,30 @@ p {
   max-height: 250px;
   overflow-y: auto;
 }
+
+/* Members display */
+.members-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.member-header,
+.member-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr auto;
+  align-items: center;
+  padding: 10px;
+  color: #e0fbfc;
+}
+
+.member-header {
+  font-weight: bold;
+  border-bottom: 2px solid #a75d47;
+}
+
+.member-row {
+  background-color: #572e1e;
+  border: 1px solid #a75d47;
+  border-radius: 6px;
+}
