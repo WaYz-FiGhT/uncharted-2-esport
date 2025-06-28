@@ -157,7 +157,7 @@ function MatchDetails() {
       </div>
     )}
 
-    {canReport && !hasAlreadyReported && (
+    {canReport && hasAlreadyReported && (
       <p style={{ marginTop: '20px', fontStyle: 'italic', color: 'gray' }}>
         Vous avez déjà reporté ce match.
       </p>
