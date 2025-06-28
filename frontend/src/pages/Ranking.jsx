@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
@@ -21,7 +21,7 @@ function Ranking() {
         <ol>
           {teams.map((team, index) => (
             <li key={team.id}>
-              {index + 1}. {team.name} — {team.xp} XP
+              {index + 1}. <Link to={`/team/${team.id}`}>{team.name}</Link> — {team.xp} XP
             </li>
           ))}
         </ol>

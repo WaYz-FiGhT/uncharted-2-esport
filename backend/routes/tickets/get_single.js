@@ -16,8 +16,11 @@ router.get('/:ticket_id', async (req, res) => {
         dt.match_id,
         m.scheduled_time,
         team1.name AS team_1_name,
+        team1.id AS team_1_id,
         team2.name AS team_2_name,
+        team2.id AS team_2_id,
         t.name AS team_name,
+        t.id AS team_id,
         dt.message,
         dt.created_at
       FROM dispute_tickets dt

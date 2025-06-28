@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
@@ -45,7 +45,15 @@ function ReportMatch() {
 
       {match && (
         <>
-          <p><strong>Match :</strong> {match.team_1_name} vs {match.team_2_name || '???'}</p>
+          <p>
+            <strong>Match :</strong>{' '}
+            <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link> vs{' '}
+            {match.team_2_name ? (
+              <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>
+            ) : (
+              '???'
+            )}
+          </p>
           <p><strong>Status actuel :</strong> {match.status}</p>
         </>
       )}

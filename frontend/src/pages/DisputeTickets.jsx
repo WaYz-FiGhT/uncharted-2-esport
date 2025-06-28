@@ -18,7 +18,9 @@ function DisputeTickets() {
             grouped[matchId] = {
               scheduled_time: ticket.scheduled_time,
               team_1_name: ticket.team_1_name,
+              team_1_id: ticket.team_1_id,
               team_2_name: ticket.team_2_name,
+              team_2_id: ticket.team_2_id,
               tickets: []
             };
           }
@@ -46,12 +48,22 @@ function DisputeTickets() {
       ) : (
         Object.entries(groupedTickets).map(([matchId, data]) => (
           <div key={matchId} style={{ marginBottom: '30px' }}>
-            <h2>Match #{matchId} – {data.team_1_name} vs {data.team_2_name || '???'}</h2>
+            <h2>
+              Match #{matchId} –{' '}
+              <Link to={`/team/${data.team_1_id}`}>{data.team_1_name}</Link> vs{' '}
+              {data.team_2_name ? (
+                <Link to={`/team/${data.team_2_id}`}>{data.team_2_name}</Link>
+              ) : (
+                '???'
+              )}
+            </h2>
             <p><strong>Date prévue :</strong> {new Date(data.scheduled_time).toLocaleString()}</p>
             <ul>
               {data.tickets.map(ticket => (
                 <li key={ticket.ticket_id} style={{ marginBottom: '15px' }}>
-                  <strong>Équipe :</strong> {ticket.ticket_team_name}<br />
+                  <strong>Équipe :</strong>{' '}
+                  <Link to={`/team/${ticket.ticket_team_id}`}>{ticket.ticket_team_name}</Link>
+                  <br />
                   <strong>Date du ticket :</strong> {new Date(ticket.created_at).toLocaleString()}<br />
                   <Link to={`/ticket/${ticket.ticket_id}`}>
                     <button style={{ marginTop: '5px' }}>Voir le ticket</button>

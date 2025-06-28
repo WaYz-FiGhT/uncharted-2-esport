@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
@@ -61,6 +61,7 @@ function TeamDetails() {
   }, [ladderId, team_id]);
 
   const isCaptain = parseInt(userId) === parseInt(captainId);
+  const isMember = members.some(m => parseInt(m.id) === parseInt(userId));
   const hasOngoingMatch = matchs.some(m =>
     ['pending', 'accepted', 'disputed'].includes(m.status)
   );
@@ -168,7 +169,13 @@ function TeamDetails() {
         <ul className="match-list">
           {matchs.map((match, index) => (
             <li key={index}>
-              {match.team_1_name} vs {match.team_2_name} {' '}
+              <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>
+              {' '}vs{' '}
+              {match.team_2_name ? (
+                <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>
+              ) : (
+                '???'
+              )}{' '}
               {match.status === 'pending' ? (
                 <span style={{ color: 'gray' }}>pending</span>
               ) : (
@@ -189,42 +196,45 @@ function TeamDetails() {
         <p>Aucun match trouvé.</p>
       )}
 
-      {isCaptain && (
-        <button onClick={() => navigate(`/team/${team_id}/${ladderId}/add-member`)}>
-          Ajouter un membre
-        </button>
-      )}
+      {isMember && (
+        <>
+          {isCaptain && (
+            <button onClick={() => navigate(`/team/${team_id}/${ladderId}/add-member`)}>
+              Ajouter un membre
+            </button>
+          )}
 
-      <button onClick={() => navigate(`/team/${team_id}/${ladderId}/create-match`)}>
-        Créer un match
-      </button>
+          <button onClick={() => navigate(`/team/${team_id}/${ladderId}/create-match`)}>
+            Créer un match
+          </button>
 
-      <button onClick={() => navigate(`/team/${team_id}/accept-match`)}>
-        Accepter un match
-      </button>
+          <button onClick={() => navigate(`/team/${team_id}/accept-match`)}>
+            Accepter un match
+          </button>
 
-      <button onClick={() => navigate(`/ladder/${ladderId}/ranking`)}>
-        Voir le classement
-      </button>
-      
-      {!isCaptain && (
-        <button onClick={() => setShowLeaveConfirm(true)} disabled={hasOngoingMatch}>
-          Quitter l'équipe
-        </button>
-      )}
+          <button onClick={() => navigate(`/ladder/${ladderId}/ranking`)}>
+            Voir le classement
+          </button>
 
-            {showLeaveConfirm && (
-        <div className="confirm-box">
-          <p>Êtes-vous sûr de vouloir quitter l'équipe&nbsp;?</p>
-          <button onClick={handleLeave}>Oui</button>
-          <button onClick={() => { setShowLeaveConfirm(false); setLeaveMessage(''); }}>Non</button>
-        </div>
-      )}
+          {!isCaptain && (
+            <button onClick={() => setShowLeaveConfirm(true)} disabled={hasOngoingMatch}>
+              Quitter l'équipe
+            </button>
+          )}
+
+          {showLeaveConfirm && (
+            <div className="confirm-box">
+              <p>Êtes-vous sûr de vouloir quitter l'équipe&nbsp;?</p>
+              <button onClick={handleLeave}>Oui</button>
+              <button onClick={() => setShowLeaveConfirm(false)}>Non</button>
+            </div>
+          )}
 
       {leaveMessage && (
         <p style={{ color: 'red' }}>{leaveMessage}</p>
       )}
-
+        </>
+        )}
     </div>
   );
 }

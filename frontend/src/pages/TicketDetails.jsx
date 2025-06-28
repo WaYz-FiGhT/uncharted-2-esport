@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
@@ -32,7 +32,10 @@ function TicketDetails() {
   return (
     <div className="page-center">
       <h1>Ticket #{ticket.id}</h1>
-      <p><strong>Équipe :</strong> {ticket.team_name}</p>
+      <p>
+        <strong>Équipe :</strong>{' '}
+        <Link to={`/team/${ticket.team_id}`}>{ticket.team_name}</Link>
+      </p>
       <p><strong>Date du match :</strong> {new Date(ticket.scheduled_time).toLocaleString()}</p>
       <p><strong>Date d'envoi :</strong> {new Date(ticket.created_at).toLocaleString()}</p>
       <h3>Message :</h3>
@@ -47,9 +50,16 @@ function TicketDetails() {
           >
             {ticket.team_1_name}
           </button>
-          <button onClick={() => handleSetResult('team_2')}>
+          <Link to={`/team/${ticket.team_1_id}`}>voir équipe</Link>
+          <button
+            onClick={() => handleSetResult('team_2')}
+            style={{ marginLeft: '10px', marginRight: '10px' }}
+          >
             {ticket.team_2_name}
           </button>
+            {ticket.team_2_id && (
+            <Link to={`/team/${ticket.team_2_id}`}>voir équipe</Link>
+          )}
         </div>
       )}
     </div>

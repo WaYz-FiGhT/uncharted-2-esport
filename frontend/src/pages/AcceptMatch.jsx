@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import '../App.css';
 
 function AcceptMatch() {
@@ -83,7 +83,10 @@ function AcceptMatch() {
       {matchInfos.length > 0 ? (
         matchInfos.map((match, index) => (
           <div key={index} className="match-block">
-            <p>{match.name_games} — {match.name} — {match.status} — {match.match_game_mode} — {match.player_number}</p>
+            <p>
+              {match.name_games} —{' '}
+              <Link to={`/team/${match.team_1_id}`}>{match.name}</Link> — {match.status} — {match.match_game_mode} — {match.player_number}
+            </p>
 
             <label>Choisissez les joueurs :</label>
             <ul>

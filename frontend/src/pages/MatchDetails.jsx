@@ -67,9 +67,13 @@ function MatchDetails() {
   const renderOfficialResult = () => {
     switch (match.result) {
       case 'win_team_1':
-        return `Victoire de ${match.team_1_name}`;
+        return (
+          <>Victoire de <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link></>
+        );
       case 'win_team_2':
-        return `Victoire de ${match.team_2_name}`;
+        return (
+          <>Victoire de <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link></>
+        );
       case 'disputed':
         return 'Disputed';
       default:
@@ -98,8 +102,18 @@ function MatchDetails() {
   return (
   <div className="page-center">
     <h1>Détails du match</h1>
-    <p><strong>Équipe 1 :</strong> {match.team_1_name}</p>
-    <p><strong>Équipe 2 :</strong> {match.team_2_name || 'En attente'}</p>
+    <p>
+      <strong>Équipe 1 :</strong>{' '}
+      <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>
+    </p>
+    <p>
+      <strong>Équipe 2 :</strong>{' '}
+      {match.team_2_id ? (
+        <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>
+      ) : (
+        'En attente'
+      )}
+    </p>
     <p><strong>Mode :</strong> {match.game_mode}</p>
     <p><strong>Status :</strong> {match.status}</p>
     <p><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</p>
@@ -118,7 +132,9 @@ function MatchDetails() {
     <h3>Joueurs par équipe :</h3>
     {Object.entries(match.players).map(([teamId, teamInfo]) => (
       <div key={teamId}>
-        <h4>{teamInfo.name}</h4>
+        <h4>
+          <Link to={`/team/${teamId}`}>{teamInfo.name}</Link>
+        </h4>
         <ul>
           {teamInfo.players.map((p, i) => (
             <li key={i}>{p}</li>
