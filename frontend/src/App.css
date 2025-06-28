@@ -167,12 +167,9 @@ p {
 
 /* ✅ Centrage + largeur élargie */
 .page-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 75%;
+  width: 90%;
   max-width: 1200px;
+  margin: 80px auto;
   padding: 40px;
   background-color: #572e1e;
   border-radius: 10px;
