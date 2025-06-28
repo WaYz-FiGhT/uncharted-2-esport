@@ -148,7 +148,7 @@ function MatchDetails() {
     ))}
 
     {/* Bouton pour reporter */}
-    {canReport && hasAlreadyReported && (
+    {canReport && !hasAlreadyReported && (
       <div style={{ marginTop: '20px' }}>
         <h4>ID de ton équipe : {userTeamId}</h4>
         <Link to={`/report/${match.id}/${userTeamId}`}>
@@ -157,7 +157,7 @@ function MatchDetails() {
       </div>
     )}
 
-    {canReport && hasAlreadyReported && (
+    {canReport && !hasAlreadyReported && (
       <p style={{ marginTop: '20px', fontStyle: 'italic', color: 'gray' }}>
         Vous avez déjà reporté ce match.
       </p>
