@@ -3,6 +3,7 @@ const session = require('express-session');
 const cors = require('cors');
 const path = require('path');
 const isAdmin = require('./routes/tickets/isAdmin');
+const startReportProcessing = require('./jobs/processReports');
 
 const app = express();
 
@@ -90,6 +91,8 @@ app.use('/ladders/name', require('./routes/ladders/get_laddername'));
 // app.use('/create_team', require('./routes/create_team')); etc.
 // app.use('/login', require('./routes/login')); etc.
 
+// 🔄 Traitement automatique des reports
+startReportProcessing();
 
 // ✅ Lancement
 app.listen(3000, () => {

@@ -203,6 +203,11 @@ p {
   overflow-y: auto;
 }
 
+/* Match items same color as members */
+.match-list li {
+  background-color: #3a1d12;
+}
+
 /* Members display */
 .members-container {
   display: flex;
