@@ -9,6 +9,7 @@ function PostMatch() {
   const [boFormat, setBoFormat] = useState('bo3');
   const [members, setMembers] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
+  const [playerNumber, setPlayerNumber] = useState(2);
   const [userId, setUserId] = useState(null);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -40,18 +41,23 @@ function PostMatch() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!match_game_mode || selectedPlayers.length === 0) {
-      setMessage("Veuillez sélectionner un mode et au moins un joueur.");
+    if (!match_game_mode) {
+      setMessage("Veuillez sélectionner un mode.");
       return;
     }
 
-    if (ladder_id === "2" && selectedPlayers.length < 3) {
-      setMessage("Veuillez sélectionner au moins 3 joueurs.");
+    if (ladder_id === "2" && playerNumber < 3) {
+      setMessage("Veuillez sélectionner au moins 3 joueurs dans le champ nombre.");
       return;
     }
 
-    if (ladder_id === "1" && selectedPlayers.length < 2) {
-      setMessage("Veuillez sélectionner au moins 2 joueurs.");
+    if (ladder_id === "1" && playerNumber < 2) {
+      setMessage("Veuillez sélectionner au moins 2 joueurs dans le champ nombre.");
+      return;
+    }
+
+    if (selectedPlayers.length < playerNumber) {
+      setMessage(`Veuillez sélectionner au moins ${playerNumber} joueurs.`);
       return;
     }
 
@@ -61,7 +67,7 @@ function PostMatch() {
         ladder_id,
         match_game_mode,
         match_format: boFormat,
-        player_number: selectedPlayers.length,
+        player_number: playerNumber,
         selectedPlayers
       }, { withCredentials: true });
 
@@ -70,6 +76,7 @@ function PostMatch() {
         setSelectedPlayers([]);
         setGameMode('');
         setBoFormat('bo3');
+        setPlayerNumber(2);
       } else {
         setMessage(res.data.error || "Erreur inconnue.");
       }
@@ -96,7 +103,17 @@ function PostMatch() {
           <option value="bo5">Bo5</option>
         </select>
 
-        <label>Choisissez les joueurs pour ce match :</label>
+        <label>Nombre minimum de joueurs :</label>
+        <input
+          type="number"
+          min="1"
+          max="5"
+          value={playerNumber}
+          onChange={(e) => setPlayerNumber(parseInt(e.target.value, 10))}
+          required
+        />
+
+       <label>Choisissez les joueurs pour ce match :</label>
         {members.length > 0 ? (
           <ul>
             {members.map(player => (

@@ -20,8 +20,20 @@ function getRandomElements(arr, count) {
 router.post('/', async (req, res) => {
   const { ladder_id, team_1_id, match_game_mode, match_format, player_number, selectedPlayers } = req.body;
 
-  if (!ladder_id || !team_1_id || !match_game_mode || !match_format || !selectedPlayers || selectedPlayers.length === 0) {
-    return res.status(400).json({ error: 'Champs manquants ou joueurs non sélectionnés' });
+  if (!ladder_id || !team_1_id || !match_game_mode || !match_format || !player_number || !selectedPlayers) {
+    return res.status(400).json({ error: 'Champs manquants' });
+  }
+
+  if (Array.isArray(selectedPlayers) && selectedPlayers.length < player_number) {
+    return res.status(400).json({ error: `Veuillez sélectionner au moins ${player_number} joueurs.` });
+  }
+
+  if (ladder_id == 2 && player_number < 3) {
+    return res.status(400).json({ error: 'Le nombre de joueurs doit être au moins de 3 pour ce ladder.' });
+  }
+
+  if (ladder_id == 1 && player_number < 2) {
+    return res.status(400).json({ error: 'Le nombre de joueurs doit être au moins de 2 pour ce ladder.' });
   }
 
   try {
