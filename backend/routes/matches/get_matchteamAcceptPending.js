@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 router.get('/', async (req, res) => {
   const { team_id, ladder_id } = req.query;
-  console.log('📥 Requête matchTeam reçue avec :', { team_id, ladder_id });
+  logger.info('📥 Requête matchTeam reçue avec :', { team_id, ladder_id });
 
   try {
     const [rows] = await db.execute(
@@ -16,7 +17,7 @@ router.get('/', async (req, res) => {
     );
     res.json(rows);
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 });

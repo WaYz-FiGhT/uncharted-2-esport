@@ -4,9 +4,12 @@ const cors = require('cors');
 const path = require('path');
 const isAdmin = require('./routes/tickets/isAdmin');
 const startReportProcessing = require('./jobs/processReports');
+const logger = require('./logger');
+const morgan = require('morgan');
 
 const app = express();
 
+app.use(morgan('combined', { stream: logger.stream }));
 // CORS : autorise React à faire des requêtes
 app.use(cors({
   origin: 'http://localhost:5173',
@@ -96,5 +99,5 @@ startReportProcessing();
 
 // ✅ Lancement
 app.listen(3000, () => {
-  console.log('✅ Backend lancé sur http://localhost:3000');
+  logger.info('✅ Backend lancé sur http://localhost:3000');
 });

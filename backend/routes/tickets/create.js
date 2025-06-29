@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // POST /tickets/create
 router.post('/', async (req, res) => {
@@ -31,7 +32,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).json({ success: true });
   } catch (err) {
-    console.error('Erreur création ticket :', err);
+    logger.error('Erreur création ticket :', err);
     res.status(500).json({ error: 'Erreur serveur.' });
   }
 });
@@ -64,7 +65,7 @@ router.get('/', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    console.error('Erreur récupération tickets :', err);
+    logger.error('Erreur récupération tickets :', err);
     res.status(500).json({ error: 'Erreur serveur.' });
   }
 });

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // GET /matches/details/:id
 router.get('/:id', async (req, res) => {
@@ -71,7 +72,7 @@ router.get('/:id', async (req, res) => {
     });
 
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 });

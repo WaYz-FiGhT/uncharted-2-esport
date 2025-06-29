@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 router.get('/', async (req, res) => {
   const { token } = req.query;
@@ -25,7 +26,7 @@ router.get('/', async (req, res) => {
 
     res.json({ message: 'Email vérifié' });
   } catch (err) {
-    console.error('Erreur vérification email :', err);
+    logger.error('Erreur vérification email :', err);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 });

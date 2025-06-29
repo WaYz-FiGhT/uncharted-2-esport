@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // Envoyer une invitation à un joueur pour rejoindre une équipe
 router.post('/', async (req, res) => {
@@ -47,7 +48,7 @@ router.post('/', async (req, res) => {
 
     res.status(201).json({ message: 'Invitation envoyée' });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: "Erreur lors de l'envoi de l'invitation" });
   }
 });

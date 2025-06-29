@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
+const logger = require('../../logger');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const db = require('../../db');
@@ -57,13 +58,13 @@ router.post('/', async (req, res) => {
       subject: 'Confirmez votre inscription',
       text: `Cliquez sur ce lien pour activer votre compte : ${verifyLink}`
     });
-    console.log('✅ Email envoyé à', email);
+    logger.info('✅ Email envoyé à', email);
 
     res.status(201).json({ message: 'Utilisateur créé. Vérifiez votre email.' });
   } catch (err) {
-    console.error('Erreur lors de la création du joueur :', err);
+    logger.error('Erreur lors de la création du joueur :', err);
     res.status(500).json({ error: 'Erreur serveur.' });
-    console.error('❌ Erreur complète :', err);
+    logger.error('❌ Erreur complète :', err);
 
   }
 });

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // POST /matches/report
 router.post('/', async (req, res) => {
@@ -124,7 +125,7 @@ router.post('/', async (req, res) => {
 
     res.json({ success: true, message: 'Résultat reporté avec succès.' });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: 'Erreur serveur.' });
   }
 });
@@ -149,7 +150,7 @@ router.get('/check', async (req, res) => {
       return res.json({ alreadyReported: false });
     }
   } catch (err) {
-    console.error('Erreur /report/check:', err);
+    logger.error('Erreur /report/check:', err);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 });

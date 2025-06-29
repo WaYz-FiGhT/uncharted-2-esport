@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 router.get('/', async (req, res) => {
   const { team_id, ladder_id } = req.query;
-  console.log('📥 Requête matchTeam reçue avec :', { team_id, ladder_id });
+  logger.info('📥 Requête matchTeam reçue avec :', { team_id, ladder_id });
 
   if (!team_id || !ladder_id) {
     return res.status(400).json({ error: 'Paramètres manquants' });
@@ -40,7 +41,7 @@ router.get('/', async (req, res) => {
 
     res.json(rows);
   } catch (err) {
-    console.error('Erreur récupération des matchs :', err);
+    logger.error('Erreur récupération des matchs :', err);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 });

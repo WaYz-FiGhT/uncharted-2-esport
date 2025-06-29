@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // GET /tickets/check?match_id=...&team_id=...
 router.get('/', async (req, res) => {
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
     );
     res.json({ alreadySent: rows.length > 0 });
   } catch (err) {
-    console.error('Erreur check ticket :', err);
+    logger.error('Erreur check ticket :', err);
     res.status(500).json({ error: 'Erreur serveur.' });
   }
 });

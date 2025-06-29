@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // Permet à un membre de quitter une équipe (hors capitaine)
 router.post('/', async (req, res) => {
@@ -66,7 +67,7 @@ router.post('/', async (req, res) => {
 
     res.json({ message: "Joueur retiré de l'équipe" });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: "Erreur lors de la suppression du joueur" });
   }
 });

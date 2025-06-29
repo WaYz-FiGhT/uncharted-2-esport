@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // 🔹 Récupère les équipes où le joueur est capitaine
 router.get('/', async (req, res) => {
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
     );
     res.json(rows);
   } catch (err) {
-    console.error('Erreur SQL (byCaptain):', err);
+    logger.error('Erreur SQL (byCaptain):', err);
     res.status(500).json({ error: 'Erreur lors de la récupération des équipes (capitaine)' });
   }
 });

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // Delete a match only if it is still pending
 router.delete('/', async (req, res) => {
@@ -25,7 +26,7 @@ router.delete('/', async (req, res) => {
 
     res.json({ message: 'Match supprimé' });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 });

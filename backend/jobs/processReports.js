@@ -1,4 +1,5 @@
 const db = require('../db');
+const logger = require('../logger');
 
 async function finalizeOldReports() {
   try {
@@ -66,7 +67,7 @@ async function finalizeOldReports() {
       }
     }
   } catch (error) {
-    console.error('Erreur lors de la finalisation des reports :', error);
+    logger.error('Erreur lors de la finalisation des reports :', error);
   }
 }
 

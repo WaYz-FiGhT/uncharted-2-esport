@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // GET /api/dispTeams?user_id=xxx
 // GET /get_team/team?id=3
@@ -20,7 +21,7 @@ router.get('/', async (req, res) => {
   
       res.json(rows[0]);
     } catch (err) {
-      console.error(err);
+      logger.error(err);
       res.status(500).json({ error: 'Erreur serveur' });
     }
   });

@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // Accepter un match
 router.post('/', async (req, res) => {
-  console.log('🔥 Route /accept_match/accept atteinte');
+  logger.info('🔥 Route /accept_match/accept atteinte');
 
   const { team_1_id, team_2_id, selectedPlayers } = req.body;
 
@@ -70,7 +71,7 @@ router.post('/', async (req, res) => {
 
     res.status(200).json({ success: true, match_id: matchId });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: "Erreur lors de l'acceptation du match" });
   }
 });

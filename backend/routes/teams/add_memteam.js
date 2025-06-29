@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // Ajouter un membre à une équipe
 router.post('/', async (req, res) => {
   const { team_id, player_id, ladder_id } = req.body;
-  console.log('💡 Données reçues:', { team_id, player_id, ladder_id });
+  logger.info('💡 Données reçues:', { team_id, player_id, ladder_id });
 
   try {
     // Vérifie si le joueur est déjà capitaine ou membre dans une team du même ladder
@@ -44,7 +45,7 @@ router.post('/', async (req, res) => {
     res.status(201).json({ id: result.insertId, team_id, player_id });
 
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: "Erreur lors de l'ajout du joueur dans la team" });
   }
 });

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // 🔹 Récupère les équipes où le joueur est membre
 router.get('/', async (req, res) => {
@@ -22,7 +23,7 @@ router.get('/', async (req, res) => {
     );
     res.json(rows);
   } catch (err) {
-    console.error('Erreur SQL (byMember):', err);
+    logger.error('Erreur SQL (byMember):', err);
     res.status(500).json({ error: 'Erreur lors de la récupération des équipes (membre)' });
   }
 });

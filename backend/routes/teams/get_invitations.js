@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // Récupérer les invitations en attente pour un joueur
 router.get('/', async (req, res) => {
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
 
     res.json(rows);
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: 'Erreur lors de la récupération des invitations' });
   }
 });

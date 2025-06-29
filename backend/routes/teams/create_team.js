@@ -1,6 +1,7 @@
 const express = require('express'); 
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // Route POST pour créer une nouvelle team
 router.post('/', async (req, res) => {
@@ -66,7 +67,7 @@ router.post('/', async (req, res) => {
     });
 
   } catch (err) {
-    console.error('Erreur SQL :', err);
+    logger.error('Erreur SQL :', err);
     res.status(500).json({ error: 'Erreur lors de la création de la team' });
   }
 });

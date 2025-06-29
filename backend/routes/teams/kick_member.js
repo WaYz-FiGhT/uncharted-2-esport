@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // Permet au capitaine d'expulser un membre de l'équipe
 router.post('/', async (req, res) => {
@@ -70,7 +71,7 @@ router.post('/', async (req, res) => {
 
     res.json({ message: "Membre expulsé de l'équipe" });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: "Erreur lors de l'expulsion du joueur" });
   }
 });

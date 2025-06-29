@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 
 // Accepter ou refuser une invitation
 router.post('/', async (req, res) => {
@@ -65,7 +66,7 @@ router.post('/', async (req, res) => {
       res.json({ message: 'Invitation refusée' });
     }
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: "Erreur lors du traitement de l'invitation" });
   }
 });

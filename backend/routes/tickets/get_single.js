@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../../db');
+const logger = require('../../logger');
 const isAdmin = require('./isAdmin');
 
 router.use(isAdmin);
@@ -37,7 +38,7 @@ router.get('/:ticket_id', async (req, res) => {
 
     res.json(rows[0]);
   } catch (err) {
-    console.error('Erreur récupération ticket :', err);
+    logger.error('Erreur récupération ticket :', err);
     res.status(500).json({ error: 'Erreur serveur.' });
   }
 });
@@ -107,7 +108,7 @@ router.post('/:ticket_id/set-result', async (req, res) => {
 
     res.json({ success: true });
   } catch (err) {
-    console.error('Erreur mise à jour résultat :', err);
+    logger.error('Erreur mise à jour résultat :', err);
     res.status(500).json({ error: 'Erreur serveur.' });
   }
 });

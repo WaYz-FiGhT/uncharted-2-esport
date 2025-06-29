@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const db = require('../../db');
+const logger = require('../../logger');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -46,7 +47,7 @@ router.post('/', async (req, res) => {
     });
 
   } catch (err) {
-    console.error('Erreur de connexion :', err);
+    logger.error('Erreur de connexion :', err);
     res.status(500).json({ error: 'Erreur serveur' });
   }
 });

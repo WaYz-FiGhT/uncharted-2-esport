@@ -1,6 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
+const logger = require('../../logger');
 const db = require('../../db');
 
 // Listes de maps par mode
@@ -104,7 +105,7 @@ router.post('/', async (req, res) => {
       status: 'pending'
     });
   } catch (err) {
-    console.error(err);
+    logger.error(err);
     res.status(500).json({ error: 'Erreur lors de la création du match' });
   }
 });
