@@ -12,7 +12,7 @@ function Home() {
   const [message1, setMessage1] = useState('');
   const [message2, setMessage2] = useState('');
 
-    useEffect(() => {
+  useEffect(() => {
     axios
       .get('http://localhost:3000/teams/ranking', { params: { ladder_id: 1 } })
       .then((res) => setLadder1(res.data))
@@ -34,10 +34,16 @@ function Home() {
       .catch(() => setLadder2Name('Ladder 2'));
   }, []);
 
+  const getTrophyEmoji = (index) => {
+    if (index === 0) return '🥇'; // Médaille d'or
+    if (index === 1) return '🥈'; // Médaille d'argent
+    if (index === 2) return '🥉'; // Médaille de bronze
+    return '';
+  };
 
   return (
     <div className="page-center">
-<h1>Classements</h1>
+      <h1>Classements</h1>
       <div className="ladder-container">
         <div className="ladder-block">
           <h2>{ladder1Name || 'Ladder 1'}</h2>
@@ -47,14 +53,8 @@ function Home() {
                 <li key={team.id} className="ranking-row">
                   <span>
                     {index + 1}
-                    {index === 0 && (
-                      <i className="fa-solid fa-trophy trophy gold" />
-                    )}
-                    {index === 1 && (
-                      <i className="fa-solid fa-trophy trophy silver" />
-                    )}
-                    {index === 2 && (
-                      <i className="fa-solid fa-trophy trophy bronze" />
+                    {index < 3 && (
+                      <span className="trophy">{getTrophyEmoji(index)}</span>
                     )}
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
@@ -74,14 +74,8 @@ function Home() {
                 <li key={team.id} className="ranking-row">
                   <span>
                     {index + 1}
-                    {index === 0 && (
-                      <i className="fa-solid fa-trophy trophy gold" />
-                    )}
-                    {index === 1 && (
-                      <i className="fa-solid fa-trophy trophy silver" />
-                    )}
-                    {index === 2 && (
-                      <i className="fa-solid fa-trophy trophy bronze" />
+                    {index < 3 && (
+                      <span className="trophy">{getTrophyEmoji(index)}</span>
                     )}
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
@@ -93,8 +87,8 @@ function Home() {
             <p>{message2 || 'Aucune équipe trouvée.'}</p>
           )}
         </div>
+      </div>
     </div>
-  </div>
   );
 }
 
