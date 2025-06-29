@@ -47,9 +47,15 @@ function Home() {
                 <li key={team.id} className="ranking-row">
                   <span>
                     {index + 1}
-                    {index === 0 && <span className="trophy gold">🏆</span>}
-                    {index === 1 && <span className="trophy silver">🏆</span>}
-                    {index === 2 && <span className="trophy bronze">🏆</span>}
+                    {index === 0 && (
+                      <i className="fa-solid fa-trophy trophy gold" />
+                    )}
+                    {index === 1 && (
+                      <i className="fa-solid fa-trophy trophy silver" />
+                    )}
+                    {index === 2 && (
+                      <i className="fa-solid fa-trophy trophy bronze" />
+                    )}
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
                   <span>{team.xp} XP</span>
@@ -68,9 +74,15 @@ function Home() {
                 <li key={team.id} className="ranking-row">
                   <span>
                     {index + 1}
-                    {index === 0 && <span className="trophy gold">🏆</span>}
-                    {index === 1 && <span className="trophy silver">🏆</span>}
-                    {index === 2 && <span className="trophy bronze">🏆</span>}
+                    {index === 0 && (
+                      <i className="fa-solid fa-trophy trophy gold" />
+                    )}
+                    {index === 1 && (
+                      <i className="fa-solid fa-trophy trophy silver" />
+                    )}
+                    {index === 2 && (
+                      <i className="fa-solid fa-trophy trophy bronze" />
+                    )}
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
                   <span>{team.xp} XP</span>
