@@ -10,7 +10,7 @@ if (!fs.existsSync(logDir)) {
 const logger = createLogger({
   level: 'info',
   format: format.combine(
-        format.errors({ stack: true }),
+    format.errors({ stack: true }),
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
     format.printf((info) => {
       const { timestamp, level, message, stack } = info;
