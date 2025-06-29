@@ -6,10 +6,12 @@ function Home() {
 
   return (
     <div className="page-center">
-      <h1>Menu</h1>
-      <h2>Créer son profil</h2>
-      <button onClick={() => navigate('/register')}>S'inscrire</button>
-      <button onClick={() => navigate('/login')}>Se connecter</button>
+      <div className="page-content">
+        <h1>Menu</h1>
+        <h2>Créer son profil</h2>
+        <button onClick={() => navigate('/register')}>S'inscrire</button>
+        <button onClick={() => navigate('/login')}>Se connecter</button>
+      </div>
     </div>
   );
 }

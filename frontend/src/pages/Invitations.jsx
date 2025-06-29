@@ -44,8 +44,9 @@ function Invitations() {
 
   return (
     <div className="page-center">
-      <h1>Invitations</h1>
-      {message && <p>{message}</p>}
+      <div className="page-content">
+        <h1>Invitations</h1>
+        {message && <p>{message}</p>}
 
       {invitations.length > 0 ? (
         <ul>
@@ -59,7 +60,8 @@ function Invitations() {
         </ul>
       ) : (
         <p>Aucune invitation.</p>
-      )}
+        )}
+      </div>
     </div>
   );
 }

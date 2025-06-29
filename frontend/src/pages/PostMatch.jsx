@@ -9,7 +9,9 @@ function PostMatch() {
   const [boFormat, setBoFormat] = useState('bo3');
   const [members, setMembers] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
-  const [playerNumber, setPlayerNumber] = useState(2);
+  const minPlayers = ladder_id === '1' ? 2 : 3;
+  const maxPlayers = ladder_id === '1' ? 2 : 5;
+  const [playerNumber, setPlayerNumber] = useState(minPlayers);
   const [userId, setUserId] = useState(null);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -46,13 +48,12 @@ function PostMatch() {
       return;
     }
 
-    if (ladder_id === "2" && playerNumber < 3) {
-      setMessage("Veuillez sélectionner au moins 3 joueurs dans le champ nombre.");
-      return;
-    }
-
-    if (ladder_id === "1" && playerNumber < 2) {
-      setMessage("Veuillez sélectionner au moins 2 joueurs dans le champ nombre.");
+    if (playerNumber < minPlayers || playerNumber > maxPlayers) {
+      if (minPlayers === maxPlayers) {
+        setMessage(`Le nombre de joueurs doit être de ${minPlayers}.`);
+      } else {
+        setMessage(`Le nombre de joueurs doit être compris entre ${minPlayers} et ${maxPlayers}.`);
+      }
       return;
     }
 
@@ -76,7 +77,7 @@ function PostMatch() {
         setSelectedPlayers([]);
         setGameMode('');
         setBoFormat('bo3');
-        setPlayerNumber(2);
+        setPlayerNumber(minPlayers);
       } else {
         setMessage(res.data.error || "Erreur inconnue.");
       }
@@ -87,8 +88,9 @@ function PostMatch() {
 
   return (
     <div className="page-center">
-      <h1>Poster un match</h1>
-      <form onSubmit={handleSubmit}>
+      <div className="page-content">
+        <h1>Poster un match</h1>
+        <form onSubmit={handleSubmit}>
         <label>Mode de jeu :</label>
         <select value={match_game_mode} onChange={(e) => setGameMode(e.target.value)} required>
           <option value="">-- Choisissez un mode --</option>
@@ -106,8 +108,8 @@ function PostMatch() {
         <label>Nombre minimum de joueurs :</label>
         <input
           type="number"
-          min="1"
-          max="5"
+          min={minPlayers}
+          max={maxPlayers}
           value={playerNumber}
           onChange={(e) => setPlayerNumber(parseInt(e.target.value, 10))}
           required
@@ -136,7 +138,8 @@ function PostMatch() {
         <button type="submit">Poster le match</button>
       </form>
 
-      {message && <p>{message}</p>}
+        {message && <p>{message}</p>}
+      </div>
     </div>
   );
 }

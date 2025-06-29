@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../App.css';
 
 function Login({ setUser }) {
   const [username, setUsername] = useState('');
@@ -31,8 +32,9 @@ function Login({ setUser }) {
 
   return (
     <div className="page-center">
-      <h1>Connexion</h1>
-      <form onSubmit={handleLogin}>
+      <div className="page-content">
+        <h1>Connexion</h1>
+        <form onSubmit={handleLogin}>
         <input
           type="text"
           placeholder="Nom d'utilisateur"
@@ -48,8 +50,9 @@ function Login({ setUser }) {
           required
         /><br />
         <button type="submit">Se connecter</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+        </form>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+      </div>
     </div>
   );
 }

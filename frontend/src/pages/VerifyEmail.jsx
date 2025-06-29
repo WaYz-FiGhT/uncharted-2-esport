@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import '../App.css';
 
 function VerifyEmail() {
   const [params] = useSearchParams();
@@ -15,7 +16,9 @@ function VerifyEmail() {
 
   return (
     <div className="page-center">
-      <p>{message}</p>
+      <div className="page-content">
+        <p>{message}</p>
+      </div>
     </div>
   );
 }

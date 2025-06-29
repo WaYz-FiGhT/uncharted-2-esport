@@ -29,7 +29,8 @@ function SingleTicket() {
 
   return (
     <div className="page-center">
-      <h1>Ticket #{ticket.id}</h1>
+      <div className="page-content">
+        <h1>Ticket #{ticket.id}</h1>
       <p><strong>Match :</strong> #{ticket.match_id}</p>
       <p>
         <strong>Équipe :</strong>{' '}
@@ -51,6 +52,7 @@ function SingleTicket() {
           {ticket.team_2_id && (
           <Link to={`/team/${ticket.team_2_id}`}>voir équipe</Link>
         )}
+      </div>
       </div>
     </div>
   );

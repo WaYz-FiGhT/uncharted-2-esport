@@ -76,6 +76,7 @@ function AcceptMatch() {
   
   return (
     <div className="page-center">
+      <div className="page-content">
       <h1>Liste des matchs en attente</h1>
 
       {message && <p className="error">{message}</p>}
@@ -110,6 +111,7 @@ function AcceptMatch() {
       ) : (
         <p>Aucun match en attente trouvé.</p>
       )}
+      </div>
     </div>
   );
 

@@ -19,13 +19,15 @@ function Dashboard() {
 
   return (
     <div className="page-center">
-      <p>Bienvenue, {username} !</p>
+      <div className="page-content">
+        <p>Bienvenue, {username} !</p>
 
-      <div>
-        <button onClick={() => navigate('/create-team')}>Créer ta team</button>
-      </div>
-      <div>
-        <button onClick={() => navigate('/mes-equipes')}>Voir mes équipes</button>
+             <div>
+          <button onClick={() => navigate('/create-team')}>Créer ta team</button>
+        </div>
+        <div>
+          <button onClick={() => navigate('/mes-equipes')}>Voir mes équipes</button>
+        </div>
       </div>
     </div>
   );

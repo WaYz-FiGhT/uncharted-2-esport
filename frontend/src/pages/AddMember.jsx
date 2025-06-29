@@ -41,14 +41,16 @@ function AddMember() {
 
   return (
     <div className="page-center">
-      <h1>Ajouter un membre</h1>
-      <h2>{ladder_id}</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Nom du joueur :</label>
-        <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Nom d'utilisateur" required />
-        <button type="submit">Ajouter</button>
-      </form>
-      {message && <p>{message}</p>}
+      <div className="page-content">
+        <h1>Ajouter un membre</h1>
+        <h2>{ladder_id}</h2>
+        <form onSubmit={handleSubmit}>
+          <label>Nom du joueur :</label>
+          <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Nom d'utilisateur" required />
+          <button type="submit">Ajouter</button>
+        </form>
+        {message && <p>{message}</p>}
+      </div>
     </div>
   );
 }

@@ -42,8 +42,9 @@ function DisputeTickets() {
 
   return (
     <div className="page-center">
-      <h1>Tickets de litige</h1>
-      {Object.keys(groupedTickets).length === 0 ? (
+      <div className="page-content">
+        <h1>Tickets de litige</h1>
+        {Object.keys(groupedTickets).length === 0 ? (
         <p>Aucun ticket trouvé.</p>
       ) : (
         Object.entries(groupedTickets).map(([matchId, data]) => (
@@ -74,7 +75,8 @@ function DisputeTickets() {
             </ul>
           </div>
         ))
-      )}
+        )}
+      </div>
     </div>
   );
 }

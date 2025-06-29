@@ -208,6 +208,14 @@ p {
   background-color: #3a1d12;
 }
 
+.match-block {
+  background-color: #3a1d12;
+  border: 1px solid #a75d47;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
 /* Members display */
 .members-container {
   display: flex;

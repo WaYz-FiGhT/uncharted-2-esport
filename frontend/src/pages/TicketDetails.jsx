@@ -31,7 +31,8 @@ function TicketDetails() {
 
   return (
     <div className="page-center">
-      <h1>Ticket #{ticket.id}</h1>
+      <div className="page-content">
+        <h1>Ticket #{ticket.id}</h1>
       <p>
         <strong>Équipe :</strong>{' '}
         <Link to={`/team/${ticket.team_id}`}>{ticket.team_name}</Link>
@@ -62,6 +63,7 @@ function TicketDetails() {
           )}
         </div>
       )}
+      </div>
     </div>
   );
 }

@@ -105,6 +105,7 @@ function MatchDetails() {
 
   return (
   <div className="page-center">
+    <div className="page-content">
     <h1>Détails du match</h1>
     <p>
       <strong>Équipe 1 :</strong>{' '}
@@ -199,6 +200,7 @@ function MatchDetails() {
         Votre équipe a déjà envoyé un ticket pour ce match.
       </p>
     )}
+    </div>
   </div>
 );
 }

@@ -36,8 +36,9 @@ function Register() {
 
   return (
     <div className="page-center">
-      <h1>Inscription</h1>
-      <form onSubmit={handleSubmit}>
+      <div className="page-content">
+        <h1>Inscription</h1>
+        <form onSubmit={handleSubmit}>
         <label>Nom d'utilisateur :</label>
         <input value={username} onChange={(e) => setUsername(e.target.value)} required />
 
@@ -54,8 +55,9 @@ function Register() {
         <input value={psn} onChange={(e) => setPsn(e.target.value)} required />
 
         <button type="submit">Créer mon compte</button>
-      </form>
-      {message && <p className="error">{message}</p>}
+        </form>
+        {message && <p className="error">{message}</p>}
+      </div>
     </div>
   );
 }

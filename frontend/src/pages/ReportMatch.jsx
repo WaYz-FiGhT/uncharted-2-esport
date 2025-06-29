@@ -41,7 +41,8 @@ function ReportMatch() {
 
   return (
     <div className="page-center">
-      <h1>Reporter le résultat</h1>
+      <div className="page-content">
+        <h1>Reporter le résultat</h1>
 
       {match && (
         <>
@@ -58,7 +59,7 @@ function ReportMatch() {
         </>
       )}
 
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
         <label>Résultat :</label>
         <select value={selectedResult} onChange={e => setSelectedResult(e.target.value)} required>
           <option value="">-- Choisissez --</option>
@@ -69,7 +70,8 @@ function ReportMatch() {
         <button type="submit">Envoyer</button>
       </form>
 
-      {message && <p>{message}</p>}
+        {message && <p>{message}</p>}
+      </div>
     </div>
   );
 }

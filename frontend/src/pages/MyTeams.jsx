@@ -55,10 +55,11 @@ function MyTeams() {
 
   return (
     <div className="page-center">
-      <h1>Mes équipes</h1>
+      <div className="page-content">
+        <h1>Mes équipes</h1>
 
-      <label htmlFor="teamSelect">Mes équipes :</label>
-      <select id="teamSelect" onChange={handleChange}>
+        <label htmlFor="teamSelect">Mes équipes :</label>
+        <select id="teamSelect" onChange={handleChange}>
         <option value="">-- Sélectionne une équipe --</option>
         {teams.map(team => (
           <option key={team.id} value={team.id}>
@@ -67,7 +68,8 @@ function MyTeams() {
         ))}
       </select>
 
-      {message && <p>{message}</p>}
+        {message && <p>{message}</p>}
+      </div>
     </div>
   );
 }

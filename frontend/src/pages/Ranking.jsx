@@ -16,8 +16,9 @@ function Ranking() {
 
   return (
     <div className="page-center">
-      <h1>Classement</h1>
-      {teams.length > 0 ? (
+      <div className="page-content">
+        <h1>Classement</h1>
+        {teams.length > 0 ? (
         <ol>
           {teams.map((team, index) => (
             <li key={team.id}>
@@ -25,9 +26,10 @@ function Ranking() {
             </li>
           ))}
         </ol>
-      ) : (
-        <p>{message || 'Aucune équipe trouvée.'}</p>
-      )}
+        ) : (
+          <p>{message || 'Aucune équipe trouvée.'}</p>
+        )}
+      </div>
     </div>
   );
 }
