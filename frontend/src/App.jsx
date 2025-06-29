@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
 import CreateTeam from './pages/CreateTeam';
 import MyTeams from './pages/MyTeams';
 import TeamDetails from './pages/TeamDetails';
@@ -39,7 +38,6 @@ function App() {
         <Route path="/register" element={<Register setUser={setUser} />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-team" element={<CreateTeam />} />
         <Route path="/mes-equipes" element={<MyTeams />} />
         <Route path="/team/:team_id" element={<TeamDetails />} />

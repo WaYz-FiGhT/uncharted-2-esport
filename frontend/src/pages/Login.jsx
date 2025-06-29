@@ -23,7 +23,7 @@ function Login({ setUser }) {
       setUser(res.data);
 
       // ✅ Redirige immédiatement après la connexion
-      navigate('/dashboard');
+      navigate('/');
     } catch (err) {
       console.error('Erreur login', err);
       setError(err?.response?.data?.error || 'Identifiants incorrects.');

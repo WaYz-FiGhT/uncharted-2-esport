@@ -18,6 +18,13 @@ function PostMatch() {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (ladder_id === '3') {
+      setGameMode('TDM Only');
+      setBoFormat('bo1');
+    }
+  }, [ladder_id]);
+
   // Vérifie que l'utilisateur est connecté
   useEffect(() => {
     axios.get('http://localhost:3000/session-info', { withCredentials: true })
@@ -77,8 +84,8 @@ function PostMatch() {
       if (res.status === 201) {
         setMessage("Match posté avec succès !");
         setSelectedPlayers([]);
-        setGameMode('');
-        setBoFormat('bo3');
+        setGameMode(ladder_id === '3' ? 'TDM Only' : '');
+        setBoFormat(ladder_id === '3' ? 'bo1' : 'bo3');
         setPlayerNumber(minPlayers);
       } else {
         setMessage(res.data.error || "Erreur inconnue.");
@@ -94,17 +101,24 @@ function PostMatch() {
         <h1>Poster un match</h1>
         <form onSubmit={handleSubmit}>
         <label>Mode de jeu :</label>
-        <select value={match_game_mode} onChange={(e) => setGameMode(e.target.value)} required>
-          <option value="">-- Choisissez un mode --</option>
-          <option value="TDM Only">TDM Only</option>
-          <option value="Mixte mode">Mixte mode</option>
-          <option value="Plunder Only">Plunder Only</option>
-        </select>
+        {ladder_id === '3' ? (
+          <select value={match_game_mode} disabled>
+            <option value="TDM Only">TDM Only</option>
+          </select>
+        ) : (
+          <select value={match_game_mode} onChange={(e) => setGameMode(e.target.value)} required>
+            <option value="">-- Choisissez un mode --</option>
+            <option value="TDM Only">TDM Only</option>
+            <option value="Mixte mode">Mixte mode</option>
+            <option value="Plunder Only">Plunder Only</option>
+          </select>
+        )}
 
         <label>Format du match :</label>
         <select value={boFormat} onChange={(e) => setBoFormat(e.target.value)} required>
+          {ladder_id === '3' && <option value="bo1">Bo1</option>}
           <option value="bo3">Bo3</option>
-          <option value="bo5">Bo5</option>
+          {ladder_id !== '3' && <option value="bo5">Bo5</option>}
         </select>
 
         <label>Nombre minimum de joueurs :</label>

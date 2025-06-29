@@ -17,8 +17,14 @@ function getRandomElements(arr, count) {
   return shuffled.slice(0, count);
 }
 
+function getMapCount(format) {
+  if (format === 'bo1') return 1;
+  if (format === 'bo3') return 3;
+  return 5; // bo5
+}
+
 router.post('/', async (req, res) => {
-  const { ladder_id, team_1_id, match_game_mode, match_format, player_number, selectedPlayers } = req.body;
+  let { ladder_id, team_1_id, match_game_mode, match_format, player_number, selectedPlayers } = req.body;
 
   if (!ladder_id || !team_1_id || !match_game_mode || !match_format || !player_number || !selectedPlayers) {
     return res.status(400).json({ error: 'Champs manquants' });
@@ -27,7 +33,7 @@ router.post('/', async (req, res) => {
   if (Array.isArray(selectedPlayers) && selectedPlayers.length < player_number) {
     return res.status(400).json({ error: `Veuillez sélectionner au moins ${player_number} joueurs.` });
   }
-  
+
   if (ladder_id == 3 && player_number !== 1) {
     return res.status(400).json({ error: 'Le nombre de joueurs doit être de 1 pour ce ladder.' });
   }
@@ -63,8 +69,13 @@ router.post('/', async (req, res) => {
     let selectedModes = [];
     let selectedMaps = [];
 
-    if (match_game_mode === 'TDM Only') {
-      const mapCount = match_format === 'bo3' ? 3 : 5;
+    if (ladder_id == 3) {
+      // Ladder 1v1 : une seule map Village en TDM
+      selectedModes = ['TDM'];
+      selectedMaps = ['Village'];
+      match_game_mode = 'TDM Only';
+    } else if (match_game_mode === 'TDM Only') {
+      const mapCount = getMapCount(match_format);
       selectedModes = Array(mapCount).fill('TDM');
       selectedMaps = getRandomElements(MAPS.TDM, mapCount);
     } else if (match_game_mode === 'Mixte mode') {
@@ -77,7 +88,7 @@ router.post('/', async (req, res) => {
         return getRandomElements(MAPS[modeKey], 1)[0];
       });
     } else if (match_game_mode === 'Plunder Only') {
-      const mapCount = match_format === 'bo3' ? 3 : 5;
+      const mapCount = getMapCount(match_format);
       selectedModes = Array(mapCount).fill('Plunder');
       selectedMaps = getRandomElements(MAPS.Plunder, mapCount);
     } else {

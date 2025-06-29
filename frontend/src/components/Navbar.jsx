@@ -28,7 +28,6 @@ function Navbar({ user, setUser }) {
 
         {user ? (
           <>
-            <li><Link to="/dashboard">Dashboard</Link></li>
             <li><Link to="/mes-equipes">Mes équipes</Link></li>
             <li><Link to="/create-team">Créer une team</Link></li>
             <li><Link to="/invitations">Invitations</Link></li>

@@ -46,11 +46,8 @@ function MyTeams() {
     fetchTeams();
   }, [userId]);
 
-  const handleChange = (e) => {
-    const teamId = e.target.value;
-    if (teamId) {
-      navigate(`/team/${teamId}`);
-    }
+  const handleView = (teamId) => {
+    navigate(`/team/${teamId}`);
   };
 
   return (
@@ -58,17 +55,17 @@ function MyTeams() {
       <div className="page-content">
         <h1>Mes équipes</h1>
 
-        <label htmlFor="teamSelect">Mes équipes :</label>
-        <select id="teamSelect" onChange={handleChange}>
-        <option value="">-- Sélectionne une équipe --</option>
-        {teams.map(team => (
-          <option key={team.id} value={team.id}>
-            {team.name || 'Nom indisponible'}
-          </option>
-        ))}
-      </select>
+          <div className="members-container">
+          {teams.map(team => (
+            <div key={team.id} className="member-row">
+              <span>{team.name || 'Nom indisponible'}</span>
+              <button onClick={() => handleView(team.id)}>Voir</button>
+            </div>
+          ))}
+          {teams.length === 0 && <p>{message}</p>}
+        </div>
 
-        {message && <p>{message}</p>}
+        {message && teams.length > 0 && <p>{message}</p>}
       </div>
     </div>
   );
