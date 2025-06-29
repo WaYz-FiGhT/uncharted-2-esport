@@ -81,9 +81,6 @@ function Home() {
             <p>{message2 || 'Aucune équipe trouvée.'}</p>
           )}
         </div>
-      <h2>Créer son profil</h2>
-      <button onClick={() => navigate('/register')}>S'inscrire</button>
-      <button onClick={() => navigate('/login')}>Se connecter</button>
     </div>
   </div>
   );
