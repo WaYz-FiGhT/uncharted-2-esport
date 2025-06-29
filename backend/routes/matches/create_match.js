@@ -27,6 +27,10 @@ router.post('/', async (req, res) => {
   if (Array.isArray(selectedPlayers) && selectedPlayers.length < player_number) {
     return res.status(400).json({ error: `Veuillez sélectionner au moins ${player_number} joueurs.` });
   }
+  
+  if (ladder_id == 3 && player_number !== 1) {
+    return res.status(400).json({ error: 'Le nombre de joueurs doit être de 1 pour ce ladder.' });
+  }
 
   if (ladder_id == 2 && (player_number < 3 || player_number > 5)) {
     return res.status(400).json({ error: 'Le nombre de joueurs doit être compris entre 3 et 5 pour ce ladder.' });

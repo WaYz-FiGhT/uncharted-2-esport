@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   try {
     const [rows] = await db.execute(
       `SELECT id, username, password, is_admin, email_verified,
-              team_id_ladder1, team_id_ladder2
+              team_id_ladder1, team_id_ladder2, team_id_ladder3
        FROM players WHERE username = ?`,
       [username]
     );
@@ -37,12 +37,14 @@ router.post('/', async (req, res) => {
       username: user.username,
       team_id_ladder1: user.team_id_ladder1,
       team_id_ladder2: user.team_id_ladder2,
+      team_id_ladder3: user.team_id_ladder3,
       is_admin: isAdmin
     };
     res.json({
       username: user.username,
       team_id_ladder1: user.team_id_ladder1,
       team_id_ladder2: user.team_id_ladder2,
+      team_id_ladder3: user.team_id_ladder3,
       is_admin: isAdmin
     });
 

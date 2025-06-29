@@ -52,7 +52,9 @@ router.post('/', async (req, res) => {
         [team_id, player_id]
       );
 
-      const column = Number(ladder_id) === 1 ? 'team_id_ladder1' : 'team_id_ladder2';
+      let column = 'team_id_ladder3';
+      if (Number(ladder_id) === 1) column = 'team_id_ladder1';
+      else if (Number(ladder_id) === 2) column = 'team_id_ladder2';
       await db.execute(
         `UPDATE players SET ${column} = ? WHERE id = ?`,
         [team_id, player_id]

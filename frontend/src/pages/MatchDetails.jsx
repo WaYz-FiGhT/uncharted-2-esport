@@ -10,6 +10,7 @@ function MatchDetails() {
   const fromTeamId = location.state?.fromTeamId;
   const [teamId1, setTeamId1] = useState(null);
   const [teamId2, setTeamId2] = useState(null);
+  const [teamId3, setTeamId3] = useState(null);
   const [userTeamId, setUserTeamId] = useState(null);
   const [hasAlreadyReported, setHasAlreadyReported] = useState(false);
   const [hasAlreadySentTicket, setHasAlreadySentTicket] = useState(false);
@@ -24,6 +25,7 @@ function MatchDetails() {
       .then(res => {
         setTeamId1(res.data.team_id_ladder1);
         setTeamId2(res.data.team_id_ladder2);
+        setTeamId3(res.data.team_id_ladder3);
       })
       .catch(() => navigate('/login'));
   }, [navigate]);
@@ -41,10 +43,12 @@ function MatchDetails() {
       setUserTeamId(teamId1);
     } else if (match.ladder_id === 2) {
       setUserTeamId(teamId2);
+    } else if (match.ladder_id === 3) {
+      setUserTeamId(teamId3);
     } else {
       setUserTeamId(null);
     }
-  }, [match, teamId1, teamId2]);
+  }, [match, teamId1, teamId2, teamId3]);
 
 
   useEffect(() => {

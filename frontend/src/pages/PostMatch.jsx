@@ -9,8 +9,10 @@ function PostMatch() {
   const [boFormat, setBoFormat] = useState('bo3');
   const [members, setMembers] = useState([]);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
-  const minPlayers = ladder_id === '1' ? 2 : 3;
-  const maxPlayers = ladder_id === '1' ? 2 : 5;
+  const minPlayers =
+    ladder_id === '1' ? 2 : ladder_id === '2' ? 3 : 1;
+  const maxPlayers =
+    ladder_id === '1' ? 2 : ladder_id === '2' ? 5 : 1;
   const [playerNumber, setPlayerNumber] = useState(minPlayers);
   const [userId, setUserId] = useState(null);
   const [message, setMessage] = useState('');
