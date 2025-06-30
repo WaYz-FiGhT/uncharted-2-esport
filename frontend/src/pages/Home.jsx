@@ -73,9 +73,7 @@ function Home() {
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
                   <span>
-                    {team.wins}
-                    <span style={{ color: 'green' }}>W</span> / {team.losses}
-                    <span style={{ color: 'red' }}>L</span>
+                    {team.wins} <span style={{ color: 'green' }}>W</span> / {team.losses} <span style={{ color: 'red' }}>L</span>
                   </span>
                   <span>{team.xp} XP</span>
                 </li>
@@ -99,9 +97,7 @@ function Home() {
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
                   <span>
-                    {team.wins}
-                    <span style={{ color: 'green' }}>W</span> / {team.losses}
-                    <span style={{ color: 'red' }}>L</span>
+                    {team.wins} <span style={{ color: 'green' }}>W</span> / {team.losses} <span style={{ color: 'red' }}>L</span>
                   </span>
                   <span>{team.xp} XP</span>
                 </li>
@@ -125,9 +121,7 @@ function Home() {
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
                     <span>
-                    {team.wins}
-                    <span style={{ color: 'green' }}>W</span> / {team.losses}
-                    <span style={{ color: 'red' }}>L</span>
+                    {team.wins} <span style={{ color: 'green' }}>W</span> / {team.losses} <span style={{ color: 'red' }}>L</span>
                   </span>
                   <span>{team.xp} XP</span>
                 </li>
