@@ -109,7 +109,22 @@ function MatchDetails() {
 
   return (
   <div className="page-center">
-        <div className="match-teams">
+    <p><strong>Mode :</strong> {match.game_mode}</p>
+    <p><strong>Status :</strong> {match.status}</p>
+    <p><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</p>
+
+    {match.result && (
+      <p><strong>Résultat officiel :</strong> {renderOfficialResult()}</p>
+    )}
+
+    <h3>Maps jouées :</h3>
+    <ul>
+      {match.maps.map((m, i) => (
+        <li key={i}>{m.game_mode} — {m.map_name}</li>
+      ))}
+    </ul>
+    
+    <div className="match-teams">
       <div className="team-block">
         <h2>
           <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>
@@ -137,20 +152,6 @@ function MatchDetails() {
         )}
       </div>
     </div>
-    <p><strong>Mode :</strong> {match.game_mode}</p>
-    <p><strong>Status :</strong> {match.status}</p>
-    <p><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</p>
-
-    {match.result && (
-      <p><strong>Résultat officiel :</strong> {renderOfficialResult()}</p>
-    )}
-
-    <h3>Maps jouées :</h3>
-    <ul>
-      {match.maps.map((m, i) => (
-        <li key={i}>{m.game_mode} — {m.map_name}</li>
-      ))}
-    </ul>
 
     {/* Bouton pour reporter */}
     {canReport && !hasAlreadyReported && (

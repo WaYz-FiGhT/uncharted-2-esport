@@ -319,3 +319,20 @@ p {
 .trophy.bronze {
   color: #cd7f32;
 }
+
+/* Match details header */
+.match-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  background-color: #3a1d12;
+  border: 1px solid #a75d47;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  color: #e0fbfc;
+}
+
+.match-info > div {
+  text-align: center;
+}
