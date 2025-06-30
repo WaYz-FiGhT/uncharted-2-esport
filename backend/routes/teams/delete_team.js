@@ -55,6 +55,9 @@ router.delete('/', async (req, res) => {
     // Supprime les membres de l'équipe
     await db.execute('DELETE FROM team_members WHERE team_id = ?', [team_id]);
 
+    // Supprime les éventuels tickets de litige liés à cette équipe
+    await db.execute('DELETE FROM dispute_tickets WHERE team_id = ?', [team_id]);
+
     // Met à jour la colonne team_id correspondante pour le capitaine
     let column = 'team_id_ladder3';
     if (ladder_id === 1) column = 'team_id_ladder1';
