@@ -121,7 +121,7 @@ function PostMatch() {
           {ladder_id !== '3' && <option value="bo5">Bo5</option>}
         </select>
 
-        <label>Nombre minimum de joueurs :</label>
+        <label>Choisir le nomdre de joueurs pour le match</label>
         <input
           type="number"
           min={minPlayers}
@@ -131,7 +131,7 @@ function PostMatch() {
           required
         />
 
-       <label>Choisissez les joueurs pour ce match :</label>
+       <label>Sélectionner les joueurs pouvant participer à ce match :</label>
         {members.length > 0 ? (
           <ul>
             {members.map(player => (

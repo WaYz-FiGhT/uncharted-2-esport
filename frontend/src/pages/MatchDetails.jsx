@@ -109,20 +109,34 @@ function MatchDetails() {
 
   return (
   <div className="page-center">
-    <div className="page-content">
-    <h1>Détails du match</h1>
-    <p>
-      <strong>Équipe 1 :</strong>{' '}
-      <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>
-    </p>
-    <p>
-      <strong>Équipe 2 :</strong>{' '}
-      {match.team_2_id ? (
-        <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>
-      ) : (
-        'En attente'
-      )}
-    </p>
+        <div className="match-teams">
+      <div className="team-block">
+        <h2>
+          <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>
+        </h2>
+        <ul>
+          {(match.players[match.team_1_id]?.players || []).map((p, i) => (
+            <li key={i}>{p}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="team-block">
+        <h2>
+          {match.team_2_id ? (
+            <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>
+          ) : (
+            'En attente'
+          )}
+        </h2>
+        {match.team_2_id && (
+          <ul>
+            {(match.players[match.team_2_id]?.players || []).map((p, i) => (
+              <li key={i}>{p}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
     <p><strong>Mode :</strong> {match.game_mode}</p>
     <p><strong>Status :</strong> {match.status}</p>
     <p><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</p>
@@ -137,20 +151,6 @@ function MatchDetails() {
         <li key={i}>{m.game_mode} — {m.map_name}</li>
       ))}
     </ul>
-
-    <h3>Joueurs par équipe :</h3>
-    {Object.entries(match.players).map(([teamId, teamInfo]) => (
-      <div key={teamId}>
-        <h4>
-          <Link to={`/team/${teamId}`}>{teamInfo.name}</Link>
-        </h4>
-        <ul>
-          {teamInfo.players.map((p, i) => (
-            <li key={i}>{p}</li>
-          ))}
-        </ul>
-      </div>
-    ))}
 
     {/* Bouton pour reporter */}
     {canReport && !hasAlreadyReported && (
@@ -205,7 +205,6 @@ function MatchDetails() {
       </p>
     )}
     </div>
-  </div>
 );
 }
 

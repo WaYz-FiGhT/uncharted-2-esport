@@ -36,7 +36,17 @@ function MyTeams() {
         if (uniqueTeams.length === 0) {
           setMessage('Aucune équipe trouvée.');
         } else {
-          setTeams(uniqueTeams);
+          const withLadder = await Promise.all(uniqueTeams.map(async team => {
+            try {
+              const res = await axios.get('http://localhost:3000/ladders/name', {
+                params: { id: team.ladder_id }
+              });
+              return { ...team, ladder_name: res.data.ladder_name };
+            } catch {
+              return { ...team, ladder_name: `Ladder ${team.ladder_id}` };
+            }
+          }));
+          setTeams(withLadder);
         }
       } catch {
         setMessage('Erreur lors du chargement des équipes.');
@@ -59,6 +69,7 @@ function MyTeams() {
           {teams.map(team => (
             <div key={team.id} className="member-row">
               <span>{team.name || 'Nom indisponible'}</span>
+              <span>{team.ladder_name}</span>
               <button onClick={() => handleView(team.id)}>Voir</button>
             </div>
           ))}

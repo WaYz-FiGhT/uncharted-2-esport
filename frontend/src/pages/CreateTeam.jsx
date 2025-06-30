@@ -21,7 +21,7 @@ function CreateTeam() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !ladderId) {
-      setMessage('Veuillez remplir tous les champs.');
+      setMessage('Please fill in all fields.');
       return;
     }
 
@@ -33,7 +33,7 @@ function CreateTeam() {
       }, { withCredentials: true });
 
       if (res.status === 201) {
-        setMessage('Team créée avec succès.');
+        setMessage('Team created successfully.');
         setName('');
         setLadderId('');
       } else {

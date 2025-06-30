@@ -266,6 +266,18 @@ p {
   min-width: 200px;
 }
 
+.match-teams {
+  display: flex;
+  gap: 40px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.team-block {
+  flex: 1;
+  min-width: 200px;
+}
 /* Classement style */
 .ranking-list {
   display: flex;

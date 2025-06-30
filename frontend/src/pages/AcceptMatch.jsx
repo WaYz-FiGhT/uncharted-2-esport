@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import '../App.css';
 
 function AcceptMatch() {
@@ -77,7 +77,7 @@ function AcceptMatch() {
   return (
     <div className="page-center">
       <div className="page-content">
-      <h1>Liste des matchs en attente</h1>
+      <h1>Pending matches list</h1>
 
       {message && <p className="error">{message}</p>}
 
@@ -85,11 +85,10 @@ function AcceptMatch() {
         matchInfos.map((match, index) => (
           <div key={index} className="match-block">
             <p>
-              {match.name_games} —{' '}
-              <Link to={`/team/${match.team_1_id}`}>{match.name}</Link> — {match.status} — {match.match_game_mode} — {match.player_number}
+             {match.name_games} — {match.name} — {match.match_game_mode} — {match.player_number}
             </p>
 
-            <label>Choisissez les joueurs :</label>
+            <label>Choose players:</label>
             <ul>
               {teamMembers.map(player => (
                 <li key={player.id}>
@@ -105,11 +104,11 @@ function AcceptMatch() {
               ))}
             </ul>
 
-            <button onClick={() => handleAccept(match.team_1_id, match.id, match.player_number)}>Accepter</button>
+            <button onClick={() => handleAccept(match.team_1_id, match.id, match.player_number)}>Accept</button>
           </div>
         ))
       ) : (
-        <p>Aucun match en attente trouvé.</p>
+        <p>No pending match found.</p>
       )}
       </div>
     </div>
