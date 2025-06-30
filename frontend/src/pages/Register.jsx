@@ -35,10 +35,8 @@ function Register() {
   };
 
   return (
-    <div className="page-center">
-      <div className="page-content">
-        <h1>Inscription</h1>
-        <form onSubmit={handleSubmit}>
+    <div className="container">
+      <form onSubmit={handleSubmit}>
         <label>Nom d'utilisateur :</label>
         <input value={username} onChange={(e) => setUsername(e.target.value)} required />
 
@@ -58,7 +56,6 @@ function Register() {
         </form>
         {message && <p className="error">{message}</p>}
       </div>
-    </div>
   );
 }
 

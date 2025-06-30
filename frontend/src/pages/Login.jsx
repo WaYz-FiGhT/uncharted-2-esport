@@ -31,9 +31,7 @@ function Login({ setUser }) {
   };
 
   return (
-    <div className="page-center">
-      <div className="page-content">
-        <h1>Connexion</h1>
+    <div className="container">
         <form onSubmit={handleLogin}>
         <input
           type="text"
@@ -53,7 +51,7 @@ function Login({ setUser }) {
         </form>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
-    </div>
+
   );
 }
 

@@ -46,9 +46,7 @@ function CreateTeam() {
   };
 
   return (
-    <div className="page-center">
-      <div className="page-content">
-        <h1>Créer une équipe</h1>
+     <div className="container">
 
       <form onSubmit={handleSubmit}>
         <label>Nom de l’équipe :</label>
@@ -73,7 +71,6 @@ function CreateTeam() {
 
       {message && <p>{message}</p>}
       </div>
-    </div>
   );
 }
 

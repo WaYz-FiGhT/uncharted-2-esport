@@ -21,7 +21,7 @@ h1, h2, h3 {
 /* Container */
 .container {
   max-width: 800px;
-  margin: auto;
+  margin: 60px auto;
   padding: 20px;
   text-align: center;
 }
