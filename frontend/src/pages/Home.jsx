@@ -60,7 +60,7 @@ function Home() {
       <h1>Classements</h1>
       <div className="ladder-container">
         <div className="ladder-block">
-          <h2>{ladder1Name || 'Ladder 1'}</h2>
+          <h2 className="ladder-name">{ladder1Name || 'Ladder 1'}</h2>
           {ladder1.length > 0 ? (
             <ul className="ranking-list">
               {ladder1.map((team, index) => (
@@ -75,7 +75,7 @@ function Home() {
                   <span>
                     {team.wins} <span style={{ color: 'green' }}>W</span> / {team.losses} <span style={{ color: 'red' }}>L</span>
                   </span>
-                  <span>{team.xp} XP</span>
+                  <span className="xp-yellow">{team.xp} XP</span>
                 </li>
               ))}
             </ul>
@@ -84,7 +84,7 @@ function Home() {
           )}
         </div>
         <div className="ladder-block">
-          <h2>{ladder2Name || 'Ladder 2'}</h2>
+          <h2 className="ladder-name">{ladder2Name || 'Ladder 2'}</h2>
           {ladder2.length > 0 ? (
             <ul className="ranking-list">
               {ladder2.map((team, index) => (
@@ -99,7 +99,7 @@ function Home() {
                   <span>
                     {team.wins} <span style={{ color: 'green' }}>W</span> / {team.losses} <span style={{ color: 'red' }}>L</span>
                   </span>
-                  <span>{team.xp} XP</span>
+                  <span className="xp-yellow">{team.xp} XP</span>
                 </li>
               ))}
             </ul>
@@ -108,7 +108,7 @@ function Home() {
           )}
         </div>
         <div className="ladder-block">
-          <h2>{ladder3Name || 'Ladder 3'}</h2>
+          <h2 className="ladder-name">{ladder3Name || 'Ladder 3'}</h2>
           {ladder3.length > 0 ? (
             <ul className="ranking-list">
               {ladder3.map((team, index) => (
@@ -123,7 +123,7 @@ function Home() {
                     <span>
                     {team.wins} <span style={{ color: 'green' }}>W</span> / {team.losses} <span style={{ color: 'red' }}>L</span>
                   </span>
-                  <span>{team.xp} XP</span>
+                  <span className="xp-yellow">{team.xp} XP</span>
                 </li>
               ))}
             </ul>

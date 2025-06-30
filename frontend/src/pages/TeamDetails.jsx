@@ -121,9 +121,13 @@ function TeamDetails() {
 
     switch (match.official_result) {
       case 'win_team_1':
-        return isTeam1 ? <span style={{ color: 'green' }}>W</span> : <span style={{ color: 'red' }}>L</span>;
+        return isTeam1
+          ? <span style={{ color: 'green', fontSize: '1.2rem', fontWeight: 'bold' }}>W</span>
+          : <span style={{ color: 'red', fontSize: '1.2rem', fontWeight: 'bold' }}>L</span>;
       case 'win_team_2':
-        return isTeam2 ? <span style={{ color: 'green' }}>W</span> : <span style={{ color: 'red' }}>L</span>;
+        return isTeam2
+          ? <span style={{ color: 'green', fontSize: '1.2rem', fontWeight: 'bold' }}>W</span>
+          : <span style={{ color: 'red', fontSize: '1.2rem', fontWeight: 'bold' }}>L</span>;
       case 'disputed':
         return <span style={{ color: 'orange' }}>D</span>;
       default:
@@ -154,9 +158,11 @@ function TeamDetails() {
 
       <div className="team-stats">
         <p>
-          {winCount} <span style={{ color: 'green' }}>W</span> |
-          {' '}
-          {loseCount} <span style={{ color: 'red' }}>L</span>
+          {winCount}{' '}
+          <span style={{ color: 'green', fontSize: '1.5rem', fontWeight: 'bold' }}>W</span>
+          {' | '}
+          {loseCount}{' '}
+          <span style={{ color: 'red', fontSize: '1.5rem', fontWeight: 'bold' }}>L</span>
         </p>
       </div>
 
