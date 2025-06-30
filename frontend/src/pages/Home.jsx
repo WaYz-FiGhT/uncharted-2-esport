@@ -72,6 +72,9 @@ function Home() {
                     )}
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
+                  <span>
+                    {team.wins}W / {team.losses}L
+                  </span>
                   <span>{team.xp} XP</span>
                 </li>
               ))}
@@ -93,6 +96,9 @@ function Home() {
                     )}
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
+                  <span>
+                    {team.wins}W / {team.losses}L
+                  </span>
                   <span>{team.xp} XP</span>
                 </li>
               ))}

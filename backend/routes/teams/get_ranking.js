@@ -13,7 +13,25 @@ router.get('/', async (req, res) => {
 
   try {
     const [rows] = await db.execute(
-      `SELECT id, name, xp FROM teams WHERE ladder_id = ? ORDER BY xp DESC`,
+      `SELECT
+        t.id,
+        t.name,
+        t.xp,
+        (
+          SELECT COUNT(*)
+          FROM matches m
+          WHERE (m.team_1_id = t.id AND m.official_result = 'win_team_1')
+             OR (m.team_2_id = t.id AND m.official_result = 'win_team_2')
+        ) AS wins,
+        (
+          SELECT COUNT(*)
+          FROM matches m
+          WHERE (m.team_1_id = t.id AND m.official_result = 'win_team_2')
+             OR (m.team_2_id = t.id AND m.official_result = 'win_team_1')
+        ) AS losses
+      FROM teams t
+      WHERE t.ladder_id = ?
+      ORDER BY t.xp DESC`,
       [ladder_id]
     );
     res.json(rows);
