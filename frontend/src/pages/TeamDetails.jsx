@@ -15,6 +15,8 @@ function TeamDetails() {
   const [message, setMessage] = useState('');
   const [leaveMessage, setLeaveMessage] = useState('');
   const [showLeaveConfirm, setShowLeaveConfirm] = useState(false);
+  const [deleteMessage, setDeleteMessage] = useState('');
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [userId, setUserId] = useState(null);
   const [captainId, setCaptainId] = useState(null);
   const [ladderId, setLadderId] = useState(null);
@@ -65,6 +67,7 @@ function TeamDetails() {
   const hasOngoingMatch = matchs.some(m =>
     ['pending', 'accepted', 'disputed'].includes(m.status)
   );
+  const canDelete = isCaptain && members.length === 1 && !hasOngoingMatch;
 
   const handleLeave = async () => {
     try {
@@ -112,6 +115,24 @@ function TeamDetails() {
       setMessage("Erreur lors de la suppression du match.");
     }
   };
+
+  const handleDeleteTeam = async () => {
+    try {
+      const res = await axios.delete('http://localhost:3000/teams/delete', {
+        data: { team_id, captain_id: userId },
+        withCredentials: true
+      });
+      if (res.status === 200) {
+        setShowDeleteConfirm(false);
+        navigate('/mes-equipes');
+      } else {
+        setDeleteMessage(res.data.error || 'Erreur.');
+      }
+    } catch (err) {
+      setDeleteMessage('Erreur lors de la requête.');
+    }
+  };
+
 
 
   const getResultTag = (match) => {
@@ -265,6 +286,24 @@ function TeamDetails() {
           <button onClick={() => navigate(`/ladder/${ladderId}/ranking`)}>
             Voir le classement
           </button>
+
+          {canDelete && (
+            <>
+              <button onClick={() => setShowDeleteConfirm(true)}>
+                Supprimer l'équipe
+              </button>
+              {showDeleteConfirm && (
+                <div className="confirm-box">
+                  <p>Êtes-vous sûr de vouloir supprimer l'équipe&nbsp;?</p>
+                  <button onClick={handleDeleteTeam}>Oui</button>
+                  <button onClick={() => setShowDeleteConfirm(false)}>Non</button>
+                </div>
+              )}
+              {deleteMessage && (
+                <p style={{ color: 'red' }}>{deleteMessage}</p>
+              )}
+            </>
+          )}
 
           {!isCaptain && (
             <button onClick={() => setShowLeaveConfirm(true)} disabled={hasOngoingMatch}>

@@ -65,6 +65,7 @@ app.use('/teams/invite', require('./routes/teams/invite_member'));
 app.use('/teams/invitations', require('./routes/teams/get_invitations'));
 app.use('/teams/respond-invitation', require('./routes/teams/respond_invitation'));
 app.use('/teams/leave', require('./routes/teams/leave_team'));
+app.use('/teams/delete', require('./routes/teams/delete_team'));
 app.use('/teams/kick-member', require('./routes/teams/kick_member'));
 app.use('/teams/by-captain', require('./routes/teams/byCaptain'));
 app.use('/teams/by-member', require('./routes/teams/byMember'));

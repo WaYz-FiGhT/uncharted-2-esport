@@ -110,6 +110,7 @@ function MatchDetails() {
     <div className="match-info">
       <div><strong>Mode :</strong> {match.game_mode}</div>
       <div><strong>Format :</strong> {match.format?.toUpperCase()}</div>
+      <div><strong>Nombre de joueurs :</strong> {match.player_number}</div>
       <div><strong>Status :</strong> {match.status}</div>
       <div><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</div>
     </div>
