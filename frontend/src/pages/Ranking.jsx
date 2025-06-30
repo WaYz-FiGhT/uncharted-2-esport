@@ -15,8 +15,8 @@ function Ranking() {
   }, [ladder_id]);
 
   return (
-    <div className="page-center">
-      <div className="page-content">
+    <div className="page-center ranking-page">
+      <div className="page-content ranking-page">
         <h1>Classement</h1>
         {teams.length > 0 ? (
         <ol>

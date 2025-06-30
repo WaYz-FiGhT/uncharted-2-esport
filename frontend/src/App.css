@@ -203,6 +203,16 @@ p {
   max-width: 900px;
 }
 
+/* Wider layout for ranking page */
+.page-center.ranking-page {
+  width: 95%;
+  max-width: 1500px;
+}
+
+.page-content.ranking-page {
+  max-width: 1000px;
+}
+
 .confirm-box {
   background-color: #572e1e;
   border: 2px solid #a75d47;
@@ -256,6 +266,10 @@ p {
 .myteams .member-row {
   grid-template-columns: 2fr 2fr auto;
   text-align: left;
+  background-color: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .myteams .member-header {
@@ -331,7 +345,7 @@ p {
 .ranking-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   max-height: 500px;
   overflow-y: auto;
   padding-left: 0;
@@ -342,7 +356,7 @@ p {
   display: grid;
   grid-template-columns: 0.5fr 2fr 1fr 1fr;
   align-items: center;
-  padding: 15px;
+  padding: 10px;
   color: #e0fbfc;
   background-color: #3a1d12;
   border: 1px solid #a75d47;
@@ -375,7 +389,7 @@ p {
 }
 
 .xp-yellow {
-  color: #ffd700;
+  color: #faeb92;
 }
 
 /* Match details header */
@@ -394,3 +408,4 @@ p {
 .match-info > div {
   text-align: center;
 }
+

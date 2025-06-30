@@ -173,7 +173,9 @@ function TeamDetails() {
             <div className="members-container">
               {members.map((membre, index) => (
                 <div key={index} className="member-row">
-                  <span>{membre.username}</span>
+                  <span>
+                    <Link to={`/profile/${membre.username}`}>{membre.username}</Link>
+                  </span>
                   <span>{membre.psn || '-'}</span>
                   <span>{membre.role}</span>
                   {isCaptain && parseInt(membre.id) !== parseInt(captainId) ? (

@@ -72,6 +72,10 @@ app.use('/teams/details', require('./routes/teams/get_teamselected'));
 app.use('/teams/get_playerid', require('./routes/teams/get_playerid'));
 app.use('/teams/ranking', require('./routes/teams/get_ranking'));
 
+
+// Players
+app.use('/players/profile', require('./routes/players/get_profile'));
+
 // tickets
 app.use('/tickets/create', require('./routes/tickets/create'));
 app.use('/tickets/check', require('./routes/tickets/check'));

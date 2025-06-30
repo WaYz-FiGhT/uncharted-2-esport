@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import '../App.css';
 
 function PostMatch() {
@@ -142,7 +142,7 @@ function PostMatch() {
                     checked={selectedPlayers.includes(player.id)}
                     onChange={() => togglePlayer(player.id)}
                   />
-                  {player.username}
+                  <Link to={`/profile/${player.username}`}>{player.username}</Link>
                 </label>
               </li>
             ))}

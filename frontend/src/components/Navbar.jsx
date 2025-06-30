@@ -32,7 +32,9 @@ function Navbar({ user, setUser }) {
             <li><Link to="/create-team">Create a team</Link></li>
             <li><Link to="/invitations">Invitations</Link></li>
             {user.is_admin === true && <li><Link to="/tickets">Tickets</Link></li>}
-            <li className="navbar-welcome">{user.username}</li>
+            <li className="navbar-welcome">
+              <Link to={`/profile/${user.username}`}>{user.username}</Link>
+            </li>
             <li>
               <span onClick={handleLogout} className="navbar-button">
                 Logout
