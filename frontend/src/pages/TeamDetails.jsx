@@ -148,7 +148,7 @@ function TeamDetails() {
   };
 
   return (
-    <div className="page-center">
+    <div className="page-center team-details-page">
       <h1>{teamName || 'Nom non disponible'}</h1>
       <h2>{gameName && ladderName ? `${gameName} - ${ladderName}` : 'Nom non disponible'}</h2>
 

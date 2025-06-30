@@ -61,13 +61,17 @@ function MyTeams() {
   };
 
   return (
-    <div className="page-center">
-        <h1>Mes équipes</h1>
+    <div className="page-center myteams">
+      <h1>Mes équipes</h1>
       <div className="members-container">
+        <div className="member-row member-header">
+          <span>Team Name</span>
+          <span>Ladder Name</span>
+        </div>
         {teams.map((team) => (
           <div key={team.id} className="member-row">
-            <span>{team.name || 'Nom indisponible'}</span>
-            <span>{team.ladder_name}</span>
+            <span className="team-name">{team.name || 'Nom indisponible'}</span>
+            <span className="ladder-name">{team.ladder_name}</span>
             <button onClick={() => handleView(team.id)}>Voir</button>
           </div>
         ))}

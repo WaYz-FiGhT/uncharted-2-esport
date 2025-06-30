@@ -98,7 +98,7 @@ form button:hover {
 
 /* Buttons global */
 button {
-  background-color: #874b1f !important;
+  background-color: #97582a !important;
   color: #e0fbfc;
   border: none;
   padding: 10px 16px;
@@ -165,6 +165,11 @@ p {
   border: 1px solid #51cf66;
 }
 
+/* Wider layout for team details */
+.team-details-page {
+  width: 95%;
+  max-width: 1500px;
+}
 /* ✅ Centrage + largeur élargie */
 .page-center {
   width: 90%;
@@ -241,6 +246,23 @@ p {
   border: 1px solid #a75d47;
   border-radius: 6px;
 }
+
+/* Custom layout for MyTeams */
+.myteams .member-row {
+  grid-template-columns: 2fr 2fr auto;
+  text-align: left;
+}
+
+.myteams .member-header {
+  font-weight: bold;
+}
+
+.myteams .team-name,
+.myteams .ladder-name,
+.myteams .member-header span {
+  font-size: 1.2rem;
+}
+
 
 /* Layout for team details */
 .team-sections {
