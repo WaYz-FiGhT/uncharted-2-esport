@@ -72,18 +72,16 @@ function MatchDetails() {
   const canReport =
     isTeamInMatch && fromTeamId && Number(fromTeamId) === Number(userTeamId);
 
-  const renderOfficialResult = () => {
+  const getResultTag = (teamNumber) => {
     switch (match.result) {
       case 'win_team_1':
-        return (
-          <>Victoire de <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link></>
-        );
+        return teamNumber === 1
+          ? <span style={{ color: 'green' }}>W</span>
+          : <span style={{ color: 'red' }}>L</span>;
       case 'win_team_2':
-        return (
-          <>Victoire de <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link></>
-        );
-      case 'disputed':
-        return 'Disputed';
+            return teamNumber === 2
+          ? <span style={{ color: 'green' }}>W</span>
+          : <span style={{ color: 'red' }}>L</span>;
       default:
         return null;
     }
@@ -113,9 +111,6 @@ function MatchDetails() {
       <div><strong>Mode :</strong> {match.game_mode}</div>
       <div><strong>Status :</strong> {match.status}</div>
       <div><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</div>
-      {match.result && (
-        <div><strong>Résultat officiel :</strong> {renderOfficialResult()}</div>
-      )}
     </div>
     <h3>Maps jouées :</h3>
     <ul>
@@ -128,6 +123,8 @@ function MatchDetails() {
       <div className="team-block">
         <h2>
           <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>
+          {' '}
+          {getResultTag(1)}
         </h2>
         <ul>
           {(match.players[match.team_1_id]?.players || []).map((p, i) => (
@@ -139,7 +136,11 @@ function MatchDetails() {
       <div className="team-block">
         <h2>
           {match.team_2_id ? (
-            <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>
+            <>
+              <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>
+              {' '}
+              {getResultTag(2)}
+            </>
           ) : (
             'En attente'
           )}
