@@ -109,14 +109,14 @@ function MatchDetails() {
 
   return (
   <div className="page-center">
-    <p><strong>Mode :</strong> {match.game_mode}</p>
-    <p><strong>Status :</strong> {match.status}</p>
-    <p><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</p>
-
-    {match.result && (
-      <p><strong>Résultat officiel :</strong> {renderOfficialResult()}</p>
-    )}
-
+    <div className="match-info">
+      <div><strong>Mode :</strong> {match.game_mode}</div>
+      <div><strong>Status :</strong> {match.status}</div>
+      <div><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</div>
+      {match.result && (
+        <div><strong>Résultat officiel :</strong> {renderOfficialResult()}</div>
+      )}
+    </div>
     <h3>Maps jouées :</h3>
     <ul>
       {match.maps.map((m, i) => (
@@ -135,6 +135,7 @@ function MatchDetails() {
           ))}
         </ul>
       </div>
+      <div className="vs">vs</div>
       <div className="team-block">
         <h2>
           {match.team_2_id ? (

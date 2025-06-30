@@ -278,6 +278,18 @@ p {
   flex: 1;
   min-width: 200px;
 }
+
+.team-block ul li {
+  background-color: #3a1d12;
+}
+
+.vs {
+  align-self: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e0fbfc;
+}
+
 /* Classement style */
 .ranking-list {
   display: flex;
