@@ -15,6 +15,14 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'Champs manquants' });
   }
 
+  if (username.length > 16) {
+    return res.status(400).json({ error: 'Username trop long (16 caractères max).' });
+  }
+
+  if (psn.length > 16) {
+    return res.status(400).json({ error: 'PSN trop long (16 caractères max).' });
+  }
+
   if (password !== confirmPassword) {
     return res.status(400).json({ error: 'Les mots de passe ne correspondent pas.' });
   }
@@ -22,11 +30,11 @@ router.post('/', async (req, res) => {
   try {
     // 🔸 Vérifier si l'utilisateur existe déjà
     const [existing] = await db.execute(
-      'SELECT id FROM players WHERE username = ? OR email = ?',
-      [username, email]
+      'SELECT id FROM players WHERE username = ? OR email = ? OR psn = ?',
+      [username, email, psn]
     );
     if (existing.length > 0) {
-      return res.status(400).json({ error: 'Utilisateur ou email déjà utilisé.' });
+      return res.status(400).json({ error: 'Utilisateur, email ou PSN déjà utilisé.' });
     }
 
     // 🔸 Hash du mot de passe

@@ -109,6 +109,7 @@ function MatchDetails() {
   <div className="page-center">
     <div className="match-info">
       <div><strong>Mode :</strong> {match.game_mode}</div>
+      <div><strong>Format :</strong> {match.format?.toUpperCase()}</div>
       <div><strong>Status :</strong> {match.status}</div>
       <div><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</div>
     </div>
@@ -158,7 +159,6 @@ function MatchDetails() {
     {/* Bouton pour reporter */}
     {canReport && !hasAlreadyReported && (
       <div style={{ marginTop: '20px' }}>
-        <h4>ID de ton équipe : {userTeamId}</h4>
         <Link to={`/report/${match.id}/${userTeamId}`}>
           <button>Reporter le résultat</button>
         </Link>

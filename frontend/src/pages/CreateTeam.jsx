@@ -56,6 +56,7 @@ function CreateTeam() {
           value={name}
           onChange={e => setName(e.target.value)}
           placeholder="Nom d'équipe"
+          maxLength={24}
           required
         />
 

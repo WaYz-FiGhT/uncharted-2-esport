@@ -64,6 +64,7 @@ router.get('/:id', async (req, res) => {
       team_1_name: match.team_1_name,
       team_2_name: match.team_2_name,
       game_mode: match.match_game_mode,
+      format: match.match_format,
       status: match.status,
       scheduled_time: match.scheduled_time,
       maps: mapRows,

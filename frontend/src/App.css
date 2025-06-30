@@ -98,7 +98,7 @@ form button:hover {
 
 /* Buttons global */
 button {
-  background-color: #a75d47;
+  background-color: #874b1f !important;
   color: #e0fbfc;
   border: none;
   padding: 10px 16px;
@@ -187,6 +187,10 @@ p {
   border: 2px solid #a75d47;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   text-align: center;
+}
+
+.ranking-content {
+  max-width: 900px;
 }
 
 .confirm-box {

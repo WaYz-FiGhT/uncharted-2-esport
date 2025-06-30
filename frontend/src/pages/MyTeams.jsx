@@ -62,23 +62,20 @@ function MyTeams() {
 
   return (
     <div className="page-center">
-      <div className="page-content">
         <h1>Mes équipes</h1>
-
-          <div className="members-container">
-          {teams.map(team => (
-            <div key={team.id} className="member-row">
-              <span>{team.name || 'Nom indisponible'}</span>
-              <span>{team.ladder_name}</span>
-              <button onClick={() => handleView(team.id)}>Voir</button>
-            </div>
-          ))}
-          {teams.length === 0 && <p>{message}</p>}
-        </div>
-
-        {message && teams.length > 0 && <p>{message}</p>}
+      <div className="members-container">
+        {teams.map((team) => (
+          <div key={team.id} className="member-row">
+            <span>{team.name || 'Nom indisponible'}</span>
+            <span>{team.ladder_name}</span>
+            <button onClick={() => handleView(team.id)}>Voir</button>
+          </div>
+        ))}
+        {teams.length === 0 && <p>{message}</p>}
       </div>
-    </div>
+
+      {message && teams.length > 0 && <p>{message}</p>}
+      </div>
   );
 }
 

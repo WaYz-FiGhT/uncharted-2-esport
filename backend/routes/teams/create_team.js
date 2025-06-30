@@ -11,6 +11,10 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'Champs manquants' });
   }
 
+  if (name.length > 24) {
+    return res.status(400).json({ error: "Nom d'équipe trop long (24 caractères max)." });
+  }
+
   try {
     // Vérifie s'il est déjà capitaine ou membre dans une team de ce ladder
     const [conflict] = await db.execute(
