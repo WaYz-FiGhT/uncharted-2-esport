@@ -56,7 +56,7 @@ function Home() {
   };
 
   return (
-    <div className="page-center">
+    <div className="page-center home-page">
       <h1>Classements</h1>
       <div className="ladder-container">
         <div className="ladder-block">

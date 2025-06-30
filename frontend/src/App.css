@@ -213,6 +213,24 @@ p {
   max-width: 1000px;
 }
 
+/* Wider layout for home page */
+.page-center.home-page {
+  width: 95%;
+  max-width: 1500px;
+}
+
+.home-page .ladder-container {
+  justify-content: space-between;
+}
+
+.home-page .ladder-block {
+  min-width: 280px;
+}
+
+.home-page .ranking-row {
+  grid-template-columns: 0.5fr 3fr 1fr 1fr;
+}
+
 .confirm-box {
   background-color: #572e1e;
   border: 2px solid #a75d47;
