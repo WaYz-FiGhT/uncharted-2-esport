@@ -75,7 +75,7 @@ function AcceptMatch() {
   };
   
   return (
-    <div className="page-center">
+    <div className="container">
       <div className="page-content">
       <h1>Pending matches list</h1>
 

@@ -229,6 +229,10 @@ p {
   width: 100%;
 }
 
+.home-page .ladder-name {
+  font-size: 2rem;
+}
+
 .home-page .ranking-row {
   grid-template-columns: 0.5fr 3fr 1fr 1fr;
 }

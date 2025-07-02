@@ -40,7 +40,7 @@ function AddMember() {
   };
 
   return (
-    <div className="page-center">
+    <div className="container">
       <div className="page-content">
         <h1>Add member</h1>
         <h2>{ladder_id}</h2>

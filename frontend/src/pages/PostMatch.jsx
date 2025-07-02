@@ -96,7 +96,7 @@ function PostMatch() {
   };
 
   return (
-    <div className="page-center">
+    <div className="container">
       <div className="page-content">
         <h1>Post a match</h1>
         <form onSubmit={handleSubmit}>
