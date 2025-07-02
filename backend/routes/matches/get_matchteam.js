@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
       FROM matches m
       JOIN ladders l ON m.ladder_id = l.id
       JOIN games g ON l.game_id = g.id
-      JOIN teams t1 ON m.team_1_id = t1.id
+      LEFT JOIN teams t1 ON m.team_1_id = t1.id
       LEFT JOIN teams t2 ON m.team_2_id = t2.id
       WHERE m.ladder_id = ?
         AND (m.team_1_id = ? OR m.team_2_id = ?)

@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
       FROM teams t
       JOIN team_members tm ON t.id = tm.team_id
       WHERE tm.player_id = ?
+      AND t.is_deleted = 0
       `,
       [player_id]
     );

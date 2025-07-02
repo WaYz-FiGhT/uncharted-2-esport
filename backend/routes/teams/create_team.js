@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
 
     // Création de l'équipe
     const [result] = await db.execute(
-      `INSERT INTO teams (name, captain_id, ladder_id) VALUES (?, ?, ?)`,
+      `INSERT INTO teams (name, captain_id, ladder_id, is_deleted) VALUES (?, ?, ?, 0)`,
       [name, user_id, ladder_id]
     );
 

@@ -55,30 +55,11 @@ router.delete('/', async (req, res) => {
         error: "Impossible de supprimer l'équipe : un match est en attente, accepté ou disputé."
       });
     }
-    // Liste des matchs à supprimer
-    const [matchIdsRows] = await connection.execute(
-      'SELECT id FROM matches WHERE team_1_id = ? OR team_2_id = ?',
-      [team_id, team_id]
+    // Marque l'équipe comme supprimée au lieu de retirer les matchs
+    await connection.execute(
+      'UPDATE teams SET is_deleted = 1 WHERE id = ?',
+      [team_id]
     );
-    
-    const matchIds = matchIdsRows.map(r => r.id);
-
-    if (matchIds.length > 0) {
-      const placeholders = matchIds.map(() => '?').join(',');
-
-      await connection.execute(
-        `DELETE FROM dispute_tickets WHERE match_id IN (${placeholders})`,
-        matchIds
-      );
-      await connection.execute(
-        `DELETE FROM match_players WHERE match_id IN (${placeholders})`,
-        matchIds
-      );
-      await connection.execute(
-        `DELETE FROM matches WHERE id IN (${placeholders})`,
-        matchIds
-      );
-    }
 
     // Supprime les membres de l'équipe
     await connection.execute('DELETE FROM team_members WHERE team_id = ?', [team_id]);
@@ -98,8 +79,7 @@ router.delete('/', async (req, res) => {
       [captain_id]
     );
 
-    // Supprime l'équipe
-    await connection.execute('DELETE FROM teams WHERE id = ?', [team_id]);
+    // Ne supprime pas physiquement l'équipe pour conserver l'historique des matchs
 
     await connection.commit();
 

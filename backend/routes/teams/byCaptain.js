@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 
   try {
     const [rows] = await db.execute(
-      'SELECT * FROM teams WHERE captain_id = ?',
+      'SELECT * FROM teams WHERE captain_id = ? AND is_deleted = 0',
       [captain_id]
     );
     res.json(rows);
