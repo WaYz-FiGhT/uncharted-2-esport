@@ -215,8 +215,8 @@ p {
 
 /* Wider layout for home page */
 .page-center.home-page {
-  width: 95%;
-  max-width: 1500px;
+  width: 98%;
+  max-width: 2400px;
 }
 
 .home-page .ladder-container {
