@@ -11,7 +11,11 @@ router.delete('/', async (req, res) => {
     return res.status(400).json({ error: 'Champs manquants' });
   }
 
+  let connection;
   try {
+    connection = await db.getConnection();
+    await connection.beginTransaction();
+
     // Vérifie que l'équipe existe et récupère le capitaine et le ladder
     const [teamRows] = await db.execute(
       'SELECT captain_id, ladder_id FROM teams WHERE id = ?',
@@ -29,7 +33,7 @@ router.delete('/', async (req, res) => {
     }
 
     // Vérifie qu'il est le seul membre de l'équipe
-    const [memberCount] = await db.execute(
+    const [memberCount] = await connection.execute(
       'SELECT COUNT(*) AS count FROM team_members WHERE team_id = ?',
       [team_id]
     );
@@ -39,7 +43,7 @@ router.delete('/', async (req, res) => {
     }
 
     // Vérifie qu'aucun match n'est en attente, accepté ou disputé
-    const [matchRows] = await db.execute(
+    const [matchRows] = await connection.execute(
       `SELECT id FROM matches
        WHERE (team_1_id = ? OR team_2_id = ?)
          AND status IN ('pending', 'accepted', 'disputed')`,
@@ -51,26 +55,56 @@ router.delete('/', async (req, res) => {
         error: "Impossible de supprimer l'équipe : un match est en attente, accepté ou disputé."
       });
     }
+    // Liste des matchs à supprimer
+    const [matchIdsRows] = await connection.execute(
+      'SELECT id FROM matches WHERE team_1_id = ? OR team_2_id = ?',
+      [team_id, team_id]
+    );
+    
+    const matchIds = matchIdsRows.map(r => r.id);
+
+    if (matchIds.length > 0) {
+      await connection.execute(
+        'DELETE FROM dispute_tickets WHERE match_id IN (?)',
+        [matchIds]
+      );
+      await connection.execute(
+        'DELETE FROM match_players WHERE match_id IN (?)',
+        [matchIds]
+      );
+      await connection.execute('DELETE FROM matches WHERE id IN (?)', [matchIds]);
+    }
 
     // Supprime les membres de l'équipe
-    await db.execute('DELETE FROM team_members WHERE team_id = ?', [team_id]);
+    await connection.execute('DELETE FROM team_members WHERE team_id = ?', [team_id]);
+
+    // Supprime les invitations liées à cette équipe
+    await connection.execute('DELETE FROM team_invitations WHERE team_id = ?', [team_id]);
 
     // Supprime les éventuels tickets de litige liés à cette équipe
-    await db.execute('DELETE FROM dispute_tickets WHERE team_id = ?', [team_id]);
+    await connection.execute('DELETE FROM dispute_tickets WHERE team_id = ?', [team_id]);
 
     // Met à jour la colonne team_id correspondante pour le capitaine
     let column = 'team_id_ladder3';
     if (ladder_id === 1) column = 'team_id_ladder1';
     else if (ladder_id === 2) column = 'team_id_ladder2';
-    await db.execute(`UPDATE players SET ${column} = NULL WHERE id = ?`, [captain_id]);
+    await connection.execute(
+      `UPDATE players SET ${column} = NULL WHERE id = ?`,
+      [captain_id]
+    );
 
     // Supprime l'équipe
-    await db.execute('DELETE FROM teams WHERE id = ?', [team_id]);
+    await connection.execute('DELETE FROM teams WHERE id = ?', [team_id]);
+
+    await connection.commit();
 
     res.json({ message: "Équipe supprimée" });
   } catch (err) {
+    if (connection) await connection.rollback();
     logger.error(err);
     res.status(500).json({ error: "Erreur lors de la suppression de l'équipe" });
+  } finally {
+    if (connection) connection.release();
   }
 });
 
