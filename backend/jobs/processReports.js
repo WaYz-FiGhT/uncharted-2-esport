@@ -68,7 +68,7 @@ async function finalizeOldReports() {
     }
   } catch (error) {
     const details = error.code || error.sqlMessage || error.message;
-    logger.error(`Erreur lors de la finalisation des reports : ${details}`, error);
+    logger.error(`Error finalizing reports: ${details}`, error);
   }
 }
 

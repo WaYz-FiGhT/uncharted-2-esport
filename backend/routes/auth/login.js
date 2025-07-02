@@ -20,14 +20,14 @@ router.post('/', async (req, res) => {
 
     const user = rows[0];
     if (!user)
-      return res.status(401).json({ error: 'Utilisateur introuvable' });
+      return res.status(401).json({ error: 'User not found' });
 
     const match = await bcrypt.compare(password, user.password);
     if (!match)
-      return res.status(401).json({ error: 'Mot de passe incorrect' });
+      return res.status(401).json({ error: 'Incorrect password' });
 
     if (!user.email_verified) {
-      return res.status(401).json({ error: 'Email non vérifié' });
+      return res.status(401).json({ error: 'Email not verified' });
     }
 
     // ⬇️ On stocke aussi le team_id (s'il est présent)
@@ -49,8 +49,8 @@ router.post('/', async (req, res) => {
     });
 
   } catch (err) {
-    logger.error('Erreur de connexion :', err);
-    res.status(500).json({ error: 'Erreur serveur' });
+    logger.error('Login error:', err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

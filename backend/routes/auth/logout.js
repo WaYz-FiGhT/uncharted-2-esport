@@ -6,10 +6,10 @@ const router = express.Router();
 router.post('/', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.status(500).json({ error: 'Erreur lors de la déconnexion' });
+      return res.status(500).json({ error: 'Error during logout' });
     }
 
-    res.status(200).json({ success: 'Déconnexion réussie' });
+    res.status(200).json({ success: 'Logout successful' });
   });
 });
 

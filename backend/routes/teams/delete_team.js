@@ -64,15 +64,20 @@ router.delete('/', async (req, res) => {
     const matchIds = matchIdsRows.map(r => r.id);
 
     if (matchIds.length > 0) {
+      const placeholders = matchIds.map(() => '?').join(',');
+
       await connection.execute(
-        'DELETE FROM dispute_tickets WHERE match_id IN (?)',
-        [matchIds]
+        `DELETE FROM dispute_tickets WHERE match_id IN (${placeholders})`,
+        matchIds
       );
       await connection.execute(
-        'DELETE FROM match_players WHERE match_id IN (?)',
-        [matchIds]
+        `DELETE FROM match_players WHERE match_id IN (${placeholders})`,
+        matchIds
       );
-      await connection.execute('DELETE FROM matches WHERE id IN (?)', [matchIds]);
+      await connection.execute(
+        `DELETE FROM matches WHERE id IN (${placeholders})`,
+        matchIds
+      );
     }
 
     // Supprime les membres de l'équipe

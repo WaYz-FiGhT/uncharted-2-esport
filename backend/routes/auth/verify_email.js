@@ -6,7 +6,7 @@ const logger = require('../../logger');
 router.get('/', async (req, res) => {
   const { token } = req.query;
   if (!token) {
-    return res.status(400).json({ error: 'Token manquant' });
+    return res.status(400).json({ error: 'Missing token' });
   }
 
   try {
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
       [token]
     );
     if (rows.length === 0) {
-      return res.status(400).json({ error: 'Token invalide' });
+      return res.status(400).json({ error: 'Invalid token' });
     }
 
     const userId = rows[0].id;
@@ -24,10 +24,10 @@ router.get('/', async (req, res) => {
       [userId]
     );
 
-    res.json({ message: 'Email vérifié' });
+    res.json({ message: 'Email verified' });
   } catch (err) {
-    logger.error('Erreur vérification email :', err);
-    res.status(500).json({ error: 'Erreur serveur' });
+    logger.error('Email verification error:', err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

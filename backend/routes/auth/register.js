@@ -12,19 +12,19 @@ router.post('/', async (req, res) => {
 
   // 🔸 Vérification des champs
   if (!username || !email || !password || !confirmPassword || !psn) {
-    return res.status(400).json({ error: 'Champs manquants' });
+    return res.status(400).json({ error: 'Missing fields' });
   }
 
   if (username.length > 16) {
-    return res.status(400).json({ error: 'Username trop long (16 caractères max).' });
+    return res.status(400).json({ error: 'Username too long (16 characters max).' });
   }
 
   if (psn.length > 16) {
-    return res.status(400).json({ error: 'PSN trop long (16 caractères max).' });
+    return res.status(400).json({ error: 'PSN too long (16 characters max).' });
   }
 
   if (password !== confirmPassword) {
-    return res.status(400).json({ error: 'Les mots de passe ne correspondent pas.' });
+    return res.status(400).json({ error: 'Passwords do not match.' });
   }
 
   try {
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
       [username, email, psn]
     );
     if (existing.length > 0) {
-      return res.status(400).json({ error: 'Utilisateur, email ou PSN déjà utilisé.' });
+      return res.status(400).json({ error: 'Username, email or PSN already used.' });
     }
 
     // 🔸 Hash du mot de passe
@@ -68,12 +68,11 @@ router.post('/', async (req, res) => {
     });
     logger.info('✅ Email envoyé à', email);
 
-    res.status(201).json({ message: 'Utilisateur créé. Vérifiez votre email.' });
+    res.status(201).json({ message: 'User created. Check your email.' });
   } catch (err) {
-    logger.error('Erreur lors de la création du joueur :', err);
-    res.status(500).json({ error: 'Erreur serveur.' });
-    logger.error('❌ Erreur complète :', err);
-
+    logger.error('Error creating player:', err);
+    res.status(500).json({ error: 'Server error.' });
+    logger.error('❌ Error complète :', err);
   }
 });
 
