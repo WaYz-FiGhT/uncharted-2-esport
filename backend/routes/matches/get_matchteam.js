@@ -41,8 +41,8 @@ router.get('/', async (req, res) => {
 
     res.json(rows);
   } catch (err) {
-    logger.error('Erreur récupération des matchs :', err);
-    res.status(500).json({ error: 'Erreur serveur' });
+    logger.error('Error récupération des matchs :', err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

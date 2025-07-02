@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
   const { team_id, player_id } = req.body;
 
   if (!team_id || !player_id) {
-    return res.status(400).json({ error: 'Champs manquants' });
+    return res.status(400).json({ error: 'Missing fields' });
   }
 
   try {
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
     );
 
     if (teamRows.length === 0) {
-      return res.status(404).json({ error: "Équipe non trouvée" });
+      return res.status(404).json({ error: "Team not found" });
     }
 
     const { captain_id, ladder_id } = teamRows[0];
@@ -67,10 +67,10 @@ router.post('/', async (req, res) => {
       [player_id]
     );
 
-    res.json({ message: "Joueur retiré de l'équipe" });
+    res.json({ message: 'Player removed from the team' });
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: "Erreur lors de la suppression du joueur" });
+    res.status(500).json({ error: 'Error removing player' });
   }
 });
 

@@ -13,7 +13,7 @@ function MyTeams() {
   useEffect(() => {
     axios.get('http://localhost:3000/session-info', { withCredentials: true })
       .then(res => setUserId(res.data.id))
-      .catch(() => setMessage('Vous devez être connecté.'));
+      .catch(() => setMessage('You must be logged in.'));
   }, []);
 
   // Récupère ses équipes (capitaine et membre)
@@ -34,7 +34,7 @@ function MyTeams() {
         );
 
         if (uniqueTeams.length === 0) {
-          setMessage('Aucune équipe trouvée.');
+          setMessage('No teams found.');
         } else {
           const withLadder = await Promise.all(uniqueTeams.map(async team => {
             try {
@@ -49,7 +49,7 @@ function MyTeams() {
           setTeams(withLadder);
         }
       } catch {
-        setMessage('Erreur lors du chargement des équipes.');
+        setMessage('Error loading teams.');
       }
     };
 
@@ -62,7 +62,7 @@ function MyTeams() {
 
   return (
     <div className="page-center myteams">
-      <h1>Mes équipes</h1>
+      <h1>My Teams</h1>
       <div className="members-container">
         <div className="member-row member-header">
           <span>Team Name</span>
@@ -70,9 +70,9 @@ function MyTeams() {
         </div>
         {teams.map((team) => (
           <div key={team.id} className="member-row">
-            <span className="team-name">{team.name || 'Nom indisponible'}</span>
+            <span className="team-name">{team.name || 'Name not available'}</span>
             <span className="ladder-name">{team.ladder_name}</span>
-            <button onClick={() => handleView(team.id)}>Voir</button>
+            <button onClick={() => handleView(team.id)}>View</button>
           </div>
         ))}
         {teams.length === 0 && <p>{message}</p>}

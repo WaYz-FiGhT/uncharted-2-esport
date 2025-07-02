@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
   const { invitation_id, accept } = req.body;
 
   if (!invitation_id || typeof accept === 'undefined') {
-    return res.status(400).json({ error: 'Champs manquants' });
+    return res.status(400).json({ error: 'Missing fields' });
   }
 
   try {
@@ -21,13 +21,13 @@ router.post('/', async (req, res) => {
     );
 
     if (invRows.length === 0) {
-      return res.status(404).json({ error: 'Invitation non trouvée' });
+      return res.status(404).json({ error: 'Invitation not found' });
     }
 
     const { team_id, player_id, status, ladder_id } = invRows[0];
 
     if (status !== 'pending') {
-      return res.status(400).json({ error: 'Invitation déjà traitée' });
+      return res.status(400).json({ error: 'Invitation already processed' });
     }
 
     if (accept) {
@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
 
       if (conflict.length > 0) {
         await db.execute(`UPDATE team_invitations SET status = 'declined' WHERE id = ?`, [invitation_id]);
-        return res.status(400).json({ error: "Le joueur fait déjà partie d'une équipe dans ce ladder." });
+        return res.status(400).json({ error: 'Player already in a team for this ladder.' });
       }
 
       await db.execute(
@@ -62,14 +62,14 @@ router.post('/', async (req, res) => {
 
       await db.execute(`UPDATE team_invitations SET status = 'accepted' WHERE id = ?`, [invitation_id]);
 
-      res.json({ message: 'Invitation acceptée' });
+      res.json({ message: 'Invitation accepted' });
     } else {
       await db.execute(`UPDATE team_invitations SET status = 'declined' WHERE id = ?`, [invitation_id]);
-      res.json({ message: 'Invitation refusée' });
+      res.json({ message: 'Invitation declined' });
     }
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: "Erreur lors du traitement de l'invitation" });
+    res.status(500).json({ error: 'Error processing invitation' });
   }
 });
 

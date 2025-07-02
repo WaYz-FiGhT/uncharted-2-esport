@@ -12,13 +12,13 @@ function ReportMatch() {
   useEffect(() => {
     axios.get(`http://localhost:3000/matches/details/${match_id}`, { withCredentials: true })
       .then(res => setMatch(res.data))
-      .catch(() => setMessage("Erreur lors de la récupération du match."));
+      .catch(() => setMessage('Error loading match.'));
   }, [match_id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!selectedResult) {
-      setMessage("Veuillez sélectionner un résultat.");
+      setMessage('Please select a result.');
       return;
     }
 
@@ -30,19 +30,19 @@ function ReportMatch() {
       }, { withCredentials: true });
 
       if (res.data.success) {
-        setMessage("Résultat envoyé avec succès !");
+        setMessage('Result submitted successfully!');
       } else {
-        setMessage(res.data.error || "Erreur lors de l'envoi.");
+        setMessage(res.data.error || 'Error sending result.');
       }
     } catch (err) {
-      setMessage("Erreur lors de l'envoi du résultat.");
+      setMessage('Error sending result.');
     }
   };
 
   return (
     <div className="page-center">
       <div className="page-content">
-        <h1>Reporter le résultat</h1>
+        <h1>Report result</h1>
 
       {match && (
         <>
@@ -60,14 +60,14 @@ function ReportMatch() {
       )}
 
         <form onSubmit={handleSubmit}>
-        <label>Résultat :</label>
+        <label>Result:</label>
         <select value={selectedResult} onChange={e => setSelectedResult(e.target.value)} required>
-          <option value="">-- Choisissez --</option>
+          <option value="">-- Select --</option>
           <option value="win">Win</option>
           <option value="lose">Lose</option>
           <option value="disputed">Disputed</option>
         </select>
-        <button type="submit">Envoyer</button>
+        <button type="submit">Submit</button>
       </form>
 
         {message && <p>{message}</p>}

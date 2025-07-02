@@ -11,13 +11,13 @@ function Ranking() {
   useEffect(() => {
     axios.get('http://localhost:3000/teams/ranking', { params: { ladder_id } })
       .then(res => setTeams(res.data))
-      .catch(() => setMessage('Erreur lors du chargement du classement.'));
+      .catch(() => setMessage('Error loading ranking.'));
   }, [ladder_id]);
 
   return (
     <div className="page-center ranking-page">
       <div className="page-content ranking-page">
-        <h1>Classement</h1>
+        <h1>Ranking</h1>
         {teams.length > 0 ? (
         <ol>
           {teams.map((team, index) => (
@@ -27,7 +27,7 @@ function Ranking() {
           ))}
         </ol>
         ) : (
-          <p>{message || 'Aucune équipe trouvée.'}</p>
+          <p>{message || 'No teams found.'}</p>
         )}
       </div>
     </div>

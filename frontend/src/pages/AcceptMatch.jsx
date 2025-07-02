@@ -28,14 +28,14 @@ function AcceptMatch() {
       withCredentials: true
     })
       .then(res => setMatchInfos(res.data))
-      .catch(() => setMessage("Erreur lors de la récupération des matchs pending."));
+      .catch(() => setMessage('Error retrieving pending matches.'));
   }, [team_id]);
 
   // Récupère les membres de l'équipe 2
   useEffect(() => {
     axios.get(`http://localhost:3000/teams/members?team_id=${team_id}`, { withCredentials: true })
       .then(res => setTeamMembers(res.data))
-      .catch(() => setMessage("Erreur lors de la récupération des membres."));
+      .catch(() => setMessage('Error retrieving members.'));
   }, [team_id]);
 
   const togglePlayer = (matchId, playerId) => {
@@ -51,7 +51,7 @@ function AcceptMatch() {
     const selected = selectedPlayers[match_id] || [];
 
     if (selected.length < player_count) {
-      setMessage(`Veuillez sélectionner au moins ${player_count} joueurs.`);
+      setMessage(`Please select at least ${player_count} players.`);
       return;
     }
 
@@ -63,13 +63,13 @@ function AcceptMatch() {
       }, { withCredentials: true });
 
       if (res.status === 200) {
-        setMessage("Match accepté avec succès !");
+        setMessage('Match accepted successfully!');
         setMatchInfos(prev => prev.filter(match => match.team_1_id !== team_1_id));
       } else {
-        setMessage(res.data.error || "Erreur inconnue.");
+        setMessage(res.data.error || 'Unknown error.');
       }
     } catch (err) {
-      const errorMsg = err.response?.data?.error || "Erreur lors de l'acceptation du match.";
+      const errorMsg = err.response?.data?.error || 'Error accepting match.';
       setMessage(errorMsg);
     }
   };

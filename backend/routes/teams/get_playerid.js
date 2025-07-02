@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
     res.json(rows);  // Les équipes renvoyées avec l'id et le nom
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: 'Erreur serveur' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

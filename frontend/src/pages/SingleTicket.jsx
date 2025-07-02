@@ -12,20 +12,20 @@ function SingleTicket() {
   useEffect(() => {
     axios.get(`http://localhost:3000/tickets/${ticket_id}`, { withCredentials: true })
       .then(res => setTicket(res.data))
-      .catch(() => setError("Erreur lors du chargement du ticket."));
+      .catch(() => setError('Error loading ticket.'));
   }, [ticket_id]);
 
   const handleSetResult = (winner) => {
     axios.post(`http://localhost:3000/tickets/${ticket_id}/set-result`, { winner }, { withCredentials: true })
       .then(() => {
-        alert("Résultat mis à jour.");
+        alert('Result updated.');
         navigate(`/match/${ticket.match_id}`);
       })
-      .catch(() => alert("Erreur lors de la mise à jour du résultat."));
+      .catch(() => alert('Error updating result.'));
   };
 
   if (error) return <p>{error}</p>;
-  if (!ticket) return <p>Chargement...</p>;
+  if (!ticket) return <p>Loading...</p>;
 
   return (
     <div className="page-center">
@@ -33,24 +33,24 @@ function SingleTicket() {
         <h1>Ticket #{ticket.id}</h1>
       <p><strong>Match :</strong> #{ticket.match_id}</p>
       <p>
-        <strong>Équipe :</strong>{' '}
+        <strong>Team:</strong>{' '}
         <Link to={`/team/${ticket.team_id}`}>{ticket.team_name}</Link>
       </p>
-      <p><strong>Date prévue :</strong> {new Date(ticket.scheduled_time).toLocaleString()}</p>
+      <p><strong>Scheduled date:</strong> {new Date(ticket.scheduled_time).toLocaleString()}</p>
       <p><strong>Message :</strong></p>
       <pre style={{ whiteSpace: 'pre-wrap' }}>{ticket.message}</pre>
 
       <div style={{ marginTop: '20px' }}>
-        <h3>Donner la victoire à :</h3>
+        <h3>Award victory to:</h3>
         <button onClick={() => handleSetResult('team_1')} style={{ marginRight: '10px' }}>
           {ticket.team_1_name}
         </button>
-        <Link to={`/team/${ticket.team_1_id}`}>voir équipe</Link>
+        <Link to={`/team/${ticket.team_1_id}`}>view team</Link>
         <button onClick={() => handleSetResult('team_2')} style={{ marginLeft: '10px', marginRight: '10px' }}>
           {ticket.team_2_name}
         </button>
           {ticket.team_2_id && (
-          <Link to={`/team/${ticket.team_2_id}`}>voir équipe</Link>
+          <Link to={`/team/${ticket.team_2_id}`}>view team</Link>
         )}
       </div>
       </div>

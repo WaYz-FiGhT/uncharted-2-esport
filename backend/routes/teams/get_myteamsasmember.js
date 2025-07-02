@@ -23,7 +23,7 @@ router.get('', async (req, res) => {
     res.json(teams); // ✅ On retourne bien la variable correcte ici
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: 'Erreur serveur' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

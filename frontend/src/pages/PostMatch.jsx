@@ -36,7 +36,7 @@ function PostMatch() {
   useEffect(() => {
     axios.get(`http://localhost:3000/teams/members?team_id=${team_id}`, { withCredentials: true })
       .then(res => setMembers(res.data))
-      .catch(() => setMessage("Erreur lors de la récupération des membres."));
+      .catch(() => setMessage('Error retrieving members.'));
   }, [team_id]);
 
   // Ajoute ou enlève un joueur à la sélection
@@ -53,21 +53,21 @@ function PostMatch() {
     e.preventDefault();
 
     if (!match_game_mode) {
-      setMessage("Veuillez sélectionner un mode.");
+      setMessage('Please select a mode.');
       return;
     }
 
     if (playerNumber < minPlayers || playerNumber > maxPlayers) {
       if (minPlayers === maxPlayers) {
-        setMessage(`Le nombre de joueurs doit être de ${minPlayers}.`);
+        setMessage(`Player count must be ${minPlayers}.`);
       } else {
-        setMessage(`Le nombre de joueurs doit être compris entre ${minPlayers} et ${maxPlayers}.`);
+        setMessage(`Player count must be between ${minPlayers} and ${maxPlayers}.`);
       }
       return;
     }
 
     if (selectedPlayers.length < playerNumber) {
-      setMessage(`Veuillez sélectionner au moins ${playerNumber} joueurs.`);
+      setMessage(`Please select at least ${playerNumber} players.`);
       return;
     }
 
@@ -82,46 +82,46 @@ function PostMatch() {
       }, { withCredentials: true });
 
       if (res.status === 201) {
-        setMessage("Match posté avec succès !");
+        setMessage('Match posted successfully!');
         setSelectedPlayers([]);
         setGameMode(ladder_id === '3' ? 'TDM Only' : '');
         setBoFormat(ladder_id === '3' ? 'bo1' : 'bo3');
         setPlayerNumber(minPlayers);
       } else {
-        setMessage(res.data.error || "Erreur inconnue.");
+        setMessage(res.data.error || 'Unknown error.');
       }
     } catch (err) {
-      setMessage(err.response?.data?.error || "Erreur lors de l'envoi du match.");
+        setMessage(err.response?.data?.error || 'Error sending match.');
     }
   };
 
   return (
     <div className="page-center">
       <div className="page-content">
-        <h1>Poster un match</h1>
+        <h1>Post a match</h1>
         <form onSubmit={handleSubmit}>
-        <label>Mode de jeu :</label>
+        <label>Game mode:</label>
         {ladder_id === '3' ? (
           <select value={match_game_mode} disabled>
             <option value="TDM Only">TDM Only</option>
           </select>
         ) : (
           <select value={match_game_mode} onChange={(e) => setGameMode(e.target.value)} required>
-            <option value="">-- Choisissez un mode --</option>
+            <option value="">-- Select a mode --</option>
             <option value="TDM Only">TDM Only</option>
-            <option value="Mixte mode">Mixte mode</option>
+            <option value="Mixte mode">Mixed mode</option>
             <option value="Plunder Only">Plunder Only</option>
           </select>
         )}
 
-        <label>Format du match :</label>
+        <label>Match format:</label>
         <select value={boFormat} onChange={(e) => setBoFormat(e.target.value)} required>
           {ladder_id === '3' && <option value="bo1">Bo1</option>}
           <option value="bo3">Bo3</option>
           {ladder_id !== '3' && <option value="bo5">Bo5</option>}
         </select>
 
-        <label>Choisir le nomdre de joueurs pour le match</label>
+        <label>Choose the number of players for the match</label>
         <input
           type="number"
           min={minPlayers}
@@ -131,7 +131,7 @@ function PostMatch() {
           required
         />
 
-       <label>Sélectionner les joueurs pouvant participer à ce match :</label>
+       <label>Select the players who can participate in this match:</label>
         {members.length > 0 ? (
           <ul>
             {members.map(player => (
@@ -148,10 +148,10 @@ function PostMatch() {
             ))}
           </ul>
         ) : (
-          <p>Aucun joueur trouvé.</p>
+          <p>No players found.</p>
         )}
 
-        <button type="submit">Poster le match</button>
+        <button type="submit">Post match</button>
       </form>
 
         {message && <p>{message}</p>}

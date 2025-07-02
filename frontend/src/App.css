@@ -401,6 +401,21 @@ p {
   color: #cd7f32;
 }
 
+.ranking-row.first {
+  border: 2px solid #d4af37;
+  font-size: 1.5em;
+}
+
+.ranking-row.second {
+  border: 2px solid #c0c0c0;
+  font-size: 1.2rem;
+}
+
+.ranking-row.third {
+  border: 2px solid #cd7f32;
+  font-size: 1.1rem;
+}
+
 /* Ladder titles and XP display */
 .ladder-name {
   color: #ffffff;

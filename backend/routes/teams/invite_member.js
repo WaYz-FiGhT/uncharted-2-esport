@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
   const { team_id, player_id, ladder_id } = req.body;
 
   if (!team_id || !player_id || !ladder_id) {
-    return res.status(400).json({ error: 'Champs manquants' });
+    return res.status(400).json({ error: 'Missing fields' });
   }
 
   try {
@@ -46,10 +46,10 @@ router.post('/', async (req, res) => {
       [team_id, player_id]
     );
 
-    res.status(201).json({ message: 'Invitation envoyée' });
+    res.status(201).json({ message: 'Invitation sent' });
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: "Erreur lors de l'envoi de l'invitation" });
+    res.status(500).json({ error: 'Error sending invitation' });
   }
 });
 

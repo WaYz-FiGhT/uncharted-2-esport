@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: "Erreur lors de l'ajout du joueur dans la team" });
+    res.status(500).json({ error: 'Error adding player to team' });
   }
 });
 

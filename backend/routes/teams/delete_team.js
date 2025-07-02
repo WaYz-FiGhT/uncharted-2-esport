@@ -8,7 +8,7 @@ router.delete('/', async (req, res) => {
   const { team_id, captain_id } = req.body;
 
   if (!team_id || !captain_id) {
-    return res.status(400).json({ error: 'Champs manquants' });
+    return res.status(400).json({ error: 'Missing fields' });
   }
 
   let connection;
@@ -23,7 +23,7 @@ router.delete('/', async (req, res) => {
     );
 
     if (teamRows.length === 0) {
-      return res.status(404).json({ error: "Équipe non trouvée" });
+      return res.status(404).json({ error: "Team not found" });
     }
 
     const { captain_id: storedCaptain, ladder_id } = teamRows[0];
@@ -83,11 +83,11 @@ router.delete('/', async (req, res) => {
 
     await connection.commit();
 
-    res.json({ message: "Équipe supprimée" });
+    res.json({ message: 'Team deleted' });
   } catch (err) {
     if (connection) await connection.rollback();
     logger.error(err);
-    res.status(500).json({ error: "Erreur lors de la suppression de l'équipe" });
+    res.status(500).json({ error: 'Error deleting team' });
   } finally {
     if (connection) connection.release();
   }

@@ -8,9 +8,9 @@ router.post('/', async (req, res) => {
   const userId = req.session?.user?.id;
   const { match_id, team_id, message } = req.body;
 
-  if (!userId) return res.status(401).json({ error: 'Non connecté' });
+  if (!userId) return res.status(401).json({ error: 'Not logged in' });
   if (!match_id || !team_id || !message?.trim()) {
-    return res.status(400).json({ error: 'Champs invalides' });
+    return res.status(400).json({ error: 'Invalid fields' });
   }
 
   try {
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     );
 
     if (existing.length > 0) {
-      return res.status(400).json({ error: 'Un ticket a déjà été envoyé par cette équipe.' });
+      return res.status(400).json({ error: 'A ticket has already been sent by this team.' });
     }
 
     await db.execute(
@@ -32,8 +32,8 @@ router.post('/', async (req, res) => {
 
     res.status(201).json({ success: true });
   } catch (err) {
-    logger.error('Erreur création ticket :', err);
-    res.status(500).json({ error: 'Erreur serveur.' });
+    logger.error('Ticket creation error:', err);
+    res.status(500).json({ error: 'Server error.' });
   }
 });
 
@@ -65,8 +65,8 @@ router.get('/', async (req, res) => {
     `);
     res.json(rows);
   } catch (err) {
-    logger.error('Erreur récupération tickets :', err);
-    res.status(500).json({ error: 'Erreur serveur.' });
+    logger.error('Error fetching tickets:', err);
+    res.status(500).json({ error: 'Server error.' });
   }
 });
 

@@ -16,7 +16,7 @@ function Register() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setMessage('Les mots de passe ne correspondent pas.');
+      setMessage('Passwords do not match.');
       return;
     }
 
@@ -30,29 +30,29 @@ function Register() {
       });
       setMessage(res.data.message);
     } catch (err) {
-      setMessage(err?.response?.data?.error || "Erreur lors de l'inscription.");
+      setMessage(err?.response?.data?.error || 'Registration error.');
     }
   };
 
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <label>Nom d'utilisateur :</label>
+        <label>Username:</label>
         <input value={username} onChange={(e) => setUsername(e.target.value)} required />
 
         <label>Email :</label>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-        <label>Mot de passe :</label>
+        <label>Password:</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
-        <label>Confirmer le mot de passe :</label>
+        <label>Confirm password:</label>
         <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
 
         <label>PSN :</label>
         <input value={psn} onChange={(e) => setPsn(e.target.value)} required />
 
-        <button type="submit">Créer mon compte</button>
+        <button type="submit">Create my account</button>
         </form>
         {message && <p className="error">{message}</p>}
       </div>

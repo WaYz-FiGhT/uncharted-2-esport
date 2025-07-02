@@ -12,7 +12,7 @@ function Profile() {
     axios
       .get(`http://localhost:3000/players/profile/${username}`)
       .then((res) => setProfile(res.data))
-      .catch(() => setMessage("Erreur lors du chargement du profil."));
+      .catch(() => setMessage('Error loading profile.'));
   }, [username]);
 
   return (
@@ -35,11 +35,11 @@ function Profile() {
               ))}
             </ul>
           ) : (
-            <p>Aucune équipe trouvée.</p>
+            <p>No teams found.</p>
           )}
         </div>
       ) : (
-        <p>{message || 'Chargement...'}</p>
+        <p>{message || 'Loading...'}</p>
       )}
     </div>
   );

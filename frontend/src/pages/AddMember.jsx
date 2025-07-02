@@ -18,7 +18,7 @@ function AddMember() {
       const player = playerRes.data[0];
 
       if (!player?.id) {
-        setMessage("Aucun joueur trouvé avec ce nom.");
+        setMessage('No player found with that name.');
         return;
       }
 
@@ -29,13 +29,13 @@ function AddMember() {
       }, { withCredentials: true });
 
       if (res.status === 201) {
-        setMessage('Invitation envoyée !');
+        setMessage('Invitation sent!');
         setUsername('');
       } else {
-        setMessage(res.data.error || "Erreur.");
+        setMessage(res.data.error || 'Error.');
       }
     } catch (err) {
-      setMessage("Erreur requête.");
+      setMessage('Request error.');
     }
   };
 

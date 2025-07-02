@@ -33,7 +33,7 @@ function MatchDetails() {
   useEffect(() => {
     axios.get(`http://localhost:3000/matches/details/${match_id}`, { withCredentials: true })
       .then(res => setMatch(res.data))
-      .catch(() => setError("Erreur lors de la récupération du match."));
+      .catch(() => setError('Error loading match.'));
   }, [match_id]);
 
     // Détermine l'id de l'équipe de l'utilisateur pour le ladder du match
@@ -103,18 +103,18 @@ function MatchDetails() {
   };
 
   if (error) return <p>{error}</p>;
-  if (!match) return <p>Chargement...</p>;
+  if (!match) return <p>Loading...</p>;
 
   return (
   <div className="page-center">
     <div className="match-info">
-      <div><strong>Mode :</strong> {match.game_mode}</div>
-      <div><strong>Format :</strong> {match.format?.toUpperCase()}</div>
-      <div><strong>Nombre de joueurs :</strong> {match.player_number}</div>
-      <div><strong>Status :</strong> {match.status}</div>
-      <div><strong>Date prévue :</strong> {new Date(match.scheduled_time).toLocaleString()}</div>
+      <div><strong>Mode:</strong> {match.game_mode}</div>
+      <div><strong>Format:</strong> {match.format?.toUpperCase()}</div>
+      <div><strong>Player count:</strong> {match.player_number}</div>
+      <div><strong>Status:</strong> {match.status}</div>
+      <div><strong>Scheduled date:</strong> {new Date(match.scheduled_time).toLocaleString()}</div>
     </div>
-    <h3>Maps jouées :</h3>
+    <h3>Played maps:</h3>
     <ul>
       {match.maps.map((m, i) => (
         <li key={i}>{m.game_mode} — {m.map_name}</li>
@@ -144,7 +144,7 @@ function MatchDetails() {
               {getResultTag(2)}
             </>
           ) : (
-            'En attente'
+            'Pending'
           )}
         </h2>
         {match.team_2_id && (
@@ -161,14 +161,14 @@ function MatchDetails() {
     {canReport && !hasAlreadyReported && (
       <div style={{ marginTop: '20px' }}>
         <Link to={`/report/${match.id}/${userTeamId}`}>
-          <button>Reporter le résultat</button>
+          <button>Report result</button>
         </Link>
       </div>
     )}
 
     {canReport && hasAlreadyReported && (
       <p style={{ marginTop: '20px', fontStyle: 'italic', color: 'gray' }}>
-        Vous avez déjà reporté ce match.
+        You have already reported this match.
       </p>
     )}
 
@@ -177,12 +177,12 @@ function MatchDetails() {
       <div style={{ marginTop: '30px' }}>
         {!showTicketForm ? (
           <button onClick={() => setShowTicketForm(true)}>
-            Créer un ticket de preuve
+            Create proof ticket
           </button>
         ) : (
           <>
             <textarea
-              placeholder="Expliquez les preuves du litige (screens, infos...)"
+              placeholder="Explain dispute proof (screens, info...)"
               value={ticketMessage}
               onChange={(e) => setTicketMessage(e.target.value)}
               rows={5}
@@ -190,7 +190,7 @@ function MatchDetails() {
             />
             <br />
             <button onClick={handleSubmitTicket}>
-              Envoyer le ticket
+              Send ticket
             </button>
           </>
         )}
@@ -199,13 +199,13 @@ function MatchDetails() {
 
     {ticketSent && (
       <p style={{ color: 'green', marginTop: '20px' }}>
-        Ticket envoyé avec succès.
+        Ticket sent successfully.
       </p>
     )}
 
     {hasAlreadySentTicket && (
       <p style={{ marginTop: '20px', fontStyle: 'italic', color: 'gray' }}>
-        Votre équipe a déjà envoyé un ticket pour ce match.
+        Your team already sent a ticket for this match.
       </p>
     )}
     </div>

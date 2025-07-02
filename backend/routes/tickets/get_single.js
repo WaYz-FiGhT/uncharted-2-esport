@@ -33,13 +33,13 @@ router.get('/:ticket_id', async (req, res) => {
     `, [ticket_id]);
 
     if (rows.length === 0) {
-      return res.status(404).json({ error: 'Ticket non trouvé' });
+      return res.status(404).json({ error: 'Ticket not found' });
     }
 
     res.json(rows[0]);
   } catch (err) {
-    logger.error('Erreur récupération ticket :', err);
-    res.status(500).json({ error: 'Erreur serveur.' });
+    logger.error('Ticket fetch error:', err);
+    res.status(500).json({ error: 'Server error.' });
   }
 });
 
@@ -49,7 +49,7 @@ router.post('/:ticket_id/set-result', async (req, res) => {
   const { winner } = req.body;
 
   if (!['team_1', 'team_2'].includes(winner)) {
-    return res.status(400).json({ error: 'Gagnant invalide.' });
+    return res.status(400).json({ error: 'Invalid winner.' });
   }
 
   try {
@@ -62,11 +62,11 @@ router.post('/:ticket_id/set-result', async (req, res) => {
     `, [ticket_id]);
 
     if (!ticket) {
-      return res.status(404).json({ error: 'Ticket introuvable.' });
+      return res.status(404).json({ error: 'Ticket not found.' });
     }
 
     if (ticket.status !== 'disputed') {
-      return res.status(400).json({ error: 'Le résultat a déjà été fixé.' });
+      return res.status(400).json({ error: 'Result already set.' });
     }
 
     const result = winner === 'team_1' ? 'win_team_1' : 'win_team_2';
@@ -108,8 +108,8 @@ router.post('/:ticket_id/set-result', async (req, res) => {
 
     res.json({ success: true });
   } catch (err) {
-    logger.error('Erreur mise à jour résultat :', err);
-    res.status(500).json({ error: 'Erreur serveur.' });
+    logger.error('Result update error:', err);
+    res.status(500).json({ error: 'Server error.' });
   }
 });
 

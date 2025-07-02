@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
       res.json(rows);
     } catch (err) {
       logger.error(err);
-      res.status(500).json({ error: 'Erreur serveur' });
+      res.status(500).json({ error: 'Server error' });
     }
   });
   

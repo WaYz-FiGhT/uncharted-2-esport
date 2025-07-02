@@ -19,17 +19,17 @@ function Home() {
     axios
       .get('http://localhost:3000/teams/ranking', { params: { ladder_id: 1 } })
       .then((res) => setLadder1(res.data))
-      .catch(() => setMessage1('Erreur lors du chargement du classement.'));
+      .catch(() => setMessage1('Error loading ranking.'));
 
     axios
       .get('http://localhost:3000/teams/ranking', { params: { ladder_id: 2 } })
       .then((res) => setLadder2(res.data))
-      .catch(() => setMessage2('Erreur lors du chargement du classement.'));
+      .catch(() => setMessage2('Error loading ranking.'));
 
     axios
       .get('http://localhost:3000/teams/ranking', { params: { ladder_id: 3 } })
       .then((res) => setLadder3(res.data))
-      .catch(() => setMessage3('Erreur lors du chargement du classement.'));
+      .catch(() => setMessage3('Error loading ranking.'));
 
     axios
       .get('http://localhost:3000/ladders/name', { params: { id: 1 } })
@@ -57,18 +57,29 @@ function Home() {
 
   return (
     <div className="page-center home-page">
-      <h1>Classements</h1>
+      <h1>Leaderboards</h1>
       <div className="ladder-container">
         <div className="ladder-block">
           <h2 className="ladder-name">{ladder1Name || 'Ladder 1'}</h2>
           {ladder1.length > 0 ? (
             <ul className="ranking-list">
               {ladder1.map((team, index) => (
-                <li key={team.id} className="ranking-row">
+                <li
+                  key={team.id}
+                  className={`ranking-row ${
+                    index === 0 ? 'first' : index === 1 ? 'second' : index === 2 ? 'third' : ''
+                  }`}
+                >
                   <span>
                     {index + 1}
                     {index < 3 && (
-                      <span className="trophy">{getTrophyEmoji(index)}</span>
+                      <span
+                        className={`trophy ${
+                          index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''
+                        }`}
+                      >
+                        {getTrophyEmoji(index)}
+                      </span>
                     )}
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
@@ -80,7 +91,7 @@ function Home() {
               ))}
             </ul>
           ) : (
-            <p>{message1 || 'Aucune équipe trouvée.'}</p>
+            <p>{message1 || 'No teams found.'}</p>
           )}
         </div>
         <div className="ladder-block">
@@ -88,11 +99,22 @@ function Home() {
           {ladder2.length > 0 ? (
             <ul className="ranking-list">
               {ladder2.map((team, index) => (
-                <li key={team.id} className="ranking-row">
+                <li
+                  key={team.id}
+                  className={`ranking-row ${
+                    index === 0 ? 'first' : index === 1 ? 'second' : index === 2 ? 'third' : ''
+                  }`}
+                >
                   <span>
                     {index + 1}
                     {index < 3 && (
-                      <span className="trophy">{getTrophyEmoji(index)}</span>
+                      <span
+                        className={`trophy ${
+                          index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''
+                        }`}
+                      >
+                        {getTrophyEmoji(index)}
+                      </span>
                     )}
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
@@ -104,7 +126,7 @@ function Home() {
               ))}
             </ul>
           ) : (
-            <p>{message2 || 'Aucune équipe trouvée.'}</p>
+            <p>{message2 || 'No teams found.'}</p>
           )}
         </div>
         <div className="ladder-block">
@@ -112,11 +134,22 @@ function Home() {
           {ladder3.length > 0 ? (
             <ul className="ranking-list">
               {ladder3.map((team, index) => (
-                <li key={team.id} className="ranking-row">
+                <li
+                  key={team.id}
+                  className={`ranking-row ${
+                    index === 0 ? 'first' : index === 1 ? 'second' : index === 2 ? 'third' : ''
+                  }`}
+                >
                   <span>
                     {index + 1}
                     {index < 3 && (
-                      <span className="trophy">{getTrophyEmoji(index)}</span>
+                      <span
+                        className={`trophy ${
+                          index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : ''
+                        }`}
+                      >
+                        {getTrophyEmoji(index)}
+                      </span>
                     )}
                   </span>
                   <Link to={`/team/${team.id}`}>{team.name}</Link>
@@ -128,7 +161,7 @@ function Home() {
               ))}
             </ul>
           ) : (
-            <p>{message3 || 'Aucune équipe trouvée.'}</p>
+            <p>{message3 || 'No teams found.'}</p>
           )}
         </div>
       </div>

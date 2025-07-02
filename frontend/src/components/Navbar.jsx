@@ -16,7 +16,7 @@ function Navbar({ user, setUser }) {
         navigate('/');
       }
     } catch (err) {
-      console.error('Erreur déconnexion', err);
+      console.error('Logout error', err);
     }
   };
 
@@ -24,7 +24,7 @@ function Navbar({ user, setUser }) {
     <nav className="navbar">
       <div className="navbar-brand">Uncharted 2 Esport</div>
       <ul className="navbar-links">
-        <li><Link to="/">Accueil</Link></li>
+        <li><Link to="/">Home</Link></li>
 
         {user ? (
           <>

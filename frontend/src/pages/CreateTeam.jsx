@@ -37,10 +37,10 @@ function CreateTeam() {
         setName('');
         setLadderId('');
       } else {
-        setMessage(res.data.error || 'Erreur lors de la création.');
+        setMessage(res.data.error || 'Error creating team.');
       }
     } catch (err) {
-      const errorMsg = err.response?.data?.error || 'Erreur réseau lors de la création.';
+      const errorMsg = err.response?.data?.error || 'Network error during creation.';
       setMessage(errorMsg);
     }
   };
@@ -49,24 +49,24 @@ function CreateTeam() {
      <div className="container">
 
       <form onSubmit={handleSubmit}>
-        <label>Nom de l’équipe :</label>
+        <label>Team name:</label>
         <input
           value={name}
           onChange={e => setName(e.target.value)}
-          placeholder="Nom d'équipe"
+          placeholder="Team name"
           maxLength={24}
           required
         />
 
         <label>Ladder :</label>
         <select value={ladderId} onChange={e => setLadderId(e.target.value)} required>
-          <option value="">-- Choisissez un ladder --</option>
+          <option value="">-- Select a ladder --</option>
           <option value="1">Uncharted 2 - 2vs2</option>
           <option value="2">Uncharted 2 - 3vs3, 4vs4, 5vs5</option>
           <option value="3">Uncharted 2 - 1vs1</option>
         </select>
 
-        <button type="submit">Créer</button>
+        <button type="submit">Create</button>
       </form>
 
       {message && <p>{message}</p>}

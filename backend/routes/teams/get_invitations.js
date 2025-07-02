@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
     res.json(rows);
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: 'Erreur lors de la récupération des invitations' });
+    res.status(500).json({ error: 'Error fetching invitations' });
   }
 });
 

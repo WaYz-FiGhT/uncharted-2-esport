@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   const { match_id, team_id } = req.query;
 
   if (!match_id || !team_id) {
-    return res.status(400).json({ error: 'Paramètres manquants' });
+    return res.status(400).json({ error: 'Missing parameters' });
   }
 
   try {
@@ -18,8 +18,8 @@ router.get('/', async (req, res) => {
     );
     res.json({ alreadySent: rows.length > 0 });
   } catch (err) {
-    logger.error('Erreur check ticket :', err);
-    res.status(500).json({ error: 'Erreur serveur.' });
+    logger.error('Ticket check error:', err);
+    res.status(500).json({ error: 'Server error.' });
   }
 });
 

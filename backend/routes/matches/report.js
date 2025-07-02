@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
     if (status !== 'accepted') {
       return res
         .status(400)
-        .json({ error: "Ce match n'est pas encore accepté." });
+        .json({ error: "This match hasn't been accepted yet." });
     }
 
   try {
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
     );
 
     if (existing.length > 0) {
-      return res.status(400).json({ error: 'Cette équipe a déjà reporté ce match.' });
+      return res.status(400).json({ error: 'This team has already reported this match.' });
     }
 
     // ✅ Insertion du report
@@ -126,7 +126,7 @@ router.post('/', async (req, res) => {
     res.json({ success: true, message: 'Résultat reporté avec succès.' });
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: 'Erreur serveur.' });
+    res.status(500).json({ error: 'Server error.' });
   }
 });
 
@@ -150,8 +150,8 @@ router.get('/check', async (req, res) => {
       return res.json({ alreadyReported: false });
     }
   } catch (err) {
-    logger.error('Erreur /report/check:', err);
-    res.status(500).json({ error: 'Erreur serveur' });
+    logger.error('Error /report/check:', err);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

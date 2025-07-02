@@ -25,8 +25,8 @@ function Login({ setUser }) {
       // ✅ Redirige immédiatement après la connexion
       navigate('/');
     } catch (err) {
-      console.error('Erreur login', err);
-      setError(err?.response?.data?.error || 'Identifiants incorrects.');
+     console.error('Login error', err);
+      setError(err?.response?.data?.error || 'Incorrect credentials.');
     }
   };
 
@@ -35,19 +35,19 @@ function Login({ setUser }) {
         <form onSubmit={handleLogin}>
         <input
           type="text"
-          placeholder="Nom d'utilisateur"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         /><br />
         <input
           type="password"
-          placeholder="Mot de passe"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         /><br />
-        <button type="submit">Se connecter</button>
+        <button type="submit">Log in</button>
         </form>
         {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>

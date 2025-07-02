@@ -24,8 +24,8 @@ router.get('/', async (req, res) => {
     );
     res.json(rows);
   } catch (err) {
-    logger.error('Erreur SQL (byMember):', err);
-    res.status(500).json({ error: 'Erreur lors de la récupération des équipes (membre)' });
+    logger.error('SQL error (byMember):', err);
+    res.status(500).json({ error: 'Error fetching teams (member)' });
   }
 });
 

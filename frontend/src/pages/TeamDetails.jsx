@@ -38,11 +38,11 @@ function TeamDetails() {
         setLadderId(res.data.ladder_id);
         setGameName(res.data.name_games);
       })
-      .catch(() => setMessage("Erreur lors de la récupération de l'équipe."));
+      .catch(() => setMessage('Error retrieving team.'));
 
     axios.get(`http://localhost:3000/teams/members?team_id=${team_id}`)
       .then(res => setMembers(res.data))
-      .catch(() => setMessage("Erreur lors de la récupération des membres."));
+      .catch(() => setMessage('Error retrieving members.'));
   }, [team_id]);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ function TeamDetails() {
         setMatchs(sorted);
         calculateStats(sorted);
       })
-      .catch(() => setMessage("Erreur lors de la récupération des matchs."));
+      .catch(() => setMessage('Error retrieving matches.'));
   }, [ladderId, team_id]);
 
   const isCaptain = parseInt(userId) === parseInt(captainId);
@@ -79,10 +79,10 @@ function TeamDetails() {
         setShowLeaveConfirm(false);
         navigate('/mes-equipes');
       } else {
-        setLeaveMessage(res.data.error || 'Erreur.');
+        setLeaveMessage(res.data.error || 'Error.');
       }
     } catch (err) {
-      setLeaveMessage("Erreur lors de la requête.");
+      setLeaveMessage('Request error.');
     }
   };
 
@@ -97,10 +97,10 @@ function TeamDetails() {
       if (res.status === 200) {
         setMembers(members.filter(m => m.id !== playerId));
       } else {
-        setMessage(res.data.error || 'Erreur.');
+        setMessage(res.data.error || 'Error.');
       }
     } catch (err) {
-      setMessage('Erreur lors de la requête.');
+      setMessage('Request error.');
     }
   };
 
@@ -112,7 +112,7 @@ function TeamDetails() {
       });
       setMatchs(matchs.filter(m => m.id !== matchId));
     } catch (err) {
-      setMessage("Erreur lors de la suppression du match.");
+      setMessage('Error deleting match.');
     }
   };
 
@@ -126,10 +126,10 @@ function TeamDetails() {
         setShowDeleteConfirm(false);
         navigate('/mes-equipes');
       } else {
-        setDeleteMessage(res.data.error || 'Erreur.');
+        setDeleteMessage(res.data.error || 'Error.');
       }
     } catch (err) {
-      setDeleteMessage('Erreur lors de la requête.');
+      setDeleteMessage('Request error.');
     }
   };
 
@@ -174,8 +174,8 @@ function TeamDetails() {
 
   return (
     <div className="page-center team-details-page">
-      <h1>{teamName || 'Nom non disponible'}</h1>
-      <h2>{gameName && ladderName ? `${gameName} - ${ladderName}` : 'Nom non disponible'}</h2>
+      <h1>{teamName || 'Name not available'}</h1>
+      <h2>{gameName && ladderName ? `${gameName} - ${ladderName}` : 'Name not available'}</h2>
 
       <div className="team-stats">
         <p>
@@ -189,7 +189,7 @@ function TeamDetails() {
 
       <div className="team-sections">
         <div className="members-section">
-          <h3>Membres de l’équipe</h3>
+          <h3>Team members</h3>
           {members.length > 0 ? (
             <div className="members-container">
               {members.map((membre, index) => (
@@ -204,24 +204,24 @@ function TeamDetails() {
                       onClick={() => handleKick(membre.id)}
                       disabled={hasOngoingMatch}
                     >
-                      Expulser
+                      Kick
                     </button>
                   ) : (
                     <button style={{ visibility: 'hidden' }} disabled>
-                      Expulser
+                      Kick
                     </button>
                   )}
                 </div>
               ))}
             </div>
           ) : (
-            <p>{message || 'Aucun membre trouvé.'}</p>
+            <p>{message || 'No members found.'}</p>
           )}
         </div>
 
 
         <div className="matches-section">
-          <h3>Matchs dans ce ladder</h3>
+          <h3>Matches in this ladder</h3>
           {matchs.length > 0 ? (
             <ul className="match-list">
               {matchs.map((match, index) => (
@@ -241,7 +241,7 @@ function TeamDetails() {
                           style={{ marginLeft: '10px' }}
                           onClick={() => handleDeleteMatch(match.id)}
                         >
-                          Supprimer
+                          Delete
                         </button>
                       )}
                     </>
@@ -255,14 +255,14 @@ function TeamDetails() {
                         navigate(`/match/${match.id}`, { state: { fromTeamId: team_id } })
                       }
                     >
-                      Détails
+                      Details
                     </button>
                   )}
                 </li>
               ))}
             </ul>
           ) : (
-            <p>Aucun match trouvé.</p>
+            <p>No matches found.</p>
           )}
         </div>
       </div>
@@ -271,32 +271,32 @@ function TeamDetails() {
         <>
           {isCaptain && (
             <button onClick={() => navigate(`/team/${team_id}/${ladderId}/add-member`)}>
-              Ajouter un membre
+              Add a member
             </button>
           )}
 
           <button onClick={() => navigate(`/team/${team_id}/${ladderId}/create-match`)}>
-            Créer un match
+            Create a match
           </button>
 
           <button onClick={() => navigate(`/team/${team_id}/accept-match`)}>
-            Accepter un match
+            Accept a match
           </button>
 
           <button onClick={() => navigate(`/ladder/${ladderId}/ranking`)}>
-            Voir le classement
+            View leaderboard
           </button>
 
           {canDelete && (
             <>
               <button onClick={() => setShowDeleteConfirm(true)}>
-                Supprimer l'équipe
+                Delete team
               </button>
               {showDeleteConfirm && (
                 <div className="confirm-box">
-                  <p>Êtes-vous sûr de vouloir supprimer l'équipe&nbsp;?</p>
-                  <button onClick={handleDeleteTeam}>Oui</button>
-                  <button onClick={() => setShowDeleteConfirm(false)}>Non</button>
+                  <p>Are you sure you want to delete the team?</p>
+                  <button onClick={handleDeleteTeam}>Yes</button>
+                  <button onClick={() => setShowDeleteConfirm(false)}>No</button>
                 </div>
               )}
               {deleteMessage && (
@@ -307,15 +307,15 @@ function TeamDetails() {
 
           {!isCaptain && (
             <button onClick={() => setShowLeaveConfirm(true)} disabled={hasOngoingMatch}>
-              Quitter l'équipe
+              Leave team
             </button>
           )}
 
           {showLeaveConfirm && (
             <div className="confirm-box">
-              <p>Êtes-vous sûr de vouloir quitter l'équipe&nbsp;?</p>
-              <button onClick={handleLeave}>Oui</button>
-              <button onClick={() => setShowLeaveConfirm(false)}>Non</button>
+              <p>Are you sure you want to leave the team?</p>
+              <button onClick={handleLeave}>Yes</button>
+              <button onClick={() => setShowLeaveConfirm(false)}>No</button>
             </div>
           )}
 

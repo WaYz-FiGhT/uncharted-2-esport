@@ -133,7 +133,7 @@ router.post('/', async (req, res) => {
     });
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: 'Erreur lors de la création du match' });
+    res.status(500).json({ error: 'Error creating match' });
   }
 });
 

@@ -18,7 +18,7 @@ router.get('/:username', async (req, res) => {
     );
 
     if (userRows.length === 0) {
-      return res.status(404).json({ error: 'Utilisateur non trouvé' });
+      return res.status(404).json({ error: 'User not found' });
     }
 
     const user = userRows[0];
@@ -63,7 +63,7 @@ router.get('/:username', async (req, res) => {
     });
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: 'Erreur serveur' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

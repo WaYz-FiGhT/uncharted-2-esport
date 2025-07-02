@@ -8,11 +8,11 @@ router.post('/', async (req, res) => {
   const { name, user_id, ladder_id } = req.body;
 
   if (!name || !user_id || !ladder_id) {
-    return res.status(400).json({ error: 'Champs manquants' });
+    return res.status(400).json({ error: 'Missing fields' });
   }
 
   if (name.length > 24) {
-    return res.status(400).json({ error: "Nom d'équipe trop long (24 caractères max)." });
+    return res.status(400).json({ error: 'Team name too long (24 characters max).' });
   }
 
   try {
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
 
     if (conflict.length > 0) {
       return res.status(400).json({
-        error: "Vous faites déjà partie d'une équipe (en tant que membre ou capitaine) dans ce ladder."
+        error: 'You are already in a team (as member or captain) in this ladder.'
       });
     }
 
@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
     );
 
     if (existing.length > 0) {
-      return res.status(409).json({ error: "Une équipe avec ce nom existe déjà dans ce ladder." });
+      return res.status(409).json({ error: 'A team with this name already exists in this ladder.' });
     }
 
     // Création de l'équipe
@@ -73,8 +73,8 @@ router.post('/', async (req, res) => {
     });
 
   } catch (err) {
-    logger.error('Erreur SQL :', err);
-    res.status(500).json({ error: 'Erreur lors de la création de la team' });
+    logger.error('SQL error:', err);
+    res.status(500).json({ error: 'Error creating team' });
   }
 });
 

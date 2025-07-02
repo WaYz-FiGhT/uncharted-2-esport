@@ -27,7 +27,7 @@ router.delete('/', async (req, res) => {
     res.json({ message: 'Match supprimé' });
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: 'Erreur serveur' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 

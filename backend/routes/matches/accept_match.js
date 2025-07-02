@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
 
     const matchId = matchRow[0]?.id;
     if (!matchId) {
-      return res.status(500).json({ error: "Impossible de récupérer l'ID du match accepté." });
+      return res.status(500).json({ error: "Couldn't retrieve accepted match ID." });
     }
 
     // Insère les joueurs de l'équipe 2 dans match_players
@@ -72,7 +72,7 @@ router.post('/', async (req, res) => {
     res.status(200).json({ success: true, match_id: matchId });
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ error: "Erreur lors de l'acceptation du match" });
+    res.status(500).json({ error: 'Error accepting match' });
   }
 });
 
