@@ -94,7 +94,7 @@ function Home() {
             <p>{message1 || 'No teams found.'}</p>
           )}
         </div>
-        <div className="ladder-block">
+        <div className="ladder-block big-ladder">
           <h2 className="ladder-name">{ladder2Name || 'Ladder 2'}</h2>
           {ladder2.length > 0 ? (
             <ul className="ranking-list">

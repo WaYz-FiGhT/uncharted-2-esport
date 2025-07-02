@@ -37,7 +37,7 @@ router.get('/:id', async (req, res) => {
     `, [matchId]);
 
     const [playerRows] = await db.execute(
-      `SELECT p.username, mp.team_id, t.name
+      `SELECT p.psn, mp.team_id, t.name
        FROM match_players mp
        JOIN players p ON mp.player_id = p.id
        JOIN teams t ON mp.team_id = t.id
@@ -53,7 +53,7 @@ router.get('/:id', async (req, res) => {
           players: []
         };
       }
-      playersByTeam[row.team_id].players.push(row.username);
+      playersByTeam[row.team_id].players.push(row.psn);
     });
 
     res.json({

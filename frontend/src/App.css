@@ -231,6 +231,16 @@ p {
 
 .home-page .ladder-name {
   font-size: 2rem;
+  margin-bottom: 5rem;
+}
+
+/* Emphasize larger ladders */
+.big-ladder .ladder-name {
+  font-size: 2.4rem;
+}
+
+.big-ladder .ranking-row {
+  font-size: 1.5rem;
 }
 
 .home-page .ranking-row {
@@ -291,13 +301,14 @@ p {
   grid-template-columns: 2fr 2fr auto;
   text-align: left;
   background-color: transparent;
-  border: none;
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .myteams .member-header {
   font-weight: bold;
+  background-color: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .myteams .team-name,
@@ -380,7 +391,7 @@ p {
   display: grid;
   grid-template-columns: 0.5fr 2fr 1fr 1fr;
   align-items: center;
-  padding: 15px;
+  padding: 10px;
   color: #e0fbfc;
   background-color: #3a1d12;
   border: 1px solid #a75d47;

@@ -42,7 +42,7 @@ function Invitations() {
   };
 
   return (
-    <div className="page-center">
+    <div className="container">
       <div className="page-content">
         <h1>Invitations</h1>
         {message && <p>{message}</p>}
