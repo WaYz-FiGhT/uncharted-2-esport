@@ -283,10 +283,6 @@ function TeamDetails() {
             Accept a match
           </button>
 
-          <button onClick={() => navigate(`/ladder/${ladderId}/ranking`)}>
-            View leaderboard
-          </button>
-
           {canDelete && (
             <>
               <button onClick={() => setShowDeleteConfirm(true)}>

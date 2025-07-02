@@ -221,7 +221,7 @@ p {
 
 .home-page .ladder-container {
   justify-content: space-between;
-    gap: 60px;
+  gap: 60px;
 }
 
 .home-page .ladder-block {
@@ -299,7 +299,7 @@ p {
 .myteams .team-name,
 .myteams .ladder-name,
 .myteams .member-header span {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 
@@ -376,11 +376,16 @@ p {
   display: grid;
   grid-template-columns: 0.5fr 2fr 1fr 1fr;
   align-items: center;
-  padding: 10px;
+  padding: 15px;
   color: #e0fbfc;
   background-color: #3a1d12;
   border: 1px solid #a75d47;
   border-radius: 6px;
+}
+
+/* Larger team names */
+.ranking-row a {
+  font-size: 1.3rem;
 }
 
 .ranking-row span:first-child {
@@ -421,6 +426,7 @@ p {
 /* Ladder titles and XP display */
 .ladder-name {
   color: #ffffff;
+  font-size: 1.5rem;
 }
 
 .xp-yellow {
@@ -442,5 +448,29 @@ p {
 
 .match-info > div {
   text-align: center;
+
+}
+  /* Custom scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a75d47 #3d1f13;
 }
 
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #3d1f13;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #a75d47;
+  border-radius: 4px;
+  border: 2px solid #3d1f13;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #C1440E;
+}
