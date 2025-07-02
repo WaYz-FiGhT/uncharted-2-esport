@@ -216,15 +216,17 @@ p {
 /* Wider layout for home page */
 .page-center.home-page {
   width: 98%;
-  max-width: 2400px;
+  max-width: 2300px;
 }
 
 .home-page .ladder-container {
   justify-content: space-between;
+    gap: 60px;
 }
 
 .home-page .ladder-block {
   min-width: 320px;
+  width: 100%;
 }
 
 .home-page .ranking-row {
@@ -403,17 +405,17 @@ p {
 
 .ranking-row.first {
   border: 2px solid #d4af37;
-  font-size: 1.5em;
+
 }
 
 .ranking-row.second {
   border: 2px solid #c0c0c0;
-  font-size: 1.2rem;
+
 }
 
 .ranking-row.third {
   border: 2px solid #cd7f32;
-  font-size: 1.1rem;
+
 }
 
 /* Ladder titles and XP display */
