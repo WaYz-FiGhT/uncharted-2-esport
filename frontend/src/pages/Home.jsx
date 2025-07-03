@@ -57,7 +57,7 @@ function Home() {
 
   return (
     <div className="page-center home-page">
-      <h1>Leaderboards</h1>
+      <h1>LEADERBOARDS</h1>
       <div className="ladder-container">
         <div className="ladder-block ladder-1">
           <h2 className="ladder-name">{ladder1Name || 'Ladder 1'}</h2>

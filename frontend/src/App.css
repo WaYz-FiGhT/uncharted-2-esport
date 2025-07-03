@@ -215,13 +215,15 @@ p {
 
 /* Wider layout for home page */
 .page-center.home-page {
-  width: 98%;
-  max-width: 2300px;
+  width: 90%;
+  max-width: 1600px;
+  margin: 15px auto;
+  padding: 15px;
 }
 
 .home-page .ladder-container {
   justify-content: space-between;
-  gap: 60px;
+  gap: 40px;
   align-items: flex-start;
 }
 
@@ -240,7 +242,7 @@ p {
   font-size: 2rem;
   margin-bottom: 5rem;
   /* Keep ladder titles aligned regardless of font size */
-  height: 3rem;
+  height: 1rem;
   line-height: 4rem;
 }
 
@@ -250,11 +252,11 @@ p {
 }
 
 .big-ladder .ranking-row {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .home-page .ranking-row {
-  grid-template-columns: 0.5fr 3fr 1fr 1fr;
+  grid-template-columns: 0.5fr 2fr 1fr 1fr;
 }
 
 .confirm-box {
