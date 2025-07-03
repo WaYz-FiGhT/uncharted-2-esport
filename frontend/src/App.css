@@ -233,6 +233,9 @@ p {
 .home-page .ladder-name {
   font-size: 2rem;
   margin-bottom: 5rem;
+  /* Keep ladder titles aligned regardless of font size */
+  height: 3rem;
+  line-height: 4rem;
 }
 
 /* Emphasize larger ladders */
