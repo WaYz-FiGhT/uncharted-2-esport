@@ -230,6 +230,12 @@ p {
   width: 100%;
 }
 
+/* Offset the first two ladders */
+.home-page .ladder-1,
+.home-page .ladder-2 {
+  margin-top: 2rem;
+}
+
 .home-page .ladder-name {
   font-size: 2rem;
   margin-bottom: 5rem;
@@ -405,6 +411,13 @@ p {
 /* Larger team names */
 .ranking-row a {
   font-size: 1.3rem;
+}
+
+/* Larger team names for bigger ladders */
+.ladder-3 .ranking-row a,
+.ladder-4 .ranking-row a,
+.ladder-5 .ranking-row a {
+  font-size: 1.6rem;
 }
 
 .ranking-row span:first-child {
