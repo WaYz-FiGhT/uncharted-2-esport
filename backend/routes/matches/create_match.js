@@ -12,9 +12,14 @@ const MAPS = {
 };
 
 // Helper pour tirage aléatoire
-function getRandomElements(arr, count) {
-  const shuffled = arr.sort(() => 0.5 - Math.random());
+function getRandomElements(arr, count, exclude = []) {
+  const available = arr.filter(m => !exclude.includes(m));
+  const shuffled = [...available].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, count);
+}
+
+function getRandomElement(arr, used) {
+  return getRandomElements(arr, 1, Array.from(used))[0];
 }
 
 function getMapCount(format) {
@@ -83,9 +88,12 @@ router.post('/', async (req, res) => {
         ? ['TDM', 'Plunder', 'TurfWar']
         : ['TDM', 'Plunder', 'TurfWar', 'TDM', 'Plunder'];
 
+      const usedMaps = new Set();
       selectedMaps = selectedModes.map(mode => {
         const modeKey = mode === 'TurfWar' ? 'TurfWar' : mode;
-        return getRandomElements(MAPS[modeKey], 1)[0];
+        const map = getRandomElement(MAPS[modeKey], usedMaps);
+        usedMaps.add(map);
+        return map;
       });
     } else if (match_game_mode === 'Plunder Only') {
       const mapCount = getMapCount(match_format);

@@ -26,6 +26,8 @@ router.get('/:username', async (req, res) => {
       .filter(id => id);
 
     let teams = [];
+    let wins = 0;
+    let losses = 0;
 
     if (teamIds.length > 0) {
       const [teamRows] = await db.execute(
@@ -34,7 +36,7 @@ router.get('/:username', async (req, res) => {
       );
       teams = teamRows;
 
-    const [[{ wins }]] = await db.execute(
+    const [[{ wins: winCount }]] = await db.execute(
       `SELECT COUNT(*) AS wins
        FROM match_players mp
        JOIN matches m ON mp.match_id = m.id
@@ -47,7 +49,7 @@ router.get('/:username', async (req, res) => {
       [user.id]
     );
 
-    const [[{ losses }]] = await db.execute(
+    const [[{ losses: lossCount }]] = await db.execute(
       `SELECT COUNT(*) AS losses
        FROM match_players mp
        JOIN matches m ON mp.match_id = m.id
@@ -59,6 +61,8 @@ router.get('/:username', async (req, res) => {
          )`,
       [user.id]
     );
+    wins = winCount;
+    losses = lossCount;
     }
 
     res.json({
