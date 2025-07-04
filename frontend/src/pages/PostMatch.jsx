@@ -87,6 +87,7 @@ function PostMatch() {
         setGameMode(ladder_id === '3' ? 'TDM Only' : '');
         setBoFormat(ladder_id === '3' ? 'bo1' : 'bo3');
         setPlayerNumber(minPlayers);
+        navigate(`/team/${team_id}`);
       } else {
         setMessage(res.data.error || 'Unknown error.');
       }

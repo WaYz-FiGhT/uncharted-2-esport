@@ -22,6 +22,8 @@ function TeamDetails() {
   const [ladderId, setLadderId] = useState(null);
   const [winCount, setWinCount] = useState(0);
   const [loseCount, setLoseCount] = useState(0);
+  const [kickMessage, setKickMessage] = useState('');
+  const [kickConfirmId, setKickConfirmId] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:3000/session-info', { withCredentials: true })
@@ -96,11 +98,12 @@ function TeamDetails() {
 
       if (res.status === 200) {
         setMembers(members.filter(m => m.id !== playerId));
+        setKickConfirmId(null);
       } else {
-        setMessage(res.data.error || 'Error.');
+        setKickMessage(res.data.error || 'Error.');
       }
     } catch (err) {
-      setMessage('Request error.');
+      setKickMessage('Request error.');
     }
   };
 
@@ -200,12 +203,20 @@ function TeamDetails() {
                   <span>{membre.psn || '-'}</span>
                   <span>{membre.role}</span>
                   {isCaptain && parseInt(membre.id) !== parseInt(captainId) ? (
-                    <button
-                      onClick={() => handleKick(membre.id)}
-                      disabled={hasOngoingMatch}
-                    >
-                      Kick
-                    </button>
+                    kickConfirmId === membre.id ? (
+                      <div className="confirm-box">
+                        <p>Are you sure you want to kick this member?</p>
+                        <button onClick={() => handleKick(membre.id)}>Yes</button>
+                        <button onClick={() => setKickConfirmId(null)}>No</button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => setKickConfirmId(membre.id)}
+                        disabled={hasOngoingMatch}
+                      >
+                        Kick
+                      </button>
+                    )
                   ) : (
                     <button style={{ visibility: 'hidden' }} disabled>
                       Kick
@@ -218,7 +229,9 @@ function TeamDetails() {
             <p>{message || 'No members found.'}</p>
           )}
         </div>
-
+        {kickMessage && (
+          <p style={{ color: 'red' }}>{kickMessage}</p>
+        )}
 
         <div className="matches-section">
           <h3>Matches in this ladder</h3>

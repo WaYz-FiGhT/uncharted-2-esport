@@ -65,6 +65,7 @@ function AcceptMatch() {
       if (res.status === 200) {
         setMessage('Match accepted successfully!');
         setMatchInfos(prev => prev.filter(match => match.team_1_id !== team_1_id));
+        navigate(`/team/${team_id}`);
       } else {
         setMessage(res.data.error || 'Unknown error.');
       }
