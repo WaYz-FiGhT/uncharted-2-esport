@@ -29,6 +29,7 @@ function Register() {
         psn
       });
       setMessage(res.data.message);
+      navigate('/login');
     } catch (err) {
       setMessage(err?.response?.data?.error || 'Registration error.');
     }
