@@ -9,10 +9,12 @@ router.get('/:id', async (req, res) => {
 
   try {
     const [matchRows] = await db.execute(`
-      SELECT 
+      SELECT
         m.*, 
-        t1.name AS team_1_name, 
-        t2.name AS team_2_name
+        t1.name AS team_1_name,
+        t1.team_picture_url AS team_1_picture_url,
+        t2.name AS team_2_name,
+        t2.team_picture_url AS team_2_picture_url
       FROM matches m
       LEFT JOIN teams t1 ON m.team_1_id = t1.id
       LEFT JOIN teams t2 ON m.team_2_id = t2.id
@@ -37,7 +39,7 @@ router.get('/:id', async (req, res) => {
     `, [matchId]);
 
     const [playerRows] = await db.execute(
-      `SELECT p.psn, mp.team_id, t.name
+      `SELECT p.psn, p.profile_picture_url, mp.team_id, t.name
        FROM match_players mp
        JOIN players p ON mp.player_id = p.id
        JOIN teams t ON mp.team_id = t.id
@@ -53,7 +55,7 @@ router.get('/:id', async (req, res) => {
           players: []
         };
       }
-      playersByTeam[row.team_id].players.push(row.psn);
+      playersByTeam[row.team_id].players.push({ psn: row.psn, profile_picture_url: row.profile_picture_url });
     });
 
     res.json({
@@ -62,7 +64,9 @@ router.get('/:id', async (req, res) => {
       team_1_id: match.team_1_id,
       team_2_id: match.team_2_id,
       team_1_name: match.team_1_name,
+      team_1_picture_url: match.team_1_picture_url,
       team_2_name: match.team_2_name,
+      team_2_picture_url: match.team_2_picture_url,
       game_mode: match.match_game_mode,
       format: match.match_format,
       player_number: match.player_number,

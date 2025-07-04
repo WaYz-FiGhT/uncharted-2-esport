@@ -22,7 +22,11 @@ function Ranking() {
         <ol>
           {teams.map((team, index) => (
               <li key={team.id}>
-                {index + 1}. <Link to={`/team/${team.id}`}>{team.name}</Link> — {team.wins}W / {team.losses}L — <span className="xp-yellow">{team.xp} XP</span>
+                {index + 1}.{' '}
+                {team.team_picture_url && (
+                  <img src={team.team_picture_url} alt="team" style={{ width: '30px', verticalAlign: 'middle', marginRight: '5px' }} />
+                )}
+                <Link to={`/team/${team.id}`}>{team.name}</Link> — {team.wins}W / {team.losses}L — <span className="xp-yellow">{team.xp} XP</span>
               </li>
           ))}
         </ol>

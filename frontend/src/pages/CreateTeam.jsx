@@ -6,6 +6,7 @@ import '../App.css';
 function CreateTeam() {
   const [name, setName] = useState('');
   const [ladderId, setLadderId] = useState('');
+  const [teamPictureUrl, setTeamPictureUrl] = useState('');
   const [userId, setUserId] = useState(null);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -29,7 +30,8 @@ function CreateTeam() {
       const res = await axios.post('http://localhost:3000/teams/create', {
         name,
         user_id: userId,
-        ladder_id: ladderId
+        ladder_id: ladderId,
+        team_picture_url: teamPictureUrl
       }, { withCredentials: true });
 
       if (res.status === 201) {
@@ -66,6 +68,9 @@ function CreateTeam() {
           <option value="3">Uncharted 2 - 1vs1</option>
         </select>
 
+        <label>Team picture URL:</label>
+        <input value={teamPictureUrl} onChange={e => setTeamPictureUrl(e.target.value)} />
+        
         <button type="submit">Create</button>
       </form>
 

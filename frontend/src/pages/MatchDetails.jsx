@@ -124,13 +124,20 @@ function MatchDetails() {
     <div className="match-teams">
       <div className="team-block">
         <h2>
-          <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>
-          {' '}
+          {match.team_1_picture_url && (
+            <img src={match.team_1_picture_url} alt="team" style={{ width: '40px', marginRight: '5px' }} />
+          )}
+          <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>{' '}
           {getResultTag(1)}
         </h2>
         <ul>
           {(match.players[match.team_1_id]?.players || []).map((p, i) => (
-            <li key={i}>{p}</li>
+            <li key={i}>
+              {p.profile_picture_url && (
+                <img src={p.profile_picture_url} alt="avatar" style={{ width: '30px', marginRight: '3px' }} />
+              )}
+              {p.psn}
+            </li>
           ))}
         </ul>
       </div>
@@ -139,8 +146,10 @@ function MatchDetails() {
         <h2>
           {match.team_2_id ? (
             <>
-              <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>
-              {' '}
+              {match.team_2_picture_url && (
+                <img src={match.team_2_picture_url} alt="team" style={{ width: '40px', marginRight: '5px' }} />
+              )}
+              <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>{' '}
               {getResultTag(2)}
             </>
           ) : (
@@ -150,7 +159,12 @@ function MatchDetails() {
         {match.team_2_id && (
           <ul>
             {(match.players[match.team_2_id]?.players || []).map((p, i) => (
-              <li key={i}>{p}</li>
+              <li key={i}>
+                {p.profile_picture_url && (
+                  <img src={p.profile_picture_url} alt="avatar" style={{ width: '30px', marginRight: '3px' }} />
+                )}
+                {p.psn}
+              </li>
             ))}
           </ul>
         )}

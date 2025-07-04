@@ -12,7 +12,7 @@ router.get('/:username', async (req, res) => {
 
   try {
     const [userRows] = await db.execute(
-      `SELECT id, username, psn, team_id_ladder1, team_id_ladder2, team_id_ladder3
+      `SELECT id, username, psn, profile_picture_url, team_id_ladder1, team_id_ladder2, team_id_ladder3
        FROM players WHERE username = ?`,
       [username]
     );
@@ -66,8 +66,10 @@ router.get('/:username', async (req, res) => {
     }
 
     res.json({
+      id: user.id,
       username: user.username,
       psn: user.psn,
+      profile_picture_url: user.profile_picture_url,
       teams,
       wins,
       losses

@@ -8,6 +8,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [psn, setPsn] = useState('');
+  const [profilePictureUrl, setProfilePictureUrl] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -26,7 +27,8 @@ function Register() {
         password,
         confirmPassword,
         email,
-        psn
+        psn,
+        profile_picture_url: profilePictureUrl
       });
       setMessage(res.data.message);
       navigate('/login');
@@ -52,6 +54,9 @@ function Register() {
 
         <label>PSN :</label>
         <input value={psn} onChange={(e) => setPsn(e.target.value)} required />
+
+        <label>Profile picture URL:</label>
+        <input value={profilePictureUrl} onChange={(e) => setProfilePictureUrl(e.target.value)} />
 
         <button type="submit">Create my account</button>
         </form>

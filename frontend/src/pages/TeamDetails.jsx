@@ -10,6 +10,7 @@ function TeamDetails() {
   const [teamName, setTeamName] = useState('');
   const [ladderName, setLadderName] = useState('');
   const [gameName, setGameName] = useState('');
+  const [teamPictureUrl, setTeamPictureUrl] = useState('');
   const [members, setMembers] = useState([]);
   const [matchs, setMatchs] = useState([]);
   const [message, setMessage] = useState('');
@@ -24,6 +25,7 @@ function TeamDetails() {
   const [loseCount, setLoseCount] = useState(0);
   const [kickMessage, setKickMessage] = useState('');
   const [kickConfirmId, setKickConfirmId] = useState(null);
+  const [newTeamPictureUrl, setNewTeamPictureUrl] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:3000/session-info', { withCredentials: true })
@@ -39,6 +41,7 @@ function TeamDetails() {
         setCaptainId(res.data.captain_id);
         setLadderId(res.data.ladder_id);
         setGameName(res.data.name_games);
+        setTeamPictureUrl(res.data.team_picture_url);
       })
       .catch(() => setMessage('Error retrieving team.'));
 
@@ -137,6 +140,21 @@ function TeamDetails() {
   };
 
 
+  const handleUpdatePicture = async () => {
+    try {
+      const res = await axios.post('http://localhost:3000/teams/update-picture', {
+        team_id,
+        captain_id: userId,
+        team_picture_url: newTeamPictureUrl
+      }, { withCredentials: true });
+      if (res.status === 200) {
+        setTeamPictureUrl(newTeamPictureUrl);
+        setNewTeamPictureUrl('');
+      }
+    } catch (err) {
+      setMessage('Error updating picture.');
+    }
+  };
 
   const getResultTag = (match) => {
     const teamIdInt = parseInt(team_id);
@@ -177,6 +195,9 @@ function TeamDetails() {
 
   return (
     <div className="page-center team-details-page">
+      {teamPictureUrl && (
+        <img src={teamPictureUrl} alt="team" style={{ width: '120px' }} />
+      )}
       <h1>{teamName || 'Name not available'}</h1>
       <h2>{gameName && ladderName ? `${gameName} - ${ladderName}` : 'Name not available'}</h2>
 
@@ -197,6 +218,9 @@ function TeamDetails() {
             <div className="members-container">
               {members.map((membre, index) => (
                 <div key={index} className="member-row">
+                  {membre.profile_picture_url && (
+                    <img src={membre.profile_picture_url} alt="avatar" style={{ width: '40px', marginRight: '5px' }} />
+                  )}
                   <span>
                     <Link to={`/profile/${membre.username}`}>{membre.username}</Link>
                   </span>
@@ -295,6 +319,18 @@ function TeamDetails() {
           <button onClick={() => navigate(`/team/${team_id}/accept-match`)}>
             Accept a match
           </button>
+
+          {isCaptain && (
+            <div style={{ marginTop: '10px' }}>
+              <input
+                placeholder="New picture URL"
+                value={newTeamPictureUrl}
+                onChange={e => setNewTeamPictureUrl(e.target.value)}
+              />
+              <button onClick={handleUpdatePicture}>Update picture</button>
+            </div>
+          )}
+
 
           {canDelete && (
             <>

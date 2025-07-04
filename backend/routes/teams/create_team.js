@@ -5,7 +5,7 @@ const logger = require('../../logger');
 
 // Route POST pour créer une nouvelle team
 router.post('/', async (req, res) => {
-  const { name, user_id, ladder_id } = req.body;
+  const { name, user_id, ladder_id, team_picture_url } = req.body;
 
   if (!name || !user_id || !ladder_id) {
     return res.status(400).json({ error: 'Missing fields' });
@@ -46,8 +46,8 @@ router.post('/', async (req, res) => {
 
     // Création de l'équipe
     const [result] = await db.execute(
-      `INSERT INTO teams (name, captain_id, ladder_id, is_deleted) VALUES (?, ?, ?, 0)`,
-      [name, user_id, ladder_id]
+      `INSERT INTO teams (name, captain_id, ladder_id, team_picture_url, is_deleted) VALUES (?, ?, ?, ?, 0)`,
+      [name, user_id, ladder_id, team_picture_url]
     );
 
     const teamId = result.insertId;

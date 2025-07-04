@@ -72,10 +72,12 @@ app.use('/teams/by-member', require('./routes/teams/byMember'));
 app.use('/teams/details', require('./routes/teams/get_teamselected'));
 app.use('/teams/get_playerid', require('./routes/teams/get_playerid'));
 app.use('/teams/ranking', require('./routes/teams/get_ranking'));
+app.use('/teams/update-picture', require('./routes/teams/update_picture'));
 
 
 // Players
 app.use('/players/profile', require('./routes/players/get_profile'));
+app.use('/players/update-profile-picture', require('./routes/players/update_profile_picture'));
 
 // tickets
 app.use('/tickets/create', require('./routes/tickets/create'));

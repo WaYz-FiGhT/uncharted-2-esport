@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
       `SELECT
         t.id,
         t.name,
+        t.team_picture_url,
         t.xp,
         (
           SELECT COUNT(*)
