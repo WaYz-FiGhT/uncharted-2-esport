@@ -26,8 +26,6 @@ router.get('/:username', async (req, res) => {
       .filter(id => id);
 
     let teams = [];
-    let totalWins = 0;
-    let totalLosses = 0;
 
     if (teamIds.length > 0) {
       const [teamRows] = await db.execute(
@@ -36,30 +34,39 @@ router.get('/:username', async (req, res) => {
       );
       teams = teamRows;
 
-      for (const teamId of teamIds) {
-        const [[{ wins }]] = await db.execute(
-          `SELECT COUNT(*) AS wins FROM matches
-           WHERE (team_1_id = ? AND official_result = 'win_team_1')
-              OR (team_2_id = ? AND official_result = 'win_team_2')`,
-          [teamId, teamId]
-        );
-        const [[{ losses }]] = await db.execute(
-          `SELECT COUNT(*) AS losses FROM matches
-           WHERE (team_1_id = ? AND official_result = 'win_team_2')
-              OR (team_2_id = ? AND official_result = 'win_team_1')`,
-          [teamId, teamId]
-        );
-        totalWins += wins;
-        totalLosses += losses;
-      }
+    const [[{ wins }]] = await db.execute(
+      `SELECT COUNT(*) AS wins
+       FROM match_players mp
+       JOIN matches m ON mp.match_id = m.id
+       WHERE mp.player_id = ?
+         AND m.status = 'completed'
+         AND (
+           (mp.team_id = m.team_1_id AND m.official_result = 'win_team_1') OR
+           (mp.team_id = m.team_2_id AND m.official_result = 'win_team_2')
+         )`,
+      [user.id]
+    );
+
+    const [[{ losses }]] = await db.execute(
+      `SELECT COUNT(*) AS losses
+       FROM match_players mp
+       JOIN matches m ON mp.match_id = m.id
+       WHERE mp.player_id = ?
+         AND m.status = 'completed'
+         AND (
+           (mp.team_id = m.team_1_id AND m.official_result = 'win_team_2') OR
+           (mp.team_id = m.team_2_id AND m.official_result = 'win_team_1')
+         )`,
+      [user.id]
+    );
     }
 
     res.json({
       username: user.username,
       psn: user.psn,
       teams,
-      wins: totalWins,
-      losses: totalLosses
+      wins,
+      losses
     });
   } catch (err) {
     logger.error(err);
