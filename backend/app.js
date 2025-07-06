@@ -34,6 +34,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Fichiers statiques
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ✅ ROUTES STRUCTURÉES
 

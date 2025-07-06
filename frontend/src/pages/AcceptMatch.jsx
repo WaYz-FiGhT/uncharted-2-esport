@@ -86,7 +86,7 @@ function AcceptMatch() {
         matchInfos.map((match, index) => (
           <div key={index} className="match-block">
             <p>
-             {match.name_games} — {match.name} — {match.match_game_mode} — {match.player_number}
+             {match.name_games} — {match.name} — {match.match_game_mode} — {match.match_format?.toUpperCase()} — {match.player_number}
             </p>
 
             <label>Choose players:</label>

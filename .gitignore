@@ -34,6 +34,7 @@ Thumbs.db
 
 # npm
 package-lock.json
+backend/uploads/
 
 # coverage & tests
 coverage/

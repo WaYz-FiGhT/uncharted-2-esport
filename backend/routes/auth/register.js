@@ -5,9 +5,11 @@ const logger = require('../../logger');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const db = require('../../db');
+const upload = require('../..//uploadConfig');
 
-router.post('/', async (req, res) => {
+router.post('/', upload.single('picture'), async (req, res) => {
   const { username, email, password, confirmPassword, psn } = req.body;
+  const profilePictureUrl = req.file ? `/uploads/${req.file.filename}` : null;
     
 
   // 🔸 Vérification des champs
@@ -44,8 +46,8 @@ router.post('/', async (req, res) => {
 
     // 🔸 Insertion en BDD avec PSN et token de vérification
     const [result] = await db.execute(
-      'INSERT INTO players (username, email, password, psn, verification_token, email_verified, created_at) VALUES (?, ?, ?, ?, ?, 0, NOW())',
-      [username, email, hashedPassword, psn, token]
+      'INSERT INTO players (username, email, password, psn, profile_picture_url, verification_token, email_verified, created_at) VALUES (?, ?, ?, ?, ?, ?, 0, NOW())',
+      [username, email, hashedPassword, psn, profilePictureUrl, token]
     );
 
        // 🔸 Envoi de l'email de vérification

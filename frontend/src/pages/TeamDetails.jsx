@@ -25,7 +25,8 @@ function TeamDetails() {
   const [loseCount, setLoseCount] = useState(0);
   const [kickMessage, setKickMessage] = useState('');
   const [kickConfirmId, setKickConfirmId] = useState(null);
-  const [newTeamPictureUrl, setNewTeamPictureUrl] = useState('');
+  const [newTeamPictureFile, setNewTeamPictureFile] = useState(null);
+  const [preview, setPreview] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:3000/session-info', { withCredentials: true })
@@ -67,12 +68,14 @@ function TeamDetails() {
       .catch(() => setMessage('Error retrieving matches.'));
   }, [ladderId, team_id]);
 
-    const handleNewPictureFileChange = (e) => {
+  const handleNewPictureFileChange = (e) => {
     const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => setNewTeamPictureUrl(reader.result);
-    reader.readAsDataURL(file);
+    setNewTeamPictureFile(file);
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+    } else {
+      setPreview('');
+    }
   };
 
   const isCaptain = parseInt(userId) === parseInt(captainId);
@@ -149,15 +152,21 @@ function TeamDetails() {
 
 
   const handleUpdatePicture = async () => {
+    if (!newTeamPictureFile) return;
     try {
-      const res = await axios.post('http://localhost:3000/teams/update-picture', {
-        team_id,
-        captain_id: userId,
-        team_picture_url: newTeamPictureUrl
-      }, { withCredentials: true });
+      const formData = new FormData();
+      formData.append('team_id', team_id);
+      formData.append('captain_id', userId);
+      formData.append('picture', newTeamPictureFile);
+
+      const res = await axios.post('http://localhost:3000/teams/update-picture', formData, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
       if (res.status === 200) {
-        setTeamPictureUrl(newTeamPictureUrl);
-        setNewTeamPictureUrl('');
+        setTeamPictureUrl(res.data.url);
+        setNewTeamPictureFile(null);
+        setPreview('');
       }
     } catch (err) {
       setMessage('Error updating picture.');
@@ -335,9 +344,9 @@ function TeamDetails() {
                 accept="image/*"
                 onChange={handleNewPictureFileChange}
               />
-              {newTeamPictureUrl && (
+              {preview && (
                 <img
-                  src={newTeamPictureUrl}
+                  src={preview}
                   alt="preview"
                   style={{ width: '80px', display: 'block', margin: '5px 0' }}
                 />

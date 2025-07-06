@@ -1,11 +1,13 @@
-const express = require('express'); 
+const express = require('express');
 const router = express.Router();
 const db = require('../../db');
 const logger = require('../../logger');
+const upload = require('../..//uploadConfig');
 
 // Route POST pour créer une nouvelle team
-router.post('/', async (req, res) => {
-  const { name, user_id, ladder_id, team_picture_url } = req.body;
+router.post('/', upload.single('picture'), async (req, res) => {
+  const { name, user_id, ladder_id } = req.body;
+  const team_picture_url = req.file ? `/uploads/${req.file.filename}` : null;
 
   if (!name || !user_id || !ladder_id) {
     return res.status(400).json({ error: 'Missing fields' });

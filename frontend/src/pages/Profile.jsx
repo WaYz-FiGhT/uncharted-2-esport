@@ -8,7 +8,8 @@ function Profile() {
   const [profile, setProfile] = useState(null);
   const [message, setMessage] = useState('');
   const [sessionUser, setSessionUser] = useState(null);
-  const [newPictureUrl, setNewPictureUrl] = useState('');
+  const [newPictureFile, setNewPictureFile] = useState(null);
+  const [preview, setPreview] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:3000/session-info', { withCredentials: true })
@@ -21,14 +22,29 @@ function Profile() {
       .catch(() => setMessage('Error loading profile.'));
   }, [username]);
 
+    const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setNewPictureFile(file);
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+    } else {
+      setPreview('');
+    }
+  };
+
   const handleUpdate = async () => {
+    if (!newPictureFile) return;
     try {
-      await axios.post('http://localhost:3000/players/update-profile-picture', {
-        player_id: profile.id,
-        profile_picture_url: newPictureUrl
-      }, { withCredentials: true });
-      setProfile({ ...profile, profile_picture_url: newPictureUrl });
-      setNewPictureUrl('');
+      const formData = new FormData();
+      formData.append('player_id', profile.id);
+      formData.append('picture', newPictureFile);
+      const res = await axios.post('http://localhost:3000/players/update-profile-picture', formData, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      setProfile({ ...profile, profile_picture_url: res.data.url });
+      setNewPictureFile(null);
+      setPreview('');
     } catch (err) {
       setMessage('Error updating picture.');
     }
@@ -61,11 +77,10 @@ function Profile() {
           )}
           {sessionUser === profile.username && (
             <div style={{ marginTop: '10px' }}>
-              <input
-                placeholder="New picture URL"
-                value={newPictureUrl}
-                onChange={e => setNewPictureUrl(e.target.value)}
-              />
+              <input type="file" accept="image/*" onChange={handleFileChange} />
+              {preview && (
+                <img src={preview} alt="preview" style={{ width: '80px', display: 'block', margin: '5px 0' }} />
+              )}
               <button onClick={handleUpdate}>Update picture</button>
             </div>
           )}

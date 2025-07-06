@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
   
     try {
       const [rows] = await db.execute(
-        `SELECT m.id, l.name, m.status, m.match_game_mode, m.player_number, g.name_games, m.created_at, t.id AS team_1_id
+        `SELECT m.id, l.name, m.status, m.match_game_mode, m.match_format, m.player_number, g.name_games, m.created_at, t.id AS team_1_id
         FROM matches m
         JOIN ladders l ON m.ladder_id = l.id
         JOIN games g ON l.game_id = g.id

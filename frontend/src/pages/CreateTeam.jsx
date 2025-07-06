@@ -6,7 +6,8 @@ import '../App.css';
 function CreateTeam() {
   const [name, setName] = useState('');
   const [ladderId, setLadderId] = useState('');
-  const [teamPictureUrl, setTeamPictureUrl] = useState('');
+  const [teamPictureFile, setTeamPictureFile] = useState(null);
+  const [preview, setPreview] = useState('');
   const [userId, setUserId] = useState(null);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -18,12 +19,14 @@ function CreateTeam() {
       .catch(() => navigate('/login'));
   }, [navigate]);
 
-    const handleFileChange = (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => setTeamPictureUrl(reader.result);
-    reader.readAsDataURL(file);
+    setTeamPictureFile(file);
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+    } else {
+      setPreview('');
+    }
   };
 
 
@@ -36,17 +39,25 @@ function CreateTeam() {
     }
 
     try {
-      const res = await axios.post('http://localhost:3000/teams/create', {
-        name,
-        user_id: userId,
-        ladder_id: ladderId,
-        team_picture_url: teamPictureUrl
-      }, { withCredentials: true });
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('user_id', userId);
+      formData.append('ladder_id', ladderId);
+      if (teamPictureFile) {
+        formData.append('picture', teamPictureFile);
+      }
+
+      const res = await axios.post('http://localhost:3000/teams/create', formData, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
 
       if (res.status === 201) {
         setMessage('Team created successfully.');
         setName('');
         setLadderId('');
+        setTeamPictureFile(null);
+        setPreview('');
       } else {
         setMessage(res.data.error || 'Error creating team.');
       }
@@ -79,9 +90,9 @@ function CreateTeam() {
 
         <label>Team picture:</label>
         <input type="file" accept="image/*" onChange={handleFileChange} />
-        {teamPictureUrl && (
+        {preview && (
           <img
-            src={teamPictureUrl}
+            src={preview}
             alt="preview"
             style={{ width: '100px', marginTop: '10px' }}
           />
