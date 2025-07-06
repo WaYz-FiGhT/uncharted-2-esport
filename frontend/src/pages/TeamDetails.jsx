@@ -67,6 +67,14 @@ function TeamDetails() {
       .catch(() => setMessage('Error retrieving matches.'));
   }, [ladderId, team_id]);
 
+    const handleNewPictureFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => setNewTeamPictureUrl(reader.result);
+    reader.readAsDataURL(file);
+  };
+
   const isCaptain = parseInt(userId) === parseInt(captainId);
   const isMember = members.some(m => parseInt(m.id) === parseInt(userId));
   const hasOngoingMatch = matchs.some(m =>
@@ -323,10 +331,17 @@ function TeamDetails() {
           {isCaptain && (
             <div style={{ marginTop: '10px' }}>
               <input
-                placeholder="New picture URL"
-                value={newTeamPictureUrl}
-                onChange={e => setNewTeamPictureUrl(e.target.value)}
+                type="file"
+                accept="image/*"
+                onChange={handleNewPictureFileChange}
               />
+              {newTeamPictureUrl && (
+                <img
+                  src={newTeamPictureUrl}
+                  alt="preview"
+                  style={{ width: '80px', display: 'block', margin: '5px 0' }}
+                />
+              )}
               <button onClick={handleUpdatePicture}>Update picture</button>
             </div>
           )}

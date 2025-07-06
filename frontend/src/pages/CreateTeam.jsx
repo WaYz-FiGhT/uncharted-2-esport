@@ -68,9 +68,16 @@ function CreateTeam() {
           <option value="3">Uncharted 2 - 1vs1</option>
         </select>
 
-        <label>Team picture URL:</label>
-        <input value={teamPictureUrl} onChange={e => setTeamPictureUrl(e.target.value)} />
-        
+        <label>Team picture:</label>
+        <input type="file" accept="image/*" onChange={handleFileChange} />
+        {teamPictureUrl && (
+          <img
+            src={teamPictureUrl}
+            alt="preview"
+            style={{ width: '100px', marginTop: '10px' }}
+          />
+        )}
+
         <button type="submit">Create</button>
       </form>
 
