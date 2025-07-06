@@ -308,6 +308,15 @@ p {
   border-radius: 6px;
 }
 
+.member-name {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.member-avatar {
+  width: 40px;
+}
 /* Custom layout for MyTeams */
 .myteams .member-row {
   grid-template-columns: 2fr 2fr auto;
@@ -347,6 +356,32 @@ p {
   margin: 20px 0;
 }
 
+.team-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.team-avatar {
+  width: 120px;
+}
+
+.team-avatar-small {
+  width: 40px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.profile-avatar {
+  width: 120px;
+}
+
 .team-stats span {
   font-size: 1.5rem;
   font-weight: bold;
@@ -379,6 +414,12 @@ p {
 
 .team-block ul li {
   background-color: #3a1d12;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.team-block ul li img {
+  width: 30px;
 }
 
 .vs {

@@ -25,6 +25,7 @@ function Navbar({ user, setUser }) {
       <div className="navbar-brand">Uncharted 2 Esport</div>
       <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>
+        <li><Link to="/rules">Rules</Link></li>
 
         {user ? (
           <>

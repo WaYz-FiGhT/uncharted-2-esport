@@ -19,6 +19,7 @@ import TicketDetails from './pages/TicketDetails';
 import VerifyEmail from './pages/VerifyEmail';
 import Invitations from './pages/Invitations';
 import Profile from './pages/Profile';
+import Rules from './pages/Rules';
 
 import axios from 'axios';
 
@@ -50,6 +51,7 @@ function App() {
         <Route path="/ladder/:ladder_id/ranking" element={<Ranking />} />
         <Route path="/invitations" element={<Invitations />} />
         <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/rules" element={<Rules />} />
 
         {/* 🔒 Routes admin-only */}
         <Route

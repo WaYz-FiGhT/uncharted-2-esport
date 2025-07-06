@@ -56,10 +56,16 @@ function Profile() {
     <div className="page-center">
       {profile ? (
         <div className="profile-page">
-          {profile.profile_picture_url && (
-            <img src={`${API_URL}${profile.profile_picture_url}`} alt="avatar" style={{ width: '120px' }} />
-          )}
-          <h1>{profile.username}</h1>
+          <div className="profile-header">
+            {profile.profile_picture_url && (
+              <img
+                src={`${API_URL}${profile.profile_picture_url}`}
+                alt="avatar"
+                className="profile-avatar"
+              />
+            )}
+            <h1>{profile.username}</h1>
+          </div>
           <p>PSN: {profile.psn || '-'}</p>
           <p>
             {profile.wins} <span style={{ color: 'green' }}>W</span> / {profile.losses}{' '}

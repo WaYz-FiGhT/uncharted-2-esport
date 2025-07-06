@@ -126,7 +126,11 @@ function MatchDetails() {
       <div className="team-block">
         <h2>
           {match.team_1_picture_url && (
-            <img src={`${API_URL}${match.team_1_picture_url}`} alt="team" style={{ width: '40px', marginRight: '5px' }} />
+            <img
+              src={`${API_URL}${match.team_1_picture_url}`}
+              alt="team"
+              className="team-avatar-small"
+            />
           )}
           <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>{' '}
           {getResultTag(1)}
@@ -135,7 +139,7 @@ function MatchDetails() {
           {(match.players[match.team_1_id]?.players || []).map((p, i) => (
             <li key={i}>
               {p.profile_picture_url && (
-                <img src={`${API_URL}${p.profile_picture_url}`} alt="avatar" style={{ width: '30px', marginRight: '3px' }} />
+                <img src={`${API_URL}${p.profile_picture_url}`} alt="avatar" />
               )}
               {p.psn}
             </li>
@@ -148,7 +152,11 @@ function MatchDetails() {
           {match.team_2_id ? (
             <>
                 {match.team_2_picture_url && (
-                  <img src={`${API_URL}${p.profile_picture_url}`} alt="avatar" style={{ width: '30px', marginRight: '3px' }} />
+                  <img
+                    src={`${API_URL}${match.team_2_picture_url}`}
+                    alt="team"
+                    className="team-avatar-small"
+                  />
                 )}
               <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>{' '}
               {getResultTag(2)}
@@ -162,7 +170,7 @@ function MatchDetails() {
             {(match.players[match.team_2_id]?.players || []).map((p, i) => (
               <li key={i}>
                 {p.profile_picture_url && (
-                  <img src={p.profile_picture_url} alt="avatar" style={{ width: '30px', marginRight: '3px' }} />
+                  <img src={p.profile_picture_url} alt="avatar" />
                 )}
                 {p.psn}
               </li>

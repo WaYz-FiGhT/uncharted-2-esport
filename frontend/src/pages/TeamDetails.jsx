@@ -214,10 +214,16 @@ function TeamDetails() {
 
   return (
     <div className="page-center team-details-page">
-      {teamPictureUrl && (
-        <img src={`${API_URL}${teamPictureUrl}`} alt="team" style={{ width: '120px' }} />
-      )}
-      <h1>{teamName || 'Name not available'}</h1>
+            <div className="team-header">
+        {teamPictureUrl && (
+          <img
+            src={`${API_URL}${teamPictureUrl}`}
+            alt="team"
+            className="team-avatar"
+          />
+        )}
+        <h1>{teamName || 'Name not available'}</h1>
+      </div>
       <h2>{gameName && ladderName ? `${gameName} - ${ladderName}` : 'Name not available'}</h2>
 
       <div className="team-stats">
@@ -237,10 +243,14 @@ function TeamDetails() {
             <div className="members-container">
               {members.map((membre, index) => (
                 <div key={index} className="member-row">
-                  {membre.profile_picture_url && (
-                    <img src={`${API_URL}${membre.profile_picture_url}`} alt="avatar" style={{ width: '40px', marginRight: '5px' }} />
-                  )}
-                  <span>
+                  <span className="member-name">
+                    {membre.profile_picture_url && (
+                      <img
+                        src={`${API_URL}${membre.profile_picture_url}`}
+                        alt="avatar"
+                        className="member-avatar"
+                      />
+                    )}
                     <Link to={`/profile/${membre.username}`}>{membre.username}</Link>
                   </span>
                   <span>{membre.psn || '-'}</span>
