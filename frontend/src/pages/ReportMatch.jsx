@@ -40,7 +40,7 @@ function ReportMatch() {
   };
 
   return (
-    <div className="page-center">
+    <div className="container">
       <div className="page-content">
         <h1>Report result</h1>
 

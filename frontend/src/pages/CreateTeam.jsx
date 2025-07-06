@@ -18,6 +18,15 @@ function CreateTeam() {
       .catch(() => navigate('/login'));
   }, [navigate]);
 
+    const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => setTeamPictureUrl(reader.result);
+    reader.readAsDataURL(file);
+  };
+
+
   // Soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
