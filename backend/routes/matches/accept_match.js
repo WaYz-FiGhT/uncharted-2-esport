@@ -10,11 +10,11 @@ router.post('/', async (req, res) => {
   const { team_1_id, team_2_id, selectedPlayers } = req.body;
 
   if (!team_1_id || !team_2_id || !selectedPlayers || selectedPlayers.length === 0) {
-    return res.status(400).json({ error: 'Champs manquants ou joueurs non sélectionnés' });
+    return res.status(400).json({ error: 'Missing fields or players not selected' });
   }
 
   if (team_1_id == team_2_id) {
-    return res.status(400).json({ error: 'Tu ne peux pas accepter ton propre match' });
+    return res.status(400).json({ error: "You can't accept your own match" });
   }
 
   try {
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
     if (existingMatch.length > 0) {
       return res
         .status(400)
-        .json({ error: 'Un match est déjà en attente ou accepté non reporté pour cette équipe.' });
+        .json({ error: 'A match is already pending or accepted and not reported for this team.' });
     }
 
     // Met à jour le match
@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
     );
 
     if (updateResult.affectedRows === 0) {
-      return res.status(404).json({ error: 'Aucun match en attente trouvé pour cette équipe.' });
+      return res.status(404).json({ error: 'No pending match found for this team.' });
     }
 
     // Récupère l'ID du match mis à jour

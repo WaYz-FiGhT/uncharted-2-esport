@@ -364,11 +364,11 @@ p {
 }
 
 .team-avatar {
-  width: 120px;
+  width: 150px;
 }
 
 .team-avatar-small {
-  width: 40px;
+  width: 35px;
 }
 
 .profile-header {
@@ -379,7 +379,8 @@ p {
 }
 
 .profile-avatar {
-  width: 120px;
+  width: 100%;
+  max-width: 100px;
 }
 
 .team-stats span {

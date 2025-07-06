@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 
   
     if (!teamId) {
-      return res.status(400).json({ error: 'Paramètre id manquant' });
+      return res.status(400).json({ error: 'Missing team_id parameter' });
     }
   
     try {
@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
       `, [teamId]);
   
       if (rows.length === 0) {
-        return res.status(404).json({ error: 'Pas de membres trouvés' });
+        return res.status(404).json({ error: 'No members found' });
       }
   
       res.json(rows);

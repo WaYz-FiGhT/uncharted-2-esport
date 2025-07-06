@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
     const { captain_id, ladder_id } = teamRows[0];
 
     if (parseInt(captain_id) === parseInt(player_id)) {
-      return res.status(403).json({ error: "Le capitaine ne peut pas quitter l'équipe" });
+      return res.status(403).json({ error: 'The captain cannot leave the team' });
     }
 
     // Vérifie que le joueur est bien membre de l'équipe
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
     );
 
     if (memberRows.length === 0) {
-      return res.status(400).json({ error: "Le joueur n'est pas membre de cette équipe" });
+      return res.status(400).json({ error: 'Player is not a member of this team' });
     }
 
     // Vérifie qu'aucun match n'est en attente, accepté ou disputé
@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 
     if (matchRows.length > 0) {
       return res.status(400).json({
-        error: "Impossible de quitter l'équipe : un match est en attente, accepté ou disputé."
+        error: 'Cannot leave the team: a match is pending, accepted or disputed.'
       });
     }
 

@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   const { player_id } = req.query;
 
   if (!player_id) {
-    return res.status(400).json({ error: 'ID du joueur manquant' });
+    return res.status(400).json({ error: 'Missing player_id parameter' });
   }
 
   try {

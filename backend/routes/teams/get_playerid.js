@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
   const username = req.query.name;
 
   if (!username) {
-    return res.status(400).json({ error: 'Paramètre username manquant' });
+    return res.status(400).json({ error: 'Missing username parameter' });
   }
 
   try {

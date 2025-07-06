@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
     `, [matchId]);
 
     if (matchRows.length === 0) {
-      return res.status(404).json({ error: 'Match non trouvé' });
+      return res.status(404).json({ error: 'Match not found' });
     }
 
     const match = matchRows[0];

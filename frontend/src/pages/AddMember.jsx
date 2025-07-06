@@ -48,8 +48,8 @@ function AddMember() {
           <label>Player name:</label>
           <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" required />
           <button type="submit">Add</button>
+          {message && <p>{message}</p>}
         </form>
-        {message && <p>{message}</p>}
       </div>
     </div>
   );

@@ -25,11 +25,11 @@ router.post('/', async (req, res) => {
     const { captain_id: storedCaptain, ladder_id } = teamRows[0];
 
     if (parseInt(storedCaptain) !== parseInt(captain_id)) {
-      return res.status(403).json({ error: 'Seul le capitaine peut expulser un membre' });
+      return res.status(403).json({ error: 'Only the captain can kick a member' });
     }
 
     if (parseInt(player_id) === parseInt(captain_id)) {
-      return res.status(403).json({ error: "Le capitaine ne peut pas s'expulser lui-même" });
+      return res.status(403).json({ error: "The captain can't kick themselves" });
     }
 
     // Vérifie que le joueur est bien membre de l'équipe
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
 
     if (matchRows.length > 0) {
       return res.status(400).json({
-        error: "Impossible d'expulser ce membre : un match est en cours ou accepté."
+        error: 'Cannot kick this member: a match is ongoing or accepted.'
       });
     }
 

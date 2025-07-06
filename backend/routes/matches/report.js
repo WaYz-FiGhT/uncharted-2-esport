@@ -9,11 +9,11 @@ router.post('/', async (req, res) => {
   const { match_id, team_id, result } = req.body;
 
   if (!userId) {
-    return res.status(401).json({ error: 'Non connecté' });
+    return res.status(401).json({ error: 'Not logged in' });
   }
 
   if (!match_id || !team_id || !['win', 'lose', 'disputed'].includes(result)) {
-    return res.status(400).json({ error: 'Champs invalides' });
+    return res.status(400).json({ error: 'Invalid fields' });
   }
 
       // ⛔ Vérifie que le match existe et est bien accepté
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
     );
 
     if (matchRows.length === 0) {
-      return res.status(404).json({ error: 'Match introuvable' });
+      return res.status(404).json({ error: 'Match not found' });
     }
 
     const { status, team_1_id: team1Id, team_2_id: team2Id } = matchRows[0];
@@ -145,7 +145,7 @@ router.post('/', async (req, res) => {
     }
     
 
-    res.json({ success: true, message: 'Résultat reporté avec succès.' });
+    res.json({ success: true, message: 'Result reported successfully.' });
   } catch (err) {
     logger.error(err);
     res.status(500).json({ error: 'Server error.' });
@@ -157,7 +157,7 @@ router.get('/check', async (req, res) => {
   const { match_id, team_id } = req.query;
 
   if (!match_id || !team_id) {
-    return res.status(400).json({ error: 'Paramètres manquants' });
+    return res.status(400).json({ error: 'Missing parameters' });
   }
 
   try {

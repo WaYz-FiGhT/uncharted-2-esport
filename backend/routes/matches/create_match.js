@@ -32,23 +32,23 @@ router.post('/', async (req, res) => {
   let { ladder_id, team_1_id, match_game_mode, match_format, player_number, selectedPlayers } = req.body;
 
   if (!ladder_id || !team_1_id || !match_game_mode || !match_format || !player_number || !selectedPlayers) {
-    return res.status(400).json({ error: 'Champs manquants' });
+    return res.status(400).json({ error: 'Missing fields' });
   }
 
   if (Array.isArray(selectedPlayers) && selectedPlayers.length < player_number) {
-    return res.status(400).json({ error: `Veuillez sélectionner au moins ${player_number} joueurs.` });
+    return res.status(400).json({ error: `Please select at least ${player_number} players.` });
   }
 
   if (ladder_id == 3 && player_number !== 1) {
-    return res.status(400).json({ error: 'Le nombre de joueurs doit être de 1 pour ce ladder.' });
+    return res.status(400).json({ error: 'Player count must be 1 for this ladder.' });
   }
 
   if (ladder_id == 2 && (player_number < 3 || player_number > 5)) {
-    return res.status(400).json({ error: 'Le nombre de joueurs doit être compris entre 3 et 5 pour ce ladder.' });
+    return res.status(400).json({ error: 'Player count must be between 3 and 5 for this ladder.' });
   }
 
   if (ladder_id == 1 && player_number !== 2) {
-    return res.status(400).json({ error: 'Le nombre de joueurs doit être de 2 pour ce ladder.' });
+    return res.status(400).json({ error: 'Player count must be 2 for this ladder.' });
   }
 
   try {
@@ -68,7 +68,7 @@ router.post('/', async (req, res) => {
     if (rows.length > 0) {
       return res
         .status(400)
-        .json({ error: "Cette équipe a déjà un match en attente ou un match accepté non reporté." });
+         .json({ error: 'This team already has a pending or accepted match not reported.' });
     }
 
     let selectedModes = [];
@@ -100,7 +100,7 @@ router.post('/', async (req, res) => {
       selectedModes = Array(mapCount).fill('Plunder');
       selectedMaps = getRandomElements(MAPS.Plunder, mapCount);
     } else {
-      return res.status(400).json({ error: 'Mode de jeu invalide.' });
+      return res.status(400).json({ error: 'Invalid game mode.' });
     }
 
     const [result] = await db.execute(

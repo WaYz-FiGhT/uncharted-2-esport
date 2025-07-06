@@ -71,8 +71,9 @@ function Register() {
         )}
 
         <button type="submit">Create my account</button>
-        </form>
+
         {message && <p className="error">{message}</p>}
+        </form>
       </div>
   );
 }

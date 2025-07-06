@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
       );
   
       if (rows.length === 0) {
-        return res.status(404).json({ error: 'Pas de matchs trouvés' });
+        return res.status(404).json({ error: 'No matches found' });
       }
   
       res.json(rows);

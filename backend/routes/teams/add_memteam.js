@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
 
     if (conflict.length > 0) {
       return res.status(400).json({
-        error: "Le joueur fait déjà partie d'une équipe (en tant que membre ou capitaine) dans ce ladder."
+        error: 'Player already belongs to a team (as member or captain) in this ladder.'
       });
     }
 

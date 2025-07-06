@@ -35,17 +35,17 @@ function DisputeTickets() {
 
         setGroupedTickets(sorted);
       })
-      .catch(() => setError("Erreur lors du chargement des tickets."));
+      .catch(() => setError("Error loading tickets."));
   }, []);
 
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="page-center">
+    <div className="container">
       <div className="page-content">
-        <h1>Tickets de litige</h1>
+        <h1>Dispute tickets</h1>
         {Object.keys(groupedTickets).length === 0 ? (
-        <p>Aucun ticket trouvé.</p>
+        <p>No tickets found.</p>
       ) : (
         Object.entries(groupedTickets).map(([matchId, data]) => (
           <div key={matchId} style={{ marginBottom: '30px' }}>
@@ -58,16 +58,16 @@ function DisputeTickets() {
                 '???'
               )}
             </h2>
-            <p><strong>Date prévue :</strong> {new Date(data.scheduled_time).toLocaleString()}</p>
+            <p><strong>Scheduled date:</strong> {new Date(data.scheduled_time).toLocaleString()}</p>
             <ul>
               {data.tickets.map(ticket => (
                 <li key={ticket.ticket_id} style={{ marginBottom: '15px' }}>
-                  <strong>Équipe :</strong>{' '}
+                  <strong>Team:</strong>{' '}
                   <Link to={`/team/${ticket.ticket_team_id}`}>{ticket.ticket_team_name}</Link>
                   <br />
-                  <strong>Date du ticket :</strong> {new Date(ticket.created_at).toLocaleString()}<br />
+                  <strong>Ticket date:</strong> {new Date(ticket.created_at).toLocaleString()}<br />
                   <Link to={`/ticket/${ticket.ticket_id}`}>
-                    <button style={{ marginTop: '5px' }}>Voir le ticket</button>
+                    <button style={{ marginTop: '5px' }}>View ticket</button>
                   </Link>
                   <hr />
                 </li>

@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const teamId = req.query.id;
   
     if (!teamId) {
-      return res.status(400).json({ error: 'Paramètre id manquant' });
+      return res.status(400).json({ error: 'Missing id parameter' });
     }
   
     try {

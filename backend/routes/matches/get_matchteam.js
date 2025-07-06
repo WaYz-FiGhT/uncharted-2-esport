@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
   logger.info('📥 Requête matchTeam reçue avec :', { team_id, ladder_id });
 
   if (!team_id || !ladder_id) {
-    return res.status(400).json({ error: 'Paramètres manquants' });
+    return res.status(400).json({ error: 'Missing parameters' });
   }
 
   try {
@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
     `, [ladder_id, team_id, team_id]);
 
     if (rows.length === 0) {
-      return res.status(404).json({ error: 'Pas de matchs trouvés' });
+      return res.status(404).json({ error: 'No matches found' });
     }
 
     res.json(rows);

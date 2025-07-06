@@ -48,8 +48,8 @@ function Login({ setUser }) {
           required
         /><br />
         <button type="submit">Log in</button>
+        {error && <p className="error">{error}</p>}
         </form>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
 
   );

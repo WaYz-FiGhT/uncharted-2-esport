@@ -29,7 +29,7 @@ router.delete('/', async (req, res) => {
     const { captain_id: storedCaptain, ladder_id } = teamRows[0];
 
     if (parseInt(storedCaptain) !== parseInt(captain_id)) {
-      return res.status(403).json({ error: "Seul le capitaine peut supprimer l'équipe" });
+      return res.status(403).json({ error: 'Only the captain can delete the team' });
     }
 
     // Vérifie qu'il est le seul membre de l'équipe
@@ -39,7 +39,7 @@ router.delete('/', async (req, res) => {
     );
 
     if (memberCount[0].count > 1) {
-      return res.status(400).json({ error: "Vous ne pouvez supprimer l'équipe que si vous êtes seul dedans" });
+      return res.status(400).json({ error: 'You can delete the team only if you are alone in it' });
     }
 
     // Vérifie qu'aucun match n'est en attente, accepté ou disputé
@@ -52,7 +52,7 @@ router.delete('/', async (req, res) => {
 
     if (matchRows.length > 0) {
       return res.status(400).json({
-        error: "Impossible de supprimer l'équipe : un match est en attente, accepté ou disputé."
+        error: 'Cannot delete team: a match is pending, accepted or disputed.'
       });
     }
     // Marque l'équipe comme supprimée au lieu de retirer les matchs

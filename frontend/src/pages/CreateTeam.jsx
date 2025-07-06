@@ -99,9 +99,10 @@ function CreateTeam() {
         )}
 
         <button type="submit">Create</button>
+        {message && <p>{message}</p>}
       </form>
 
-      {message && <p>{message}</p>}
+
       </div>
   );
 }

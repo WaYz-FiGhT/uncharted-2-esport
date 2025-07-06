@@ -68,9 +68,10 @@ function ReportMatch() {
           <option value="disputed">Disputed</option>
         </select>
         <button type="submit">Submit</button>
-      </form>
+
 
         {message && <p>{message}</p>}
+        </form>
       </div>
     </div>
   );

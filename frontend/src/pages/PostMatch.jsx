@@ -153,9 +153,10 @@ function PostMatch() {
         )}
 
         <button type="submit">Post match</button>
-      </form>
+
 
         {message && <p>{message}</p>}
+      </form>
       </div>
     </div>
   );

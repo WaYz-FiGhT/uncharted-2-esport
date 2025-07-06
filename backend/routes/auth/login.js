@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password)
-    return res.status(400).json({ error: 'Champs manquants' });
+    return res.status(400).json({ error: 'Missing fields' });
 
   try {
     const [rows] = await db.execute(

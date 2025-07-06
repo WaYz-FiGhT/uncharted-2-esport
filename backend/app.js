@@ -50,7 +50,7 @@ app.get('/session-info', (req, res) => {
     const { id, username, team_id_ladder1, team_id_ladder2, team_id_ladder3, is_admin } = req.session.user;
     return res.json({ id, username, team_id_ladder1, team_id_ladder2, team_id_ladder3, is_admin });
   } else {
-    return res.status(401).json({ error: 'Non connecté' });
+    return res.status(401).json({ error: 'Not logged in' });
   }
 });
 
