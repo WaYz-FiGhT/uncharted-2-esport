@@ -59,15 +59,19 @@ function DisputeTickets() {
               )}
             </h2>
             <p><strong>Scheduled date:</strong> {new Date(data.scheduled_time).toLocaleString()}</p>
-            <ul>
+            <ul className="ticket-list">
               {data.tickets.map(ticket => (
-                <li key={ticket.ticket_id} style={{ marginBottom: '15px' }}>
-                  <strong>Team:</strong>{' '}
-                  <Link to={`/team/${ticket.ticket_team_id}`}>{ticket.ticket_team_name}</Link>
-                  <br />
-                  <strong>Ticket date:</strong> {new Date(ticket.created_at).toLocaleString()}<br />
-                  <Link to={`/ticket/${ticket.ticket_id}`}>
-                    <button style={{ marginTop: '5px' }}>View ticket</button>
+                <li key={ticket.ticket_id} className="ticket-item">
+                  <span>
+                    <strong>Team:</strong>{' '}
+                    <Link to={`/team/${ticket.ticket_team_id}`}>{ticket.ticket_team_name}</Link>
+                  </span>
+                  <span>
+                    <strong>Ticket date:</strong>{' '}
+                    {new Date(ticket.created_at).toLocaleString()}
+                  </span>
+                  <Link to={`/ticket/${ticket.ticket_id}`} className="ticket-button">
+                    <button>View ticket</button>
                   </Link>
                   <hr />
                 </li>
