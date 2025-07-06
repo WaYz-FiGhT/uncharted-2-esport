@@ -50,7 +50,10 @@ function TeamDetails() {
 
     axios.get(`http://localhost:3000/teams/members?team_id=${team_id}`)
       .then(res => setMembers(res.data))
-      .catch(() => setMessage('Error retrieving members.'));
+      .catch(() => {
+        setMessage('Error retrieving members.');
+        setMembers([]); // clear previous members when team not found
+      });
   }, [team_id]);
 
   useEffect(() => {
