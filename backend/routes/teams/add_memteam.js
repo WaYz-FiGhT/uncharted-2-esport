@@ -16,15 +16,15 @@ router.post('/', async (req, res) => {
       FROM teams t
       LEFT JOIN team_members tm ON t.id = tm.team_id
       WHERE t.ladder_id = ?
+        AND t.is_deleted = 0
         AND (t.captain_id = ? OR tm.player_id = ?)
       `,
       [ladder_id, player_id, player_id]
     );
 
     if (conflict.length > 0) {
-      return res.status(400).json({
-        error: 'Player already belongs to a team (as member or captain) in this ladder.'
-      });
+    logger.error(err);
+    res.status(400).json({ error: 'Error adding player to team' });
     }
 
     // Insère le joueur dans la table team_members

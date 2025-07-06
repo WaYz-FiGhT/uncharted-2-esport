@@ -35,7 +35,7 @@ function AddMember() {
         setMessage(res.data.error || 'Error.');
       }
     } catch (err) {
-      setMessage('Request error.');
+      setMessage('impossable to add this player (already in a team, already in your team).');
     }
   };
 
@@ -43,7 +43,6 @@ function AddMember() {
     <div className="container">
       <div className="page-content">
         <h1>Add member</h1>
-        <h2>{ladder_id}</h2>
         <form onSubmit={handleSubmit}>
           <label>Player name:</label>
           <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" required />

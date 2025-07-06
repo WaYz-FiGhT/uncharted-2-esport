@@ -33,8 +33,8 @@ function TeamDetails() {
   useEffect(() => {
     axios.get('http://localhost:3000/session-info', { withCredentials: true })
       .then(res => setUserId(res.data.id))
-      .catch(() => navigate('/login'));
-  }, [navigate]);
+      .catch(() => setUserId(null));
+  }, []);
 
   useEffect(() => {
     axios.get(`http://localhost:3000/teams/details?id=${team_id}`)

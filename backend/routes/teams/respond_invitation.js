@@ -37,6 +37,7 @@ router.post('/', async (req, res) => {
          FROM teams t
          LEFT JOIN team_members tm ON t.id = tm.team_id
          WHERE t.ladder_id = ?
+           AND t.is_deleted = 0
            AND (t.captain_id = ? OR tm.player_id = ?)`,
         [ladder_id, player_id, player_id]
       );

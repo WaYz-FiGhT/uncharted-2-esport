@@ -29,8 +29,12 @@ function MatchDetails() {
         setTeamId2(res.data.team_id_ladder2);
         setTeamId3(res.data.team_id_ladder3);
       })
-      .catch(() => navigate('/login'));
-  }, [navigate]);
+      .catch(() => {
+        setTeamId1(null);
+        setTeamId2(null);
+        setTeamId3(null);
+      });
+  }, []);
 
   useEffect(() => {
     axios.get(`http://localhost:3000/matches/details/${match_id}`, { withCredentials: true })

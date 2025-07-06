@@ -25,6 +25,7 @@ router.post('/', upload.single('picture'), async (req, res) => {
       FROM teams t
       LEFT JOIN team_members tm ON t.id = tm.team_id
       WHERE t.ladder_id = ?
+        AND t.is_deleted = 0
         AND (t.captain_id = ? OR tm.player_id = ?)
       `,
       [ladder_id, user_id, user_id]
@@ -38,7 +39,7 @@ router.post('/', upload.single('picture'), async (req, res) => {
 
     // Vérifie si le nom est déjà pris dans ce ladder
     const [existing] = await db.execute(
-      `SELECT id FROM teams WHERE name = ? AND ladder_id = ?`,
+      `SELECT id FROM teams WHERE name = ? AND ladder_id = ? AND is_deleted = 0`,
       [name, ladder_id]
     );
 
