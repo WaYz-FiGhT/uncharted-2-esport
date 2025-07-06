@@ -12,7 +12,7 @@ router.get('/:username', async (req, res) => {
 
   try {
     const [userRows] = await db.execute(
-      `SELECT id, username, psn, profile_picture_url, team_id_ladder1, team_id_ladder2, team_id_ladder3
+      `SELECT id, username, psn, profile_picture_url, team_id_ladder1, team_id_ladder2, team_id_ladder3, wins, losses
        FROM players WHERE username = ?`,
       [username]
     );
@@ -26,8 +26,8 @@ router.get('/:username', async (req, res) => {
       .filter(id => id);
 
     let teams = [];
-    let wins = 0;
-    let losses = 0;
+    const wins = user.wins || 0;
+    const losses = user.losses || 0;
 
     if (teamIds.length > 0) {
       const [teamRows] = await db.execute(
@@ -35,34 +35,6 @@ router.get('/:username', async (req, res) => {
         teamIds
       );
       teams = teamRows;
-
-    const [[{ wins: winCount }]] = await db.execute(
-      `SELECT COUNT(*) AS wins
-       FROM match_players mp
-       JOIN matches m ON mp.match_id = m.id
-       WHERE mp.player_id = ?
-         AND m.status = 'completed'
-         AND (
-           (mp.team_id = m.team_1_id AND m.official_result = 'win_team_1') OR
-           (mp.team_id = m.team_2_id AND m.official_result = 'win_team_2')
-         )`,
-      [user.id]
-    );
-
-    const [[{ losses: lossCount }]] = await db.execute(
-      `SELECT COUNT(*) AS losses
-       FROM match_players mp
-       JOIN matches m ON mp.match_id = m.id
-       WHERE mp.player_id = ?
-         AND m.status = 'completed'
-         AND (
-           (mp.team_id = m.team_1_id AND m.official_result = 'win_team_2') OR
-           (mp.team_id = m.team_2_id AND m.official_result = 'win_team_1')
-         )`,
-      [user.id]
-    );
-    wins = winCount;
-    losses = lossCount;
     }
 
     res.json({

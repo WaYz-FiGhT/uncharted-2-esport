@@ -120,8 +120,30 @@ router.post('/', async (req, res) => {
           await db.execute(`UPDATE teams SET xp = GREATEST(0, xp + ?) WHERE id = ?`, [change1, team1Id]);
           await db.execute(`UPDATE teams SET xp = xp + ? WHERE id = ?`, [change2, team2Id]);
         }
+                // 📊 Met à jour les statistiques des joueurs
+        const [playerRows] = await db.execute(
+          `SELECT player_id, team_id FROM match_players WHERE match_id = ?`,
+          [match_id]
+        );
+
+        for (const { player_id, team_id } of playerRows) {
+          if (finalResult === 'win_team_1') {
+            if (team_id === team1Id) {
+              await db.execute(`UPDATE players SET wins = wins + 1 WHERE id = ?`, [player_id]);
+            } else if (team_id === team2Id) {
+              await db.execute(`UPDATE players SET losses = losses + 1 WHERE id = ?`, [player_id]);
+            }
+          } else if (finalResult === 'win_team_2') {
+            if (team_id === team2Id) {
+              await db.execute(`UPDATE players SET wins = wins + 1 WHERE id = ?`, [player_id]);
+            } else if (team_id === team1Id) {
+              await db.execute(`UPDATE players SET losses = losses + 1 WHERE id = ?`, [player_id]);
+            }
+          }
+        }
       }
     }
+    
 
     res.json({ success: true, message: 'Résultat reporté avec succès.' });
   } catch (err) {
