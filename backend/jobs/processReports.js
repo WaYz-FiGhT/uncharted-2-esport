@@ -64,6 +64,27 @@ async function finalizeOldReports() {
           await db.execute(`UPDATE teams SET xp = GREATEST(0, xp + ?) WHERE id = ?`, [change1, team_1_id]);
           await db.execute(`UPDATE teams SET xp = xp + ? WHERE id = ?`, [change2, team_2_id]);
         }
+
+        const [playerRows] = await db.execute(
+          `SELECT player_id, team_id FROM match_players WHERE match_id = ?`,
+          [match_id]
+        );
+
+        for (const { player_id, team_id: pTeamId } of playerRows) {
+          if (finalResult === 'win_team_1') {
+            if (pTeamId === team_1_id) {
+              await db.execute(`UPDATE players SET wins = wins + 1 WHERE id = ?`, [player_id]);
+            } else if (pTeamId === team_2_id) {
+              await db.execute(`UPDATE players SET losses = losses + 1 WHERE id = ?`, [player_id]);
+            }
+          } else if (finalResult === 'win_team_2') {
+            if (pTeamId === team_2_id) {
+              await db.execute(`UPDATE players SET wins = wins + 1 WHERE id = ?`, [player_id]);
+            } else if (pTeamId === team_1_id) {
+              await db.execute(`UPDATE players SET losses = losses + 1 WHERE id = ?`, [player_id]);
+            }
+          }
+        }
       }
     }
   } catch (error) {

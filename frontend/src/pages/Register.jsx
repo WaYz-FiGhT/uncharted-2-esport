@@ -21,14 +21,13 @@ function Register() {
     }
 
     try {
-      const formData = new FormData();
-      formData.append('username', username);
-      formData.append('password', password);
-      formData.append('confirmPassword', confirmPassword);
-      formData.append('email', email);
-      formData.append('psn', psn);
-
-      const res = await axios.post('http://localhost:3000/auth/register', formData);
+      const res = await axios.post('http://localhost:3000/auth/register', {
+        username,
+        password,
+        confirmPassword,
+        email,
+        psn,
+      });
       setMessage(res.data.message);
       navigate('/login');
     } catch (err) {
