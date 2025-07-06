@@ -5,11 +5,11 @@ const logger = require('../../logger');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const db = require('../../db');
-const upload = require('../..//uploadConfig');
 
-router.post('/', upload.single('picture'), async (req, res) => {
+router.post('/', async (req, res) => {
+
   const { username, email, password, confirmPassword, psn } = req.body;
-  const profilePictureUrl = req.file ? `/uploads/${req.file.filename}` : null;
+  const profilePictureUrl = null;
     
 
   // 🔸 Vérification des champs

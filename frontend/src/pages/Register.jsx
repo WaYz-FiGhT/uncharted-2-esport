@@ -8,8 +8,6 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [psn, setPsn] = useState('');
-  const [profilePictureFile, setProfilePictureFile] = useState(null);
-  const [preview, setPreview] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -29,9 +27,6 @@ function Register() {
       formData.append('confirmPassword', confirmPassword);
       formData.append('email', email);
       formData.append('psn', psn);
-      if (profilePictureFile) {
-        formData.append('picture', profilePictureFile);
-      }
 
       const res = await axios.post('http://localhost:3000/auth/register', formData);
       setMessage(res.data.message);
@@ -58,17 +53,6 @@ function Register() {
 
         <label>PSN :</label>
         <input value={psn} onChange={(e) => setPsn(e.target.value)} required />
-
-        <label>Profile picture:</label>
-        <input type="file" accept="image/*" onChange={(e) => {
-          const file = e.target.files[0];
-          setProfilePictureFile(file);
-          if (file) setPreview(URL.createObjectURL(file));
-          else setPreview('');
-        }} />
-        {preview && (
-          <img src={preview} alt="preview" style={{ width: '100px', marginTop: '10px' }} />
-        )}
 
         <button type="submit">Create my account</button>
 
