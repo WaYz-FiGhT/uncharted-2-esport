@@ -3,6 +3,8 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
+const API_URL = 'http://localhost:3000';
+
 function TeamDetails() {
   const { team_id } = useParams();
   const navigate = useNavigate();
@@ -213,7 +215,7 @@ function TeamDetails() {
   return (
     <div className="page-center team-details-page">
       {teamPictureUrl && (
-        <img src={teamPictureUrl} alt="team" style={{ width: '120px' }} />
+        <img src={`${API_URL}${teamPictureUrl}`} alt="team" style={{ width: '120px' }} />
       )}
       <h1>{teamName || 'Name not available'}</h1>
       <h2>{gameName && ladderName ? `${gameName} - ${ladderName}` : 'Name not available'}</h2>
@@ -236,7 +238,7 @@ function TeamDetails() {
               {members.map((membre, index) => (
                 <div key={index} className="member-row">
                   {membre.profile_picture_url && (
-                    <img src={membre.profile_picture_url} alt="avatar" style={{ width: '40px', marginRight: '5px' }} />
+                    <img src={`${API_URL}${membre.profile_picture_url}`} alt="avatar" style={{ width: '40px', marginRight: '5px' }} />
                   )}
                   <span>
                     <Link to={`/profile/${membre.username}`}>{membre.username}</Link>

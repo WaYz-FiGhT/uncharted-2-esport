@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
+const API_URL = 'http://localhost:3000';
+
 function MatchDetails() {
   const { match_id } = useParams();
   const location = useLocation();
@@ -124,7 +126,7 @@ function MatchDetails() {
       <div className="team-block">
         <h2>
           {match.team_1_picture_url && (
-            <img src={match.team_1_picture_url} alt="team" style={{ width: '40px', marginRight: '5px' }} />
+            <img src={`${API_URL}${match.team_1_picture_url}`} alt="team" style={{ width: '40px', marginRight: '5px' }} />
           )}
           <Link to={`/team/${match.team_1_id}`}>{match.team_1_name}</Link>{' '}
           {getResultTag(1)}
@@ -133,7 +135,7 @@ function MatchDetails() {
           {(match.players[match.team_1_id]?.players || []).map((p, i) => (
             <li key={i}>
               {p.profile_picture_url && (
-                <img src={p.profile_picture_url} alt="avatar" style={{ width: '30px', marginRight: '3px' }} />
+                <img src={`${API_URL}${p.profile_picture_url}`} alt="avatar" style={{ width: '30px', marginRight: '3px' }} />
               )}
               {p.psn}
             </li>
@@ -145,9 +147,9 @@ function MatchDetails() {
         <h2>
           {match.team_2_id ? (
             <>
-              {match.team_2_picture_url && (
-                <img src={match.team_2_picture_url} alt="team" style={{ width: '40px', marginRight: '5px' }} />
-              )}
+                {match.team_2_picture_url && (
+                  <img src={`${API_URL}${p.profile_picture_url}`} alt="avatar" style={{ width: '30px', marginRight: '3px' }} />
+                )}
               <Link to={`/team/${match.team_2_id}`}>{match.team_2_name}</Link>{' '}
               {getResultTag(2)}
             </>

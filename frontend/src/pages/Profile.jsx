@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
+const API_URL = 'http://localhost:3000';
+
 function Profile() {
   const { username } = useParams();
   const [profile, setProfile] = useState(null);
@@ -55,7 +57,7 @@ function Profile() {
       {profile ? (
         <div className="profile-page">
           {profile.profile_picture_url && (
-            <img src={profile.profile_picture_url} alt="avatar" style={{ width: '120px' }} />
+            <img src={`${API_URL}${profile.profile_picture_url}`} alt="avatar" style={{ width: '120px' }} />
           )}
           <h1>{profile.username}</h1>
           <p>PSN: {profile.psn || '-'}</p>
