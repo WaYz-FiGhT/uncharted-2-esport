@@ -334,7 +334,7 @@ function TeamDetails() {
 
       {isMember && (
         <>
-          {isCaptain && (
+          {isCaptain && ladderId !== 3 && (
             <button onClick={() => navigate(`/team/${team_id}/${ladderId}/add-member`)}>
               Add a member
             </button>

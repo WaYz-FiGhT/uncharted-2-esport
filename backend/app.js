@@ -6,6 +6,7 @@ const isAdmin = require('./routes/tickets/isAdmin');
 const startReportProcessing = require('./jobs/processReports');
 const logger = require('./logger');
 const morgan = require('morgan');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(cors({
 
 // Sessions
 app.use(session({
-  secret: 'un-secret-securise',
+  secret: process.env.SESSION_SECRET || 'un-secret-securise',
   resave: false,
   saveUninitialized: true,
   cookie: {

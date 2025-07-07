@@ -26,6 +26,12 @@ router.post('/', async (req, res) => {
 
     const { team_id, player_id, status, ladder_id } = invRows[0];
 
+    if (Number(ladder_id) === 3) {
+      await db.execute(`UPDATE team_invitations SET status = 'declined' WHERE id = ?`, [invitation_id]);
+      return res.status(400).json({ error: 'Cannot join a 1vs1 team' });
+    }
+
+
     if (status !== 'pending') {
       return res.status(400).json({ error: 'Invitation already processed' });
     }

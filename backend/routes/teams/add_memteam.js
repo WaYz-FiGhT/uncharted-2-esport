@@ -5,10 +5,24 @@ const logger = require('../../logger');
 
 // Ajouter un membre à une équipe
 router.post('/', async (req, res) => {
-  const { team_id, player_id, ladder_id } = req.body;
-  logger.info('💡 Données reçues:', { team_id, player_id, ladder_id });
+  const { team_id, player_id } = req.body;
+  logger.info('💡 Données reçues:', { team_id, player_id });;
 
   try {
+    const [teamRows] = await db.execute(
+      'SELECT ladder_id FROM teams WHERE id = ?',
+      [team_id]
+    );
+
+    if (teamRows.length === 0) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    const ladder_id = teamRows[0].ladder_id;
+
+    if (Number(ladder_id) === 3) {
+      return res.status(400).json({ error: 'Cannot add members to a 1vs1 team' });
+    }
     // Vérifie si le joueur est déjà capitaine ou membre dans une team du même ladder
     const [conflict] = await db.execute(
       `
@@ -23,8 +37,9 @@ router.post('/', async (req, res) => {
     );
 
     if (conflict.length > 0) {
-    logger.error(err);
-    res.status(400).json({ error: 'Error adding player to team' });
+      return res.status(400).json({
+        error: 'Player already belongs to a team (as member or captain) in this ladder.'
+      });
     }
 
     // Insère le joueur dans la table team_members

@@ -9,6 +9,17 @@ function AddMember() {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
+  if (ladder_id === '3') {
+    return (
+      <div className="container">
+        <div className="page-content">
+          <p>You cannot add members to a 1vs1 team.</p>
+        </div>
+      </div>
+    );
+  }
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

@@ -25,6 +25,8 @@ frontend/.DS_Store
 .env
 *.env.*
 !.env.example
+!backend/.env
+!backend/.env.production
 
 # IDEs & OS
 .vscode/
@@ -33,6 +35,7 @@ frontend/.DS_Store
 Thumbs.db
 
 # npm
+node_modules/
 package-lock.json
 backend/uploads/
 
