@@ -9,4 +9,17 @@ const storage = multer.diskStorage({
   }
 });
 
-module.exports = multer({ storage });
+const allowedExtensions = ['.png', '.jpg', '.jpeg', '.gif'];
+
+module.exports = multer({
+  storage,
+  limits: { fileSize: 2 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowedExtensions.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type'));
+    }
+  }
+});
