@@ -1,12 +1,81 @@
-# React + Vite
+# Uncharted 2 Esport
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ce dépôt contient un backend Node.js/Express et un frontend React/Vite permettant de gérer un ladder d\'équipes e-sport. Les instructions ci‑dessous expliquent comment installer les dépendances, configurer l\'environnement et lancer l\'application en développement.
 
-Currently, two official plugins are available:
+## Prérequis
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Node.js** (version 18 ou supérieure recommandée)
+- **npm**
+- **MySQL** (base de données pour l\'application)
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clonez ce dépôt puis installez les dépendances pour chaque partie :
+
+   ```bash
+   cd backend
+   npm install
+   cd ../frontend
+   npm install
+   ```
+
+2. Créez ensuite les fichiers d\'environnement.
+
+## Configuration
+
+### Backend
+
+Dans `backend/.env`, définissez les variables suivantes :
+
+```ini
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=
+DB_NAME=uncharted2
+SESSION_SECRET=un-secret-securise
+FRONTEND_URL=http://localhost:5173
+```
+
+`DB_*` correspond à vos informations MySQL. `SESSION_SECRET` sert à sécuriser les sessions. `FRONTEND_URL` indique l\'origine autorisée pour les requêtes du frontend.
+
+Un fichier `backend/.env.production` est également présent pour un déploiement en production (mêmes clés mais avec des valeurs adaptées).
+
+### Frontend
+
+Dans `frontend/.env`, indiquez l\'URL du backend :
+
+```ini
+VITE_API_URL=http://localhost:3000
+```
+
+Cette variable est utilisée par Axios pour appeler l\'API.
+
+## Lancement
+
+1. Assurez‑vous que votre base MySQL (nommée par défaut `uncharted2`) existe.
+2. Démarrez le backend :
+
+   ```bash
+   cd backend
+   npm start
+   ```
+
+   Le serveur écoute sur `http://localhost:3000`.
+
+3. Dans un autre terminal, démarrez le frontend :
+
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+   L\'application React est alors accessible sur `http://localhost:5173`.
+
+## Tests
+
+Dans le dossier `backend`, vous pouvez lancer les tests unitaires :
+
+```bash
+npm test
+```
+
