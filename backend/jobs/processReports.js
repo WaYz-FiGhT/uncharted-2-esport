@@ -1,5 +1,6 @@
 const db = require('../db');
 const logger = require('../logger');
+const { eloChange } = require('../utils/elo');
 
 async function finalizeOldReports() {
   try {
@@ -44,14 +45,6 @@ async function finalizeOldReports() {
 
         const team1XP = teamRows.find(t => t.id === team_1_id)?.xp || 0;
         const team2XP = teamRows.find(t => t.id === team_2_id)?.xp || 0;
-
-        const eloChange = (ratingA, ratingB, winA) => {
-          const K = 32;
-          const expectedA = 1 / (1 + Math.pow(10, (ratingB - ratingA) / 400));
-          const scoreA = winA ? 1 : 0;
-          const changeA = Math.round(K * (scoreA - expectedA));
-          return changeA;
-        };
 
         if (finalResult === 'win_team_1') {
           const change1 = eloChange(team1XP, team2XP, true);

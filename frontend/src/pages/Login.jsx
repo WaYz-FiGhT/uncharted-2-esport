@@ -14,10 +14,10 @@ function Login({ setUser }) {
     setError('');
 
     try {
-      const res = await axios.post('http://localhost:3000/auth/login', {
+      const res = await axios.post('/auth/login', {
         username,
         password
-      }, { withCredentials: true });
+      });
 
       // ✅ Met à jour l'état utilisateur global
       setUser(res.data);

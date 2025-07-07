@@ -61,7 +61,8 @@ router.post('/', async (req, res) => {
       }
     });
 
-    const verifyLink = `http://localhost:5173/verify-email?token=${token}`;
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    const verifyLink = `${frontendUrl}/verify-email?token=${token}`;
     await transporter.sendMail({
       from: 'noreply@unchartedesport.com',
       to: email,

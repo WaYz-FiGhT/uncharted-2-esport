@@ -8,7 +8,7 @@ function DisputeTickets() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/tickets/create', { withCredentials: true })
+    axios.get('/tickets/create')
       .then(res => {
         const grouped = {};
 

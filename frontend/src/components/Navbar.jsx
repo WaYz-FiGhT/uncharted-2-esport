@@ -7,9 +7,7 @@ function Navbar({ user, setUser }) {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/auth/logout', {}, {
-        withCredentials: true,
-      });
+      const res = await axios.post('/auth/logout');
 
       if (res.data.success) {
         setUser(null);

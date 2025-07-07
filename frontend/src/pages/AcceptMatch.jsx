@@ -15,7 +15,7 @@ function AcceptMatch() {
 
   // Vérifie si l'utilisateur est connecté
   useEffect(() => {
-    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+    axios.get('/session-info')
       .then(res => setUserId(res.data.id))
       .catch(() => navigate('/login'));
   }, [navigate]);
@@ -23,9 +23,8 @@ function AcceptMatch() {
   // Récupère les matchs en attente
   useEffect(() => {
     if (!team_id) return;
-    axios.get('http://localhost:3000/matches/pending', {
-      params: { team_id },
-      withCredentials: true
+    axios.get('/matches/pending', {
+      params: { team_id }
     })
       .then(res => setMatchInfos(res.data))
       .catch(() => setMessage('Error retrieving pending matches.'));
@@ -33,7 +32,7 @@ function AcceptMatch() {
 
   // Récupère les membres de l'équipe 2
   useEffect(() => {
-    axios.get(`http://localhost:3000/teams/members?team_id=${team_id}`, { withCredentials: true })
+    axios.get(`/teams/members?team_id=${team_id}`)
       .then(res => setTeamMembers(res.data))
       .catch(() => setMessage('Error retrieving members.'));
   }, [team_id]);
@@ -56,11 +55,11 @@ function AcceptMatch() {
     }
 
     try {
-      const res = await axios.post('http://localhost:3000/matches/accept', {
+      const res = await axios.post('/matches/accept', {
         team_1_id,
         team_2_id: team_id,
         selectedPlayers: selected
-      }, { withCredentials: true });
+      });
 
       if (res.status === 200) {
         setMessage('Match accepted successfully!');

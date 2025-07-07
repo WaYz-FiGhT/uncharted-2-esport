@@ -8,7 +8,7 @@ function Invitations() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+    axios.get('/session-info')
       .then(res => setUserId(res.data.id))
       .catch(() => setMessage('You must be logged in.'));
   }, []);
@@ -16,19 +16,18 @@ function Invitations() {
   useEffect(() => {
     if (!userId) return;
 
-    axios.get('http://localhost:3000/teams/invitations', {
-      params: { player_id: userId },
-      withCredentials: true
+    axios.get('/teams/invitations', {
+      params: { player_id: userId }
     })
       .then(res => setInvitations(res.data))
   }, [userId]);
 
   const respond = async (invitationId, accept) => {
     try {
-      const res = await axios.post('http://localhost:3000/teams/respond-invitation', {
+      const res = await axios.post('/teams/respond-invitation', {
         invitation_id: invitationId,
         accept
-      }, { withCredentials: true });
+      });
 
       if (res.status === 200) {
         setInvitations(prev => prev.filter(inv => inv.id !== invitationId));

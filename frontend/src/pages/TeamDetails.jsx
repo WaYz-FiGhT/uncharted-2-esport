@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function TeamDetails() {
   const { team_id } = useParams();
@@ -31,13 +31,13 @@ function TeamDetails() {
   const [preview, setPreview] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+    axios.get('/session-info')
       .then(res => setUserId(res.data.id))
       .catch(() => setUserId(null));
   }, []);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/teams/details?id=${team_id}`)
+    axios.get(`/teams/details?id=${team_id}`)
       .then(res => {
         setTeamName(res.data.team_name);
         setLadderName(res.data.ladder_name);
@@ -48,7 +48,7 @@ function TeamDetails() {
       })
       .catch(() => setMessage('Error retrieving team.'));
 
-    axios.get(`http://localhost:3000/teams/members?team_id=${team_id}`)
+    axios.get(`/teams/members?team_id=${team_id}`)
       .then(res => setMembers(res.data))
       .catch(() => {
         setMessage('Error retrieving members.');
@@ -59,9 +59,8 @@ function TeamDetails() {
   useEffect(() => {
     if (!ladderId) return;
 
-    axios.get('http://localhost:3000/matches/team', {
-      params: { ladder_id: ladderId, team_id },
-      withCredentials: true
+    axios.get('/matches/team', {
+      params: { ladder_id: ladderId, team_id }
     })
       .then(res => {
         const sorted = res.data.sort((a, b) =>
@@ -92,10 +91,10 @@ function TeamDetails() {
 
   const handleLeave = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/teams/leave', {
+      const res = await axios.post('/teams/leave', {
         team_id,
         player_id: userId
-      }, { withCredentials: true });
+      });
       if (res.status === 200) {
         setShowLeaveConfirm(false);
         navigate('/mes-equipes');
@@ -109,11 +108,11 @@ function TeamDetails() {
 
   const handleKick = async (playerId) => {
     try {
-      const res = await axios.post('http://localhost:3000/teams/kick-member', {
+      const res = await axios.post('/teams/kick-member', {
         team_id,
         captain_id: userId,
         player_id: playerId
-      }, { withCredentials: true });
+      });
 
       if (res.status === 200) {
         setMembers(members.filter(m => m.id !== playerId));
@@ -128,9 +127,8 @@ function TeamDetails() {
 
   const handleDeleteMatch = async (matchId) => {
     try {
-      await axios.delete('http://localhost:3000/matches/delete-pending', {
-        data: { match_id: matchId },
-        withCredentials: true
+      await axios.delete('/matches/delete-pending', {
+        data: { match_id: matchId }
       });
       setMatchs(matchs.filter(m => m.id !== matchId));
     } catch (err) {
@@ -140,9 +138,8 @@ function TeamDetails() {
 
   const handleDeleteTeam = async () => {
     try {
-      const res = await axios.delete('http://localhost:3000/teams/delete', {
-        data: { team_id, captain_id: userId },
-        withCredentials: true
+      const res = await axios.delete('/teams/delete', {
+        data: { team_id, captain_id: userId }
       });
       if (res.status === 200) {
         setShowDeleteConfirm(false);
@@ -164,8 +161,7 @@ function TeamDetails() {
       formData.append('captain_id', userId);
       formData.append('picture', newTeamPictureFile);
 
-      const res = await axios.post('http://localhost:3000/teams/update-picture', formData, {
-        withCredentials: true,
+      const res = await axios.post('/teams/update-picture', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       if (res.status === 200) {

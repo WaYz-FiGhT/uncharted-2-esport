@@ -13,7 +13,7 @@ function VerifyEmail() {
     hasVerified.current = true;
 
     const token = params.get('token');
-    axios.get(`http://localhost:3000/auth/verify-email?token=${token}`)
+    axios.get(`/auth/verify-email?token=${token}`)
       .then(() => setMessage('Email verified! You can now log in.'))
       .catch(() => setMessage('Invalid or expired verification link.'));
   }, [params]);

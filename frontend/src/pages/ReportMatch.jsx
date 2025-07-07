@@ -10,7 +10,7 @@ function ReportMatch() {
   const [match, setMatch] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/matches/details/${match_id}`, { withCredentials: true })
+    axios.get(`/matches/details/${match_id}`)
       .then(res => setMatch(res.data))
       .catch(() => setMessage('Error loading match.'));
   }, [match_id]);
@@ -23,11 +23,11 @@ function ReportMatch() {
     }
 
     try {
-      const res = await axios.post('http://localhost:3000/matches/report', {
+      const res = await axios.post('/matches/report', {
         match_id,
         team_id,
         result: selectedResult
-      }, { withCredentials: true });
+      });
 
       if (res.data.success) {
         setMessage('Result submitted successfully!');

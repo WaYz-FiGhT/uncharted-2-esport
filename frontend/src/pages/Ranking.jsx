@@ -3,13 +3,15 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Ranking() {
   const { ladder_id } = useParams();
   const [teams, setTeams] = useState([]);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3000/teams/ranking', { params: { ladder_id } })
+    axios.get('/teams/ranking', { params: { ladder_id } })
       .then(res => setTeams(res.data))
       .catch(() => setMessage('Error loading ranking.'));
   }, [ladder_id]);

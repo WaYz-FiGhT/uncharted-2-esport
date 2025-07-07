@@ -13,7 +13,7 @@ function AddMember() {
     e.preventDefault();
 
     try {
-      const playerRes = await axios.get(`http://localhost:3000/teams/get_playerid?name=${username}`, { withCredentials: true });
+      const playerRes = await axios.get(`/teams/get_playerid?name=${username}`);
 
       const player = playerRes.data[0];
 
@@ -22,11 +22,11 @@ function AddMember() {
         return;
       }
 
-      const res = await axios.post('http://localhost:3000/teams/invite', {
+      const res = await axios.post('/teams/invite', {
         team_id,
         player_id: player.id,
         ladder_id
-      }, { withCredentials: true });
+      });
 
       if (res.status === 201) {
         setMessage('Invitation sent!');

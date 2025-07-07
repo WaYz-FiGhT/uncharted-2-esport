@@ -17,32 +17,32 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/teams/ranking', { params: { ladder_id: 1 } })
+      .get('/teams/ranking', { params: { ladder_id: 1 } })
       .then((res) => setLadder1(res.data))
       .catch(() => setMessage1('Error loading ranking.'));
 
     axios
-      .get('http://localhost:3000/teams/ranking', { params: { ladder_id: 2 } })
+      .get('/teams/ranking', { params: { ladder_id: 2 } })
       .then((res) => setLadder2(res.data))
       .catch(() => setMessage2('Error loading ranking.'));
 
     axios
-      .get('http://localhost:3000/teams/ranking', { params: { ladder_id: 3 } })
+      .get('/teams/ranking', { params: { ladder_id: 3 } })
       .then((res) => setLadder3(res.data))
       .catch(() => setMessage3('Error loading ranking.'));
 
     axios
-      .get('http://localhost:3000/ladders/name', { params: { id: 1 } })
+      .get('/ladders/name', { params: { id: 1 } })
       .then((res) => setLadder1Name(res.data.ladder_name))
       .catch(() => setLadder1Name('Ladder 1'));
 
     axios
-      .get('http://localhost:3000/ladders/name', { params: { id: 2 } })
+      .get('/ladders/name', { params: { id: 2 } })
       .then((res) => setLadder2Name(res.data.ladder_name))
       .catch(() => setLadder2Name('Ladder 2'));
 
     axios
-      .get('http://localhost:3000/ladders/name', { params: { id: 3 } })
+      .get('/ladders/name', { params: { id: 3 } })
       .then((res) => setLadder3Name(res.data.ladder_name))
       .catch(() => setLadder3Name('Ladder 3'));
 

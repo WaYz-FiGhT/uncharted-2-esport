@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function MatchDetails() {
   const { match_id } = useParams();
@@ -23,7 +23,7 @@ function MatchDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+    axios.get('/session-info')
       .then(res => {
         setTeamId1(res.data.team_id_ladder1);
         setTeamId2(res.data.team_id_ladder2);
@@ -37,7 +37,7 @@ function MatchDetails() {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/matches/details/${match_id}`, { withCredentials: true })
+    axios.get(`/matches/details/${match_id}`)
       .then(res => setMatch(res.data))
       .catch(() => setError('Error loading match.'));
   }, [match_id]);
@@ -60,15 +60,11 @@ function MatchDetails() {
   useEffect(() => {
     if (!userTeamId) return;
 
-    axios.get(`http://localhost:3000/matches/report/check?match_id=${match_id}&team_id=${userTeamId}`, {
-      withCredentials: true
-    })
+    axios.get(`/matches/report/check?match_id=${match_id}&team_id=${userTeamId}`)
       .then(res => setHasAlreadyReported(res.data.alreadyReported))
       .catch(() => setHasAlreadyReported(false));
 
-    axios.get(`http://localhost:3000/tickets/check?match_id=${match_id}&team_id=${userTeamId}`, {
-      withCredentials: true
-    })
+    axios.get(`/tickets/check?match_id=${match_id}&team_id=${userTeamId}`)
       .then(res => setHasAlreadySentTicket(res.data.alreadySent))
       .catch(() => setHasAlreadySentTicket(false));
   }, [userTeamId, match_id]);
@@ -94,11 +90,11 @@ function MatchDetails() {
   };
 
   const handleSubmitTicket = () => {
-    axios.post('http://localhost:3000/tickets/create', {
+    axios.post('/tickets/create', {
       match_id: match.id,
       team_id: userTeamId,
       message: ticketMessage
-    }, { withCredentials: true })
+    })
       .then(() => {
         setTicketSent(true);
         setShowTicketForm(false);

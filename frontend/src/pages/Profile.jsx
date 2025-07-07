@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Profile() {
   const { username } = useParams();
@@ -14,12 +14,12 @@ function Profile() {
   const [preview, setPreview] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+    axios.get('/session-info')
       .then(res => setSessionUser(res.data.username))
       .catch(() => setSessionUser(null));
 
     axios
-      .get(`http://localhost:3000/players/profile/${username}`)
+      .get(`/players/profile/${username}`)
       .then((res) => setProfile(res.data))
       .catch(() => setMessage('Error loading profile.'));
   }, [username]);
@@ -40,7 +40,7 @@ function Profile() {
       const formData = new FormData();
       formData.append('player_id', profile.id);
       formData.append('picture', newPictureFile);
-      const res = await axios.post('http://localhost:3000/players/update-profile-picture', formData, {
+      const res = await axios.post('/players/update-profile-picture', formData, {
         withCredentials: true,
         headers: { 'Content-Type': 'multipart/form-data' }
       });

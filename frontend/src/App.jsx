@@ -27,7 +27,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+    axios.get('/session-info')
       .then(res => setUser(res.data))
       .catch(() => setUser(null));
   }, []);

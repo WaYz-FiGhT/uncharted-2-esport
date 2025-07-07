@@ -27,14 +27,14 @@ function PostMatch() {
 
   // Vérifie que l'utilisateur est connecté
   useEffect(() => {
-    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+    axios.get('/session-info')
       .then(res => setUserId(res.data.id))
       .catch(() => navigate('/login'));
   }, [navigate]);
 
   // Récupère les membres de l'équipe
   useEffect(() => {
-    axios.get(`http://localhost:3000/teams/members?team_id=${team_id}`, { withCredentials: true })
+    axios.get(`/teams/members?team_id=${team_id}`)
       .then(res => setMembers(res.data))
       .catch(() => setMessage('Error retrieving members.'));
   }, [team_id]);
@@ -72,14 +72,14 @@ function PostMatch() {
     }
 
     try {
-      const res = await axios.post('http://localhost:3000/matches/create', {
+      const res = await axios.post('/matches/create', {
         team_1_id: team_id,
         ladder_id,
         match_game_mode,
         match_format: boFormat,
         player_number: playerNumber,
         selectedPlayers
-      }, { withCredentials: true });
+      });
 
       if (res.status === 201) {
         setMessage('Match posted successfully!');

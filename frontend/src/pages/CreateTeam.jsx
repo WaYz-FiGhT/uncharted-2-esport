@@ -14,7 +14,7 @@ function CreateTeam() {
 
   // Vérifie la session
   useEffect(() => {
-    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+    axios.get('/session-info')
       .then(res => setUserId(res.data.id))
       .catch(() => navigate('/login'));
   }, [navigate]);
@@ -47,7 +47,7 @@ function CreateTeam() {
         formData.append('picture', teamPictureFile);
       }
 
-      const res = await axios.post('http://localhost:3000/teams/create', formData, {
+      const res = await axios.post('/teams/create', formData, {
         withCredentials: true,
         headers: { 'Content-Type': 'multipart/form-data' }
       });

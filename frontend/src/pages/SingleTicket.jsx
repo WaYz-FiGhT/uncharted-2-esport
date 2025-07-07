@@ -10,13 +10,13 @@ function SingleTicket() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/tickets/${ticket_id}`, { withCredentials: true })
+    axios.get(`/tickets/${ticket_id}`)
       .then(res => setTicket(res.data))
       .catch(() => setError('Error loading ticket.'));
   }, [ticket_id]);
 
   const handleSetResult = (winner) => {
-    axios.post(`http://localhost:3000/tickets/${ticket_id}/set-result`, { winner }, { withCredentials: true })
+    axios.post(`/tickets/${ticket_id}/set-result`, { winner })
       .then(() => {
         alert('Result updated.');
         navigate(`/match/${ticket.match_id}`);

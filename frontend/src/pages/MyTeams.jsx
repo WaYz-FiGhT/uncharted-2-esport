@@ -11,7 +11,7 @@ function MyTeams() {
 
   // Récupère l'utilisateur connecté
   useEffect(() => {
-    axios.get('http://localhost:3000/session-info', { withCredentials: true })
+    axios.get('/session-info')
       .then(res => setUserId(res.data.id))
       .catch(() => setMessage('You must be logged in.'));
   }, []);
@@ -23,8 +23,8 @@ function MyTeams() {
     const fetchTeams = async () => {
       try {
         const [capRes, memRes] = await Promise.all([
-          axios.get(`http://localhost:3000/teams/by-captain?captain_id=${userId}`, { withCredentials: true }),
-          axios.get(`http://localhost:3000/teams/by-member?player_id=${userId}`, { withCredentials: true }),
+          axios.get(`/teams/by-captain?captain_id=${userId}`),
+          axios.get(`/teams/by-member?player_id=${userId}`),
         ]);
 
         const combined = [...capRes.data, ...memRes.data];
@@ -38,7 +38,7 @@ function MyTeams() {
         } else {
           const withLadder = await Promise.all(uniqueTeams.map(async team => {
             try {
-              const res = await axios.get('http://localhost:3000/ladders/name', {
+              const res = await axios.get('/ladders/name', {
                 params: { id: team.ladder_id }
               });
               return { ...team, ladder_name: res.data.ladder_name };
