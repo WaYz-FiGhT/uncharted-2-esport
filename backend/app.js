@@ -10,6 +10,12 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 
+const isProduction = process.env.NODE_ENV === 'production';
+if (isProduction) {
+  // trust proxy is required if the app sits behind a reverse proxy (e.g. nginx)
+  app.set('trust proxy', 1);
+}
+
 app.use(morgan('combined', { stream: logger.stream }));
 
 // CORS : autorise React à faire des requêtes
@@ -23,10 +29,11 @@ app.use(cors({
 app.use(session({
   secret: process.env.SESSION_SECRET || 'un-secret-securise',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
-    secure: false,
+    secure: isProduction,
     httpOnly: true,
+    sameSite: 'lax',
     maxAge: 3600000
   }
 }));

@@ -79,3 +79,10 @@ Dans le dossier `backend`, vous pouvez lancer les tests unitaires :
 npm test
 ```
 
+## Conseils de sécurisation
+
+- En production, activez le flag `cookie.secure` dans `backend/app.js` et
+  servez l'application via HTTPS. Pour cela, placez éventuellement un proxy
+  (Nginx, Apache) devant Node.js et utilisez `NODE_ENV=production`.
+- Vérifiez régulièrement les droits d'accès à l'API (par exemple avec le
+  middleware `isAdmin`) et surveillez les journaux pour détecter les erreurs.
