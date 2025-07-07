@@ -29,6 +29,7 @@ function TeamDetails() {
   const [kickConfirmId, setKickConfirmId] = useState(null);
   const [newTeamPictureFile, setNewTeamPictureFile] = useState(null);
   const [preview, setPreview] = useState('');
+  const [pictureMessage, setPictureMessage] = useState('');
 
   useEffect(() => {
     axios.get('/session-info')
@@ -155,6 +156,17 @@ function TeamDetails() {
 
   const handleUpdatePicture = async () => {
     if (!newTeamPictureFile) return;
+    const ext = newTeamPictureFile.name.split('.').pop().toLowerCase();
+    const allowed = ['png', 'jpg', 'jpeg', 'gif'];
+    if (!allowed.includes(ext)) {
+      setPictureMessage('Invalid file type (png, jpg, jpeg or gif are authorized).');
+      return;
+    }
+    if (newTeamPictureFile.size > 2 * 1024 * 1024) {
+      setPictureMessage('File too large (max 2MB).');
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append('team_id', team_id);
@@ -168,9 +180,14 @@ function TeamDetails() {
         setTeamPictureUrl(res.data.url);
         setNewTeamPictureFile(null);
         setPreview('');
+        setPictureMessage('');
       }
     } catch (err) {
-      setMessage('Error updating picture.');
+      if (err.response && err.response.data && err.response.data.error) {
+        setPictureMessage(err.response.data.error);
+      } else {
+        setPictureMessage('Error updating picture.');
+      }
     }
   };
 
@@ -349,22 +366,25 @@ function TeamDetails() {
           </button>
 
           {isCaptain && (
-            <div style={{ marginTop: '10px' }}>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleNewPictureFileChange}
-              />
-              {preview && (
-                <img
-                  src={preview}
-                  alt="preview"
-                  style={{ width: '80px', display: 'block', margin: '5px 0' }}
+                          <div style={{ marginTop: '10px' }}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleNewPictureFileChange}
                 />
-              )}
-              <button onClick={handleUpdatePicture}>Update picture</button>
-            </div>
-          )}
+                              {preview && (
+                  <img
+                    src={preview}
+                    alt="preview"
+                    style={{ width: '80px', display: 'block', margin: '5px 0' }}
+                  />
+                )}
+                <button onClick={handleUpdatePicture}>Update picture</button>
+                {pictureMessage && (
+                  <p style={{ color: 'red' }}>{pictureMessage}</p>
+                )}
+              </div>
+            )}
 
 
           {canDelete && (

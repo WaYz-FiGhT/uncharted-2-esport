@@ -12,6 +12,7 @@ function Profile() {
   const [sessionUser, setSessionUser] = useState(null);
   const [newPictureFile, setNewPictureFile] = useState(null);
   const [preview, setPreview] = useState('');
+  const [updateMessage, setUpdateMessage] = useState('');
 
   useEffect(() => {
     axios.get('/session-info')
@@ -36,6 +37,18 @@ function Profile() {
 
   const handleUpdate = async () => {
     if (!newPictureFile) return;
+
+      const ext = newPictureFile.name.split('.').pop().toLowerCase();
+    const allowed = ['png', 'jpg', 'jpeg', 'gif'];
+    if (!allowed.includes(ext)) {
+      setUpdateMessage('Invalid file type (png, jpg, jpeg or gif are authorized).');
+      return;
+    }
+    if (newPictureFile.size > 2 * 1024 * 1024) {
+      setUpdateMessage('File too large (max 2MB).');
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append('player_id', profile.id);
@@ -47,8 +60,13 @@ function Profile() {
       setProfile({ ...profile, profile_picture_url: res.data.url });
       setNewPictureFile(null);
       setPreview('');
+      setUpdateMessage('');
     } catch (err) {
-      setMessage('Error updating picture.');
+      if (err.response && err.response.data && err.response.data.error) {
+        setUpdateMessage(err.response.data.error);
+      } else {
+        setUpdateMessage('Error updating picture.');
+      }
     }
   };
 
@@ -90,6 +108,9 @@ function Profile() {
                 <img src={preview} alt="preview" style={{ width: '80px', display: 'block', margin: '5px 0' }} />
               )}
               <button onClick={handleUpdate}>Update picture</button>
+              {updateMessage && (
+                <p style={{ color: 'red' }}>{updateMessage}</p>
+              )}
             </div>
           )}
         </div>
