@@ -17,12 +17,24 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'Missing fields' });
   }
 
+  if (!username.trim()) {
+    return res.status(400).json({ error: 'Username cannot be empty or spaces.' });
+  }
+
+  if (!psn.trim()) {
+    return res.status(400).json({ error: 'PSN cannot be empty or spaces.' });
+  }
+
   if (username.length > 16) {
     return res.status(400).json({ error: 'Username too long (16 characters max).' });
   }
 
   if (psn.length > 16) {
     return res.status(400).json({ error: 'PSN too long (16 characters max).' });
+  }
+
+  if (password.length < 8 || password.length > 24) {
+    return res.status(400).json({ error: 'Password must be between 8 and 24 characters.' });
   }
 
   if (password !== confirmPassword) {

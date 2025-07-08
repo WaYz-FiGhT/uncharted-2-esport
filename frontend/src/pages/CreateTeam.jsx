@@ -33,8 +33,13 @@ function CreateTeam() {
   // Soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !ladderId) {
+    if (!name.trim() || !ladderId) {
       setMessage('Please fill in all fields.');
+      return;
+    }
+
+    if (name.length > 16) {
+      setMessage('Team name must be 16 characters max.');
       return;
     }
 
@@ -76,7 +81,7 @@ function CreateTeam() {
           value={name}
           onChange={e => setName(e.target.value)}
           placeholder="Team name"
-          maxLength={24}
+          maxLength={16}
           required
         />
 

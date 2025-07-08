@@ -13,8 +13,12 @@ router.post('/', upload.single('picture'), async (req, res) => {
     return res.status(400).json({ error: 'Missing fields' });
   }
 
-  if (name.length > 24) {
-    return res.status(400).json({ error: 'Team name too long (24 characters max).' });
+  if (!name.trim()) {
+    return res.status(400).json({ error: 'Team name cannot be empty or spaces.' });
+  }
+
+  if (name.length > 16) {
+    return res.status(400).json({ error: 'Team name too long (16 characters max).' });
   }
 
   try {
