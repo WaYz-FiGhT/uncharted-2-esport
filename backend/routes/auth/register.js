@@ -83,8 +83,8 @@ router.post('/', async (req, res) => {
     await transporter.sendMail({
       from: 'noreply@unchartedesport.com',
       to: email,
-      subject: 'Confirmez votre inscription',
-      text: `Cliquez sur ce lien pour activer votre compte : ${verifyLink}`
+      subject: 'Confirm your registration',
+      text: `Click this link to verify your email and activate your account: ${verifyLink}`
     });
     logger.info('✅ Email envoyé à', email);
 
