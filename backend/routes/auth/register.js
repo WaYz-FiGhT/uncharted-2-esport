@@ -34,8 +34,8 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'Username too long (16 characters max).' });
   }
 
-  if (psn.length > 16) {
-    return res.status(400).json({ error: 'PSN too long (16 characters max).' });
+  if (psn.length < 4 || psn.length > 16) {
+    return res.status(400).json({ error: 'PSN must be between 4 and 16 characters.' });
   }
 
   if (password.length < 8 || password.length > 24) {

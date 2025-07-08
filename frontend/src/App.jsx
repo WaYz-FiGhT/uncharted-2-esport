@@ -17,6 +17,8 @@ import Ranking from './pages/Ranking';
 import DisputeTickets from './pages/DisputeTickets';
 import TicketDetails from './pages/TicketDetails';
 import VerifyEmail from './pages/VerifyEmail';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Invitations from './pages/Invitations';
 import Profile from './pages/Profile';
 import Rules from './pages/Rules';
@@ -39,6 +41,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register setUser={setUser} />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/create-team" element={<CreateTeam />} />
         <Route path="/mes-equipes" element={<MyTeams />} />

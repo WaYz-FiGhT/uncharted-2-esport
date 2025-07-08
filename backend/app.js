@@ -53,6 +53,8 @@ app.use('/auth/login', require('./routes/auth/login'));
 app.use('/auth/logout', require('./routes/auth/logout'));
 app.use('/auth/register', require('./routes/auth/register'));
 app.use('/auth/verify-email', require('./routes/auth/verify_email'));
+app.use('/auth/forgot-password', require('./routes/auth/forgot_password'));
+app.use('/auth/reset-password', require('./routes/auth/reset_password'));
 
 // Session info
 app.get('/session-info', (req, res) => {

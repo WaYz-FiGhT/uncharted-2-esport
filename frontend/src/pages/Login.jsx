@@ -48,6 +48,9 @@ function Login({ setUser }) {
           required
         /><br />
         <button type="submit">Log in</button>
+        <button type="button" onClick={() => navigate('/forgot-password')}>
+          Forgot password?
+        </button>
         {error && <p className="error">{error}</p>}
         </form>
       </div>
