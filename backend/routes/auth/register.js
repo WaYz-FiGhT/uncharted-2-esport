@@ -30,8 +30,8 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'PSN cannot be empty or spaces.' });
   }
 
-  if (username.length > 16) {
-    return res.status(400).json({ error: 'Username too long (16 characters max).' });
+  if (username.length < 4 || username.length > 16) {
+    return res.status(400).json({ error: 'Username must be between 4 and 16 characters.' });
   }
 
   if (psn.length < 4 || psn.length > 16) {
