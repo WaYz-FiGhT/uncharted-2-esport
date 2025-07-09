@@ -13,7 +13,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '.env.production') });
 
 const app = express();
-const isProduction = true;
+const isProduction = process.env.NODE_ENV === 'production';
 
 app.set('trust proxy', 1);
 
