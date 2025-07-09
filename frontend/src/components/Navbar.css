@@ -217,3 +217,15 @@
 .navbar-toggler {
   display: none;
 }
+
+@media (max-width: 600px) {
+  .navbar-links a,
+  .navbar-button,
+  .navbar-welcome {
+    font-size: 18px;
+  }
+
+  .navbar-brand {
+    font-size: 32px;
+  }
+}

@@ -1,24 +1,21 @@
+const path = require('path'); // Charger path AVANT dotenv
+require('dotenv').config({ path: path.join(__dirname, '.env.production') });
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
-const path = require('path');
 const isAdmin = require('./routes/tickets/isAdmin');
 const startReportProcessing = require('./jobs/processReports');
 const logger = require('./logger');
 const morgan = require('morgan');
+const dotenv = require('dotenv');
 
-// Load environment variables
-const envFile = process.env.NODE_ENV === 'production'
-  ? '.env.production'
-  : '.env';
-require('dotenv').config({ path: path.join(__dirname, envFile) });
+// 🚀 FORCE le chargement de .env.production
+dotenv.config({ path: path.join(__dirname, '.env.production') });
+
 const app = express();
+const isProduction = true;
 
-const isProduction = process.env.NODE_ENV === 'production';
-if (isProduction) {
-  // trust proxy is required if the app sits behind a reverse proxy (e.g. nginx)
-  app.set('trust proxy', 1);
-}
+app.set('trust proxy', 1);
 
 app.use(morgan('combined', { stream: logger.stream }));
 

@@ -31,7 +31,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    axios.get('/session-info')
+    axios.get('/session-info', { withCredentials: true })
       .then(res => setUser(res.data))
       .catch(() => setUser(null));
   }, []);

@@ -39,8 +39,7 @@ function MyTeams() {
           const withLadder = await Promise.all(uniqueTeams.map(async team => {
             try {
               const res = await axios.get('/ladders/name', {
-                params: { id: team.ladder_id },
-                withCredentials: true
+
               });
               return { ...team, ladder_name: res.data.ladder_name };
             } catch {

@@ -590,3 +590,24 @@ p {
 .footer-bar a:hover {
   text-decoration: underline;
 }
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .page-center {
+    width: 95%;
+    padding: 20px;
+  }
+
+  form {
+    padding: 40px 20px;
+  }
+
+  .ranking-row {
+    font-size: 0.9rem;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+  }
+
+  .ranking-row a {
+    font-size: 1rem;
+  }
+}
