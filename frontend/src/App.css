@@ -574,3 +574,19 @@ p {
 .ticket-item hr {
   width: 100%;
 }
+
+/* Footer bar on home page */
+.footer-bar {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.footer-bar a {
+  color: #e0fbfc;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.footer-bar a:hover {
+  text-decoration: underline;
+}

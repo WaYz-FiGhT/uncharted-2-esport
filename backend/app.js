@@ -6,8 +6,12 @@ const isAdmin = require('./routes/tickets/isAdmin');
 const startReportProcessing = require('./jobs/processReports');
 const logger = require('./logger');
 const morgan = require('morgan');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
 
+// Load environment variables
+const envFile = process.env.NODE_ENV === 'production'
+  ? '.env.production'
+  : '.env';
+require('dotenv').config({ path: path.join(__dirname, envFile) });
 const app = express();
 
 const isProduction = process.env.NODE_ENV === 'production';

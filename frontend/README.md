@@ -40,6 +40,8 @@ FRONTEND_URL=http://localhost:5173
 
 Un fichier `backend/.env.production` est également présent pour un déploiement en production (mêmes clés mais avec des valeurs adaptées).
 
+Un fichier `backend/.env.production` est également présent pour un déploiement en production (mêmes clés mais avec des valeurs adaptées). Lorsque `NODE_ENV=production`, le backend charge automatiquement ce fichier à la place de `.env`.Un fichier `backend/.env.production` est également présent pour un déploiement en production (mêmes clés mais avec des valeurs adaptées). Lorsque `NODE_ENV=production`, le backend charge automatiquement ce fichier à la place de `.env`.
+
 ### Frontend
 
 Dans `frontend/.env`, indiquez l\'URL du backend :

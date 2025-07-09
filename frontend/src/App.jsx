@@ -22,6 +22,8 @@ import ResetPassword from './pages/ResetPassword';
 import Invitations from './pages/Invitations';
 import Profile from './pages/Profile';
 import Rules from './pages/Rules';
+import Legal from './pages/Legal';
+import Privacy from './pages/Privacy';
 
 import axios from 'axios';
 
@@ -56,6 +58,8 @@ function App() {
         <Route path="/invitations" element={<Invitations />} />
         <Route path="/profile/:username" element={<Profile />} />
         <Route path="/rules" element={<Rules />} />
+        <Route path="/mentions-legales" element={<Legal />} />
+        <Route path="/politique-de-confidentialite" element={<Privacy />} />
 
         {/* 🔒 Routes admin-only */}
         <Route
