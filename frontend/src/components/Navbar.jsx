@@ -36,7 +36,7 @@ function Navbar({ user, setUser }) {
 
         {user ? (
           <>
-            <li><Link to="/mes-equipes">My test teams</Link></li>
+            <li><Link to="/mes-equipes">My teams</Link></li>
             <li><Link to="/create-team">Create a team</Link></li>
             <li><Link to="/invitations">Invitations</Link></li>
             {user.is_admin === true && <li><Link to="/tickets">Tickets</Link></li>}

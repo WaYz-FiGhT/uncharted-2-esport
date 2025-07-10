@@ -69,16 +69,14 @@ router.post('/', async (req, res) => {
 
        // 🔸 Envoi de l'email de vérification
     const transporter = nodemailer.createTransport({
-      host: 'sandbox.smtp.mailtrap.io',
-      port: 587,
-      secure: false,
+      service: 'gmail',
       auth: {
-        user: 'd6a28cc1be54ae',
-        pass: '9235fe8b6ded92'
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS
       }
     });
 
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    const frontendUrl = process.env.FRONTEND_URL || 'https://uncharted-esport.com';
     const verifyLink = `${frontendUrl}/verify-email?token=${token}`;
     await transporter.sendMail({
       from: 'noreply@unchartedesport.com',

@@ -2,7 +2,12 @@ const mysql = require('mysql2/promise'); // version promise directe
 const path = require('path');
 
 // Charge .env.production explicitement
-require('dotenv').config({ path: path.join(__dirname, '.env.production') });
+// Load the production environment file and force override to avoid empty values
+// from previously loaded environments
+require('dotenv').config({
+  path: path.join(__dirname, '.env.production'),
+  override: true,
+});
 
 const db = mysql.createPool({
   host: process.env.DB_HOST || 'localhost',
