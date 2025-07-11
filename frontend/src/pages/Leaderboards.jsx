@@ -165,11 +165,6 @@ function Leaderboards() {
           )}
         </div>
       </div>
-      <div className="footer-bar">
-        <Link to="/mentions-legales">Terms of use</Link>
-        <span className="separator">|</span>
-        <Link to="/politique-de-confidentialite">Privacy policy</Link>
-      </div>
     </div>
   );
 }
