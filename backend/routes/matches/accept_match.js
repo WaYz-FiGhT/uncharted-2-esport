@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
     // Met à jour le match
     const [updateResult] = await db.execute(
       `UPDATE matches
-       SET team_2_id = ?, status = 'accepted'
+       SET team_2_id = ?, status = 'accepted', scheduled_time = UTC_TIMESTAMP()
        WHERE team_1_id = ? AND status = 'pending'`,
       [team_2_id, team_1_id]
     );

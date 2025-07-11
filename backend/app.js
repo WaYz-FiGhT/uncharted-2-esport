@@ -5,6 +5,7 @@ const session = require('express-session');
 const cors = require('cors');
 const isAdmin = require('./routes/tickets/isAdmin');
 const startReportProcessing = require('./jobs/processReports');
+const startPendingMatchCleanup = require('./jobs/cleanupPendingMatches');
 const logger = require('./logger');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
@@ -117,6 +118,7 @@ app.use('/ladders/name', require('./routes/ladders/get_laddername'));
 
 // 🔄 Traitement automatique des reports
 startReportProcessing();
+startPendingMatchCleanup();
 
 // ✅ Lancement
 app.listen(3000, () => {
