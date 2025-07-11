@@ -596,6 +596,17 @@ p {
   margin-bottom: 40px;
 }
 
+.youtube-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.youtube-grid iframe {
+  border: none;
+}
+
 /* Mobile adjustments */
 @media (max-width: 600px) {
   body {
