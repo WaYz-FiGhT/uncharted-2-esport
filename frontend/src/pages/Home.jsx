@@ -6,19 +6,19 @@ function Home() {
     <div className="page-center">
       <section className="home-section">
         <h1>Welcome to Uncharted Esport</h1>
-        <p>Bienvenue sur le site Uncharted Esport !</p>
+        <p>Welcome to Uncharted Esport!</p>
       </section>
       <section className="home-section">
         <h2>Uncharted Community</h2>
-        <p>Découvrez nos chaînes YouTube et les dernières vidéos.</p>
+        <p>Check out YouTube channels and latest videos.</p>
       </section>
       <section className="home-section">
         <h2>Discord &amp; Podcasts</h2>
-        <p>Rejoignez la communauté sur Discord et écoutez nos podcasts.</p>
+        <p>Join the community on Discord and listen to our podcasts.</p>
       </section>
       <section className="home-section">
         <h2>Future releases</h2>
-        <p>Restez à l'affût des prochaines fonctionnalités.</p>
+        <p>Stay tuned for upcoming features.</p>
       </section>
     </div>
   );
