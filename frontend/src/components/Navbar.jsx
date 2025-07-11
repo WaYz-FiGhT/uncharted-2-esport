@@ -32,6 +32,7 @@ function Navbar({ user, setUser }) {
       </button>
       <ul className={`navbar-links ${menuOpen ? 'show' : ''}`}>
         <li><Link to="/">Home</Link></li>
+        <li><Link to="/leaderboards">Leaderboards</Link></li>
         <li><Link to="/rules">Rules</Link></li>
 
         {user ? (
