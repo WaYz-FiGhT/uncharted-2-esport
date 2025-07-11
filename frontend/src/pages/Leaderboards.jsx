@@ -133,7 +133,7 @@ function Leaderboards() {
           <h2 className="ladder-name">{ladder3Name || 'Ladder 3'}</h2>
           {ladder3.length > 0 ? (
             <ul className="ranking-list">
-              {ladder3.slice(0, 1).map((team, index) => (
+              {ladder3.slice(0, 2).map((team, index) => (
                 <li
                   key={team.id}
                   className={`ranking-row ${
