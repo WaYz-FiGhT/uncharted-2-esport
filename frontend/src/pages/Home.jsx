@@ -61,15 +61,13 @@ function Leaderboards() {
       .catch(() => setLadder3Name('Ladder 3'));
 
   }, []);
-
+}
   const getTrophyEmoji = (index) => {
     if (index === 0) return '🥇'; // Médaille d'or
     if (index === 1) return '🥈'; // Médaille d'argent
     if (index === 2) return '🥉'; // Médaille de bronze
     return '';
   };
-
-function Home() {
 
   return (
     <div className="page-center">
@@ -213,7 +211,4 @@ function Home() {
       </section>
     </div>
   );
-}
-}
-
-export default Home;
+export default Leaderboards;
