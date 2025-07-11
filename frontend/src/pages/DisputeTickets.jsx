@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { formatUTCDate } from '../utils/date';
 import axios from 'axios';
 import '../App.css';
 
@@ -58,7 +59,7 @@ function DisputeTickets() {
                 '???'
               )}
             </h2>
-            <p><strong>Scheduled date:</strong> {new Date(data.scheduled_time).toLocaleString()}</p>
+            <p><strong>Scheduled date:</strong> {formatUTCDate(data.scheduled_time)}</p>
             <ul className="ticket-list">
               {data.tickets.map(ticket => (
                 <li key={ticket.ticket_id} className="ticket-item">
@@ -68,7 +69,7 @@ function DisputeTickets() {
                   </span>
                   <span>
                     <strong>Ticket date:</strong>{' '}
-                    {new Date(ticket.created_at).toLocaleString()}
+                    {formatUTCDate(ticket.created_at)}
                   </span>
                   <Link to={`/ticket/${ticket.ticket_id}`} className="ticket-button">
                     <button>View ticket</button>

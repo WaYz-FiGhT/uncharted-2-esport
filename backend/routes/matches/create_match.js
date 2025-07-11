@@ -105,7 +105,7 @@ router.post('/', async (req, res) => {
 
     const [result] = await db.execute(
       `INSERT INTO matches (ladder_id, team_1_id, match_game_mode, match_format, player_number, scheduled_time, status, map_list, mode_list)
-       VALUES (?, ?, ?, ?, ?, NOW() + INTERVAL 1 HOUR, ?, ?, ?)`,
+       VALUES (?, ?, ?, ?, ?, UTC_TIMESTAMP() + INTERVAL 1 HOUR, ?, ?, ?)`,
       [
         ladder_id,
         team_1_id,

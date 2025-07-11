@@ -13,7 +13,7 @@ async function finalizeOldReports() {
           SELECT 1 FROM match_reports mr2
           WHERE mr2.match_id = m.id AND mr2.team_id <> mr.team_id
         )
-        AND mr.created_at <= NOW() - INTERVAL 3 HOUR
+        AND mr.created_at <= UTC_TIMESTAMP() - INTERVAL 3 HOUR
     `);
 
     for (const row of rows) {

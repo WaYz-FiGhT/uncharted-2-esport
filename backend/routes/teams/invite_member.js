@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
 
     await db.execute(
       `INSERT INTO team_invitations (team_id, player_id, status, created_at)
-       VALUES (?, ?, 'pending', NOW())`,
+       VALUES (?, ?, 'pending', UTC_TIMESTAMP())`,
       [team_id, player_id]
     );
 

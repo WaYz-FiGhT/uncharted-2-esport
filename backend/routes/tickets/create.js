@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 
     await db.execute(
       `INSERT INTO dispute_tickets (match_id, team_id, message, created_at)
-       VALUES (?, ?, ?, NOW())`,
+       VALUES (?, ?, ?, UTC_TIMESTAMP())`,
       [match_id, team_id, message.trim()]
     );
 

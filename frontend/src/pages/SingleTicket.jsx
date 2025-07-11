@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { formatUTCDate } from '../utils/date';
 import axios from 'axios';
 import '../App.css';
 
@@ -36,7 +37,7 @@ function SingleTicket() {
         <strong>Team:</strong>{' '}
         <Link to={`/team/${ticket.team_id}`}>{ticket.team_name}</Link>
       </p>
-      <p><strong>Scheduled date:</strong> {new Date(ticket.scheduled_time).toLocaleString()}</p>
+      <p><strong>Scheduled date:</strong> {formatUTCDate(ticket.scheduled_time)}</p>
       <p><strong>Message :</strong></p>
       <pre style={{ whiteSpace: 'pre-wrap' }}>{ticket.message}</pre>
 

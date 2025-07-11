@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
 
     // 🔸 Insertion en BDD avec PSN et token de vérification
     const [result] = await db.execute(
-      'INSERT INTO players (username, email, password, psn, profile_picture_url, verification_token, email_verified, created_at) VALUES (?, ?, ?, ?, ?, ?, 0, UTC_TIMESTAMP())',
+      'INSERT INTO players (username, email, password, psn, profile_picture_url, verification_token, email_verified, created_at) VALUES (?, ?, ?, ?, ?, ?, 0, UTC_TIMESTAMP,
       [username, email, hashedPassword, psn, profilePictureUrl, token]
     );
 

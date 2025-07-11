@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
 
   try {
     const [rows] = await db.execute(
-      'SELECT id FROM players WHERE password_reset_token = ? AND password_reset_expires > NOW()',
+      'SELECT id FROM players WHERE password_reset_token = ? AND password_reset_expires > UTC_TIMESTAMP()',
       [token]
     );
 

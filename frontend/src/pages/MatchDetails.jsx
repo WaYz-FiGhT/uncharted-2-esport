@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { formatUTCDate } from '../utils/date';
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
@@ -113,7 +114,7 @@ function MatchDetails() {
       <div><strong>Mode:</strong> {match.game_mode}</div>
       <div><strong>Format:</strong> {match.format?.toUpperCase()}</div>
       <div><strong>Status:</strong> {match.status}</div>
-      <div><strong>Scheduled date:</strong> {new Date(match.scheduled_time).toLocaleString()}</div>
+      <div><strong>Scheduled date:</strong> {formatUTCDate(match.scheduled_time)}</div>
     </div>
     <h3>Played maps:</h3>
     <ul>
