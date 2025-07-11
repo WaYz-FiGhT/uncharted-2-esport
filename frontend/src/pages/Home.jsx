@@ -1,5 +1,19 @@
 import '../App.css';
 
+function YouTubeEmbed({ id }) {
+  return (
+    <iframe
+      width="300"
+      height="169"
+      src={`https://www.youtube.com/embed/${id}`}
+      title="YouTube video"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
+  );
+}
+
 function Home() {
 
   return (
@@ -11,6 +25,11 @@ function Home() {
       <section className="home-section">
         <h2>Uncharted Community</h2>
         <p>Check out YouTube channels and latest videos.</p>
+        <div className="youtube-grid">
+          {['dQw4w9WgXcQ', 'M7lc1UVf-VE', '9bZkp7q19f0'].map(id => (
+            <YouTubeEmbed key={id} id={id} />
+          ))}
+        </div>
       </section>
       <section className="home-section">
         <h2>Discord &amp; Podcasts</h2>
