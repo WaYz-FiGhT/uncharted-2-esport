@@ -185,6 +185,11 @@
   outline: none !important;
 }
 
+/* Hide hamburger menu on wider screens */
+.navbar-toggler {
+  display: none;
+}
+
 /* Responsive : menu mobile */
 @media (max-width: 600px) {
   .navbar-links {

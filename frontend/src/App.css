@@ -593,6 +593,16 @@ p {
 
 /* Mobile adjustments */
 @media (max-width: 600px) {
+  body {
+    padding: 100px 0 0 0;
+  }
+
+  .container {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 10px;
+  }
+
   .page-center {
     width: 95%;
     padding: 20px;
