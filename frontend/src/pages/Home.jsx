@@ -26,7 +26,7 @@ function Home() {
         <h2>Uncharted Community</h2>
         <p>Check out YouTube channels and latest videos.</p>
         <div className="youtube-grid">
-          {['dQw4w9WgXcQ', 'M7lc1UVf-VE', '9bZkp7q19f0'].map(id => (
+          {['xTdNBjY5i1Q', 'DWy8iSss-Xs', 'GYY9qXq-DAA', 'mylsM4ZQ4Ng'].map(id => (
             <YouTubeEmbed key={id} id={id} />
           ))}
         </div>
