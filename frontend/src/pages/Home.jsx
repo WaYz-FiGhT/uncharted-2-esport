@@ -32,8 +32,8 @@ function Home() {
         </div>
       </section>
       <section className="home-section">
-        <h2>Discord &amp; Podcasts</h2>
-        <p>Join the community on Discord and listen to our podcasts.</p>
+        <h2>Discord/h2>
+        <p>Join the community on Discord <a href="https://discord.gg/uc4Xj793"> </a></p>
       </section>
       <section className="home-section">
         <h2>Future releases</h2>
