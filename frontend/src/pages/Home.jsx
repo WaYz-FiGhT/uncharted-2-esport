@@ -33,9 +33,9 @@ function Home() {
       </section>
       <section className="home-section">
         <h2>Discord </h2>
-      <a href="https://discord.gg/uc4Xj793">Events & Ladders uncharted</a>
-      <a href="https://discord.gg/E7TQzJhX">ThuggzBunney Events</a>
-      <a href="https://discord.gg/unchartedmultiplayer">Uncharted Reloaded</a>
+      <p><a href="https://discord.gg/uc4Xj793">Events & Ladders uncharted</a></p>
+      <p><a href="https://discord.gg/E7TQzJhX">ThuggzBunney Events</a></p>
+      <p><a href="https://discord.gg/unchartedmultiplayer">Uncharted Reloaded</a></p>
       </section>
       <section className="home-section">
         <h2>Future releases</h2>
