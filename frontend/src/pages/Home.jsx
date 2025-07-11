@@ -33,7 +33,7 @@ function Home() {
       </section>
       <section className="home-section">
         <h2>Discord/h2>
-        <p>Join the community on Discord (<a href="https://discord.gg/uc4Xj793"> https://discord.gg/uc4Xj793 </a>)</p>
+      <p>Contact : <a href="mailto:contact.unchartedesport@gmail.com">contact.unchartedesport@gmail.com</a></p>
       </section>
       <section className="home-section">
         <h2>Future releases</h2>
