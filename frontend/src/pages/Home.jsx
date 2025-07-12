@@ -134,7 +134,12 @@ function Home() {
 
       <section className="home-section">
         <h2>Admins</h2>
-        <p>WaYz (WaYz_FiGhT), NeFariousS (Second_alex-pasq), dbarker99</p>
+        <p>WaYz (WaYz_FiGhT), NeFariousS (Second_alex-pasq), dbarker99, ThuggzBunney, WengaaLD (Gwen_gwen35)</p>
+      </section>
+
+      <section className="home-section">
+        <h2>Contact</h2>
+        <p><a href="mailto:contact.unchartedesport@gmail.com">contact.unchartedesport@gmail.com</a></p>
       </section>
 
       <div className="footer-bar">
