@@ -137,13 +137,18 @@ function PostMatch() {
           <ul>
             {members.map(player => (
               <li key={player.id}>
-                <label>
+                <label className="player-select-label">
                   <input
                     type="checkbox"
                     checked={selectedPlayers.includes(player.id)}
                     onChange={() => togglePlayer(player.id)}
                   />
-                  <Link to={`/profile/${player.username}`}>{player.username}</Link>
+                  <Link
+                    to={`/profile/${player.username}`}
+                    className="player-select-name"
+                  >
+                    {player.username}
+                  </Link>
                 </label>
               </li>
             ))}
