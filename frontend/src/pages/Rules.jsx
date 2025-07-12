@@ -45,9 +45,9 @@ function Rules() {
         </ul>
         <h2>4vs4 / 5vs5</h2>
         <ul>
-          <li><strong>TDM</strong>: Power Weapons ON, 50&nbsp;kills, 15&nbsp;minutes</li>
-          <li><strong>Plunder</strong>: Standard, 5&nbsp;captures, 15&nbsp;minutes</li>
-          <li><strong>Turf War</strong>: Standard, 450&nbsp;points, 15&nbsp;minutes</li>
+          <li>TDM : Power Weapons ON, 50&nbsp;kills, 15&nbsp;minutes</li>
+          <li>Plunder : Standard, 5&nbsp;captures, 15&nbsp;minutes</li>
+          <li>Turf War : Standard, 450&nbsp;points, 15&nbsp;minutes</li>
         </ul>
       </section>
       <section>
@@ -59,7 +59,7 @@ function Rules() {
         </ul>
         <h2>1vs1</h2>
         <ul>
-          <li><strong>TDM</strong>: Power Weapons OFF 20&nbsp;kills, 15&nbsp;minutes</li>
+          <li>TDM : Power Weapons OFF 20&nbsp;kills, 15&nbsp;minutes</li>
         </ul>
       </section>
     </div>
