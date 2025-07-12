@@ -94,7 +94,11 @@ function Profile() {
             <ul>
               {profile.teams.map((team) => (
                 <li key={team.id}>
-                  <Link to={`/team/${team.id}`}>{team.name}</Link>
+                  <Link to={`/team/${team.id}`}>{team.name}</Link>{' '}
+                  <span>
+                    {team.ladder_name && `(${team.ladder_name})`} —{' '}
+                    <span className="xp-yellow">{team.xp} XP</span> — #{team.rank}
+                  </span>
                 </li>
               ))}
             </ul>
