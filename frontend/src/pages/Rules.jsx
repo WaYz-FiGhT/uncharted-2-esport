@@ -19,7 +19,7 @@ function Rules() {
       </section>
 
       <section>
-        <h2>Banned Boosters</h2>
+        <h1>Banned Boosters</h1>
         <ul>
           <li>Launch Man</li>
           <li>Rocket Man</li>
@@ -27,7 +27,7 @@ function Rules() {
       </section>
 
       <section>
-        <h2>Banned Skins</h2>
+        <h1>Banned Skins</h1>
         <ul>
           <li>All skeleton skins</li>
           <li>Navarro</li>
@@ -36,18 +36,30 @@ function Rules() {
       </section>
 
       <section>
-        <h2>Match Setups</h2>
-        <h3>3vs3</h3>
+        <h1>Match Setups</h1>
+        <h2>3vs3</h2>
         <ul>
-          <li><strong>TDM</strong>: Power Weapons decided by teams (default ON), 40&nbsp;kills, 15&nbsp;minutes</li>
-          <li><strong>Plunder</strong>: Standard, 5&nbsp;captures, 15&nbsp;minutes</li>
-          <li><strong>Turf War</strong>: Standard, 300&nbsp;points, 15&nbsp;minutes</li>
+          <li>TDM : Power Weapons decided by teams (default ON), 40&nbsp;kills, 15&nbsp;minutes</li>
+          <li>Plunder : Standard, 5&nbsp;captures, 15&nbsp;minutes</li>
+          <li>Turf War : Standard, 300&nbsp;points, 15&nbsp;minutes</li>
         </ul>
-        <h3>4vs4 / 5vs5</h3>
+        <h2>4vs4 / 5vs5</h2>
         <ul>
           <li><strong>TDM</strong>: Power Weapons ON, 50&nbsp;kills, 15&nbsp;minutes</li>
           <li><strong>Plunder</strong>: Standard, 5&nbsp;captures, 15&nbsp;minutes</li>
           <li><strong>Turf War</strong>: Standard, 450&nbsp;points, 15&nbsp;minutes</li>
+        </ul>
+      </section>
+      <section>
+        <h3>2vs2</h3>
+        <ul>
+          <li>TDM : Power Weapons OFF, 30&nbsp;kills, 15&nbsp;minutes</li>
+          <li>Plunder : Standard, 5&nbsp;captures, 15&nbsp;minutes</li>
+          <li>Turf War : Standard, 250&nbsp;points, 15&nbsp;minutes</li>
+        </ul>
+        <h2>1vs1</h2>
+        <ul>
+          <li><strong>TDM</strong>: Power Weapons OFF 20&nbsp;kills, 15&nbsp;minutes</li>
         </ul>
       </section>
     </div>
