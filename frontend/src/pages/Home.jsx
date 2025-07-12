@@ -135,7 +135,7 @@ function Home() {
 
       <section className="home-section">
         <h2>Admins</h2>
-        <p>WaYz (WaYz_FiGhT, NeFariousS (Second_alex-pasq), dbarker99</p>
+        <p>WaYz (WaYz_FiGhT), NeFariousS (Second_alex-pasq), dbarker99</p>
         <p>Uncharted 3 ladders coming soon.</p>
       </section>
 
