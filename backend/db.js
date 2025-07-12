@@ -1,11 +1,11 @@
 const mysql = require('mysql2/promise'); // version promise directe
 const path = require('path');
 
-// Charge .env.production explicitement
-// Load the production environment file and force override to avoid empty values
-// from previously loaded environments
+const envFile = process.env.NODE_ENV === 'production'
+  ? '.env.production'
+  : '.env';
 require('dotenv').config({
-  path: path.join(__dirname, '.env.production'),
+  path: path.join(__dirname, envFile),
   override: true,
 });
 

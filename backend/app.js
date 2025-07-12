@@ -1,5 +1,7 @@
 const path = require('path'); // Charger path AVANT dotenv
-require('dotenv').config({ path: path.join(__dirname, '.env.production') });
+// Sélectionne le fichier d'environnement en fonction de NODE_ENV
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env';
+require('dotenv').config({ path: path.join(__dirname, envFile) });
 const express = require('express');
 const session = require('express-session');
 const cors = require('cors');
@@ -10,8 +12,8 @@ const logger = require('./logger');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 
-// 🚀 FORCE le chargement de .env.production
-dotenv.config({ path: path.join(__dirname, '.env.production') });
+// Recharge l'environnement pour s'assurer que les variables sont bien définies
+dotenv.config({ path: path.join(__dirname, envFile) });
 
 const app = express();
 const isProduction = process.env.NODE_ENV === 'production';
