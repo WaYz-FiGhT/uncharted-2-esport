@@ -30,11 +30,18 @@ router.get('/:username', async (req, res) => {
     const losses = user.losses || 0;
 
     if (teamIds.length > 0) {
-      const [teamRows] = await db.execute(
-        `SELECT id, name FROM teams WHERE id IN (${teamIds.map(() => '?').join(',')})`,
-        teamIds
-      );
-      teams = teamRows;
+      const teamPromises = teamIds.map(async (id) => {
+        const [rows] = await db.execute(
+          `SELECT t.id, t.name, t.ladder_id, l.name AS ladder_name, t.xp,
+            (SELECT COUNT(*) + 1 FROM teams t2 WHERE t2.ladder_id = t.ladder_id AND t2.is_deleted = 0 AND t2.xp > t.xp) AS rank
+           FROM teams t
+           JOIN ladders l ON t.ladder_id = l.id
+           WHERE t.id = ?`,
+          [id]
+        );
+        return rows[0];
+      });
+      teams = await Promise.all(teamPromises);
     }
 
     res.json({
