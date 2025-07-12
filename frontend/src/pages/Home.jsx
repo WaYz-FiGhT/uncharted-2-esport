@@ -66,7 +66,6 @@ function Home() {
     <div className="page-center">
       <section className="home-section">
         <h1>WELCOME TO UNCHARTED ESPORT !</h1>
-        <p>Welcome to Uncharted Esport!</p>
       </section>
 
       <section className="home-section">
