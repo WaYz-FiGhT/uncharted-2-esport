@@ -71,7 +71,7 @@ function Profile() {
   };
 
   return (
-    <div className="page-center">
+    <div className="page-center profile-page">
       {profile ? (
         <div className="profile-page">
           <div className="profile-header">
