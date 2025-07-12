@@ -481,6 +481,7 @@ p {
 .profile-team-list {
   list-style: none;
   padding-left: 0;
+  margin: 0;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -490,11 +491,16 @@ p {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 0.5fr;
   align-items: center;
-  padding: 10px;
+  padding: 10px 10px 10px 0;
+  width: 100%;
   color: #e0fbfc;
   background-color: #3a1d12;
   border: 1px solid #a75d47;
   border-radius: 6px;
+}
+
+.profile-team-row a {
+  display: block;
 }
 
 /* Larger team names for bigger ladders */
