@@ -482,8 +482,8 @@ p {
   list-style: none;
   padding-left: 0;
   margin: 0;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
@@ -501,6 +501,7 @@ p {
 
 .profile-team-row a {
   display: block;
+  text-align: left;
 }
 
 /* Larger team names for bigger ladders */
