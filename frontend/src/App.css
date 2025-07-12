@@ -468,6 +468,26 @@ p {
   font-size: 1.3rem;
 }
 
+/* Player profile team list */
+.profile-team-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-team-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 0.5fr;
+  align-items: center;
+  padding: 10px;
+  color: #e0fbfc;
+  background-color: #3a1d12;
+  border: 1px solid #a75d47;
+  border-radius: 6px;
+}
+
 /* Larger team names for bigger ladders */
 .ladder-3 .ranking-row a,
 .ladder-4 .ranking-row a,
