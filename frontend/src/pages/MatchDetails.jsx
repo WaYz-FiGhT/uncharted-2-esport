@@ -23,6 +23,14 @@ function MatchDetails() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+    const slugify = (name) =>
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+
+  const getMapImage = (name) => `/images/maps/${slugify(name)}.png`;
+
   useEffect(() => {
     axios.get('/session-info')
       .then(res => {
@@ -117,9 +125,16 @@ function MatchDetails() {
       <div><strong>Scheduled date:</strong> {formatUTCDate(match.scheduled_time)}</div>
     </div>
     <h3>Played maps:</h3>
-    <ul>
+    <ul className="map-list">
       {match.maps.map((m, i) => (
-        <li key={i}>{m.game_mode} — {m.map_name}</li>
+        <li key={i}>
+          <span>{m.game_mode} — {m.map_name}</span>
+          <img
+            src={getMapImage(m.map_name)}
+            alt={m.map_name}
+            className="map-thumb"
+          />
+        </li>
       ))}
     </ul>
     
