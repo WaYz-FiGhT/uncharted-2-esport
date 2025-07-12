@@ -70,13 +70,13 @@ function Home() {
       </section>
 
       <section className="home-section">
-        <h1>Top 3 of all laddders for the season 1 :</h1>
+        <h2>Top 3 of all laddders for the season 1 :</h2>
         <div className="ladder-container">
           {[ladder1, ladder2, ladder3].map((ladder, idx) => (
             <div key={idx} className={`ladder-block ladder-${idx + 1}`}>
-              <h2 className="ladder-name">
+              <h3 className="ladder-name">
                 {[ladder1Name, ladder2Name, ladder3Name][idx]}
-              </h2>
+              </h3>
               {ladder.length > 0 ? (
                 <ul className="ranking-list">
                   {ladder.slice(0, 3).map((team, index) => (
