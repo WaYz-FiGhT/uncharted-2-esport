@@ -225,6 +225,10 @@ p {
   padding: 15px;
 }
 
+.page-center.profile-page {
+  text-align: left;
+}
+
 .leaderboards-page .ladder-container {
   justify-content: space-between;
   gap: 40px;
