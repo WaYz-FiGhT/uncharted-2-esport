@@ -129,7 +129,14 @@ function Home() {
 
       <section className="home-section">
         <h2>Future releases</h2>
-        <p>Stay tuned for upcoming features.</p>
+        <p>A tournament page will soon be available to organize the end-of-season PlayOffs.</p>
+        <p>Uncharted 3 ladders coming soon.</p>
+      </section>
+
+      <section className="home-section">
+        <h2>Admins</h2>
+        <p>WaYz (WaYz_FiGhT, NeFariousS (Second_alex-pasq), dbarker99</p>
+        <p>Uncharted 3 ladders coming soon.</p>
       </section>
 
       <div className="footer-bar">
