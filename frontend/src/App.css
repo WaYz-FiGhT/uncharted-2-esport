@@ -214,31 +214,31 @@ p {
 }
 
 /* Wider layout for home page */
-.page-center.home-page {
+.page-center.leaderboards-page {
   width: 90%;
   max-width: 1600px;
   margin: 15px auto;
   padding: 15px;
 }
 
-.home-page .ladder-container {
+.leaderboards-page .ladder-container {
   justify-content: space-between;
   gap: 40px;
   align-items: flex-start;
 }
 
-.home-page .ladder-block {
+.leaderboards-page .ladder-block {
   min-width: 320px;
   width: 100%;
 }
 
 /* Offset the first two ladders */
-.home-page .ladder-1,
-.home-page .ladder-2 {
+.leaderboards-page .ladder-1,
+.leaderboards-page .ladder-2 {
   margin-top: 2rem;
 }
 
-.home-page .ladder-name {
+.leaderboards-page .ladder-name {
   font-size: 2rem;
   margin-bottom: 5rem;
   /* Keep ladder titles aligned regardless of font size */
@@ -255,7 +255,7 @@ p {
   font-size: 1rem;
 }
 
-.home-page .ranking-row {
+.leaderboards-page .ranking-row {
   grid-template-columns: 0.5fr 2fr 1fr 1fr;
 }
 
@@ -589,6 +589,22 @@ p {
 
 .footer-bar a:hover {
   text-decoration: underline;
+}
+
+/* Sections on new home page */
+.home-section {
+  margin-bottom: 40px;
+}
+
+.youtube-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.youtube-grid iframe {
+  border: none;
 }
 
 /* Mobile adjustments */
