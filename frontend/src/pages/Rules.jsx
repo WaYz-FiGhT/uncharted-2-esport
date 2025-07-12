@@ -7,16 +7,14 @@ function Rules() {
       <section>
         <h2>General</h2>
         <ul>
-          <li>3vs3 / 4vs4 / 5vs5</li>
-          <li>Two match formats: Best of 5 or Best of 3</li>
+          <li>Three match formats: Best of 5, Best of 3 or Bo1 (only for 1vs1)</li>
+          <li>Three match modes: TDM Only, Plunder Only or Mixed mode</li>
           <li>The team that posts the challenge hosts round&nbsp;1, then hosting rotates</li>
           <li>When hosting, the opposing team chooses the side (Heroes/Villains)</li>
           <li>Teams have 20&nbsp;minutes from the scheduled time to show up. Provide evidence for no-shows</li>
-          <li>If a player lags out within 30&nbsp;seconds, restart the match; otherwise continue</li>
-          <li>If the host lags out, resume with the same score and remaining time</li>
-          <li>Cheating or glitching results in disqualification (evidence required)</li>
-          <li>Intentional suicides are forbidden and result in loss of the map</li>
-          <li>Disputes must include URL links to screenshots or videos as evidence</li>
+          <li>If a player lags out within 30&nbsp;seconds, restart the match; otherwise continue / If the host lags out, resume with the same score and remaining time</li>
+          <li>Cheating or glitching results in disqualification (evidence required) / Intentional suicides are forbidden and result in loss of the map</li>
+          <li>If the 2 teams have reported an inconsistent or disputed result, then the match will be in “disputed” status. A multiline text field will be available for you to provide the necessary evidence and justification to show whether you have won or not. If you wish to send images or videos, please do so only by URL in this text field.</li>
           <li>If only one team reports within 3&nbsp;hours, its result becomes official</li>
         </ul>
       </section>
