@@ -3,9 +3,8 @@ import '../App.css';
 function Rules() {
   return (
     <div className="page-center rules-page">
-      <h1>Rules</h1>
       <section>
-        <h2>General</h2>
+        <h1>General</h1>
         <ul>
           <li>Three match formats: Best of 5, Best of 3 or Bo1 (only for 1vs1)</li>
           <li>Three match modes: TDM Only, Plunder Only or Mixed mode</li>
