@@ -142,6 +142,10 @@ ul li {
   color: #e0fbfc;
 }
 
+.map-list li {
+  gap: 10px;
+}
+
 /* Messages */
 p {
   text-align: center;
@@ -432,6 +436,11 @@ p {
 
 .team-block ul li img {
   width: 30px;
+}
+
+.map-list li img.map-thumb {
+  width: 120px;
+  border-radius: 4px;
 }
 
 .vs {
