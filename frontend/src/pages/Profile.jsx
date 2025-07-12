@@ -91,18 +91,13 @@ function Profile() {
           </p>
           <h2>Teams</h2>
           {profile.teams.length > 0 ? (
-            <ul>
+            <ul className="profile-team-list">
               {profile.teams.map((team) => (
-                <li key={team.id}>
-                  <Link to={`/team/${team.id}`}>{team.name}</Link>{' '}
-                  <span>
-                    {team.ladder_name && (
-                      <>
-                        {team.ladder_name} —{' '}
-                      </>
-                    )}
-                    <span className="xp-yellow">{team.xp} XP</span> — #{team.rank}
-                  </span>
+                                <li key={team.id} className="profile-team-row">
+                  <Link to={`/team/${team.id}`}>{team.name}</Link>
+                  <span>{team.ladder_name || '-'}</span>
+                  <span className="xp-yellow">{team.xp} XP</span>
+                  <span>#{team.rank}</span>
                 </li>
               ))}
             </ul>
