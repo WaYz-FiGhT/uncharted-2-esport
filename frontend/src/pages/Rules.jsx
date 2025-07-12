@@ -4,83 +4,55 @@ function Rules() {
   return (
     <div className="page-center rules-page">
       <h1>Rules</h1>
-      <p style={{ whiteSpace: 'pre-line' }}>
+      <section>
+        <h2>General</h2>
+        <ul>
+          <li>3vs3 / 4vs4 / 5vs5</li>
+          <li>Two match formats: Best of 5 or Best of 3</li>
+          <li>The team that posts the challenge hosts round&nbsp;1, then hosting rotates</li>
+          <li>When hosting, the opposing team chooses the side (Heroes/Villains)</li>
+          <li>Teams have 20&nbsp;minutes from the scheduled time to show up. Provide evidence for no-shows</li>
+          <li>If a player lags out within 30&nbsp;seconds, restart the match; otherwise continue</li>
+          <li>If the host lags out, resume with the same score and remaining time</li>
+          <li>Cheating or glitching results in disqualification (evidence required)</li>
+          <li>Intentional suicides are forbidden and result in loss of the map</li>
+          <li>Disputes must include URL links to screenshots or videos as evidence</li>
+          <li>If only one team reports within 3&nbsp;hours, its result becomes official</li>
+        </ul>
+      </section>
 
-----------RULES----------<br></br>
+      <section>
+        <h2>Banned Boosters</h2>
+        <ul>
+          <li>Launch Man</li>
+          <li>Rocket Man</li>
+        </ul>
+      </section>
 
-3vs3 / 4vs4 / 5vs5<br></br>
+      <section>
+        <h2>Banned Skins</h2>
+        <ul>
+          <li>All skeleton skins</li>
+          <li>Navarro</li>
+          <li>Roman</li>
+        </ul>
+      </section>
 
-there is 2 format on the web site : Best of 5 or besto of 3<br></br>
-
-The team who posted the challenge will host round 1 then rotate.<br></br>
-
-If you are hosting the match then the opposition team will get to choose the side HEROS / VILLIANS<br></br>
-
-You will have 20 minutes from the start time of your match to show up, if for any reason a team no shows, you must provide evidence and report<br></br>
-
-If for any reason a player lags out then the match will continue unless you have been playing for 30 seconds or less, then you can all back out a replay the match.<br></br>
-
-If you any reason the host lags out rematch will continue with the same score and remaining time<br></br>
-→ Example: If it was 12:6 with 8 minutes left, resume from there<br></br>
-
-Any HARD evidence or cheating/glitching no matter what you will be disqualified (YOU WILL NEED TO PROVIDE EVIDENCE)<br></br>
-
-Intentional suicides are not allowed. Killing yourself for any reason is strictly forbidden and will result in loss of that map<br></br>
-
-For the declaration of Tickets if the match is "disputed, everything will be done by URL, in the text field that will be proposed to you, add URL images (screen of the scoreboard) or video link demonstrating what you want to prove to win your case.<br></br>
-
-When a team postpones a result, the opposing team has 3 hours to postpone its result. If the opposing team does not respect the 3-hour time limit, the official result of the match will be that of the only team to have postponed.<br></br>
-<br></br>
-----------BANNED BOOSTERS----------<br></br>
-Launch Man<br></br>
-Rocket Man<br></br>
-<br></br>
-----------BANNED SKINS----------<br></br>
-ALL SKELETON SKINS<br></br>
-Navarro<br></br>
-Roman<br></br>
-<br></br>
-----------MATCH SETUPS----------<br></br>
-<br></br>
-------3vs3------<br></br>
-<br></br>
-TDM<br></br>
-<br></br>
-Power Weapons both teams can decide  [ ON ] / [OFF], IF teams cant decide PW will STAY ON <br></br>
-40 Kills,<br></br>
-15 Minutes,<br></br>
-<br></br>
-PLUNDER<br></br>
-<br></br>
-Standard,<br></br>
-5 Captures,<br></br>
-15 Minutes,<br></br>
-<br></br>
-TURF WAR<br></br>
-<br></br>
-Standard,<br></br>
-300 Points,<br></br>
-15 Minutes<br></br>
-<br></br>
-------4vs4 / 5vs5------<br></br>
-<br></br>
-TDM<br></br>
-<br></br>
-Power Weapons [ ON ],<br></br>
-50 Kills,<br></br>
-15 Minutes,<br></br>
-
-PLUNDER<br></br>
-<br></br>
-Standard,<br></br>
-5 Captures,<br></br>
-15 Minutes,<br></br>
-<br></br>
-TURF WAR<br></br>
-<br></br>
-Standard,<br></br>
-450 Points,<br></br>
-15 Minutes</p>
+      <section>
+        <h2>Match Setups</h2>
+        <h3>3vs3</h3>
+        <ul>
+          <li><strong>TDM</strong>: Power Weapons decided by teams (default ON), 40&nbsp;kills, 15&nbsp;minutes</li>
+          <li><strong>Plunder</strong>: Standard, 5&nbsp;captures, 15&nbsp;minutes</li>
+          <li><strong>Turf War</strong>: Standard, 300&nbsp;points, 15&nbsp;minutes</li>
+        </ul>
+        <h3>4vs4 / 5vs5</h3>
+        <ul>
+          <li><strong>TDM</strong>: Power Weapons ON, 50&nbsp;kills, 15&nbsp;minutes</li>
+          <li><strong>Plunder</strong>: Standard, 5&nbsp;captures, 15&nbsp;minutes</li>
+          <li><strong>Turf War</strong>: Standard, 450&nbsp;points, 15&nbsp;minutes</li>
+        </ul>
+      </section>
     </div>
   );
 }
