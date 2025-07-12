@@ -70,7 +70,7 @@ function Home() {
       </section>
 
       <section className="home-section">
-        <h1>LEADERBOARDS</h1>
+        <h1>Top 3 of all laddders for the season 1 :</h1>
         <div className="ladder-container">
           {[ladder1, ladder2, ladder3].map((ladder, idx) => (
             <div key={idx} className={`ladder-block ladder-${idx + 1}`}>
@@ -136,7 +136,6 @@ function Home() {
       <section className="home-section">
         <h2>Admins</h2>
         <p>WaYz (WaYz_FiGhT), NeFariousS (Second_alex-pasq), dbarker99</p>
-        <p>Uncharted 3 ladders coming soon.</p>
       </section>
 
       <div className="footer-bar">
