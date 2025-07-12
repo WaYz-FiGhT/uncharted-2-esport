@@ -314,6 +314,17 @@ p {
   gap: 5px;
 }
 
+/* Player selection list */
+.player-select-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-select-name {
+  font-size: 1.2rem;
+}
+
 .member-avatar {
   width: 40px;
 }
